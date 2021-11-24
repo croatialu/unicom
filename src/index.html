@@ -38,6 +38,7 @@
             <input id="vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
           </div>
           <div class="bg sendcode-btn"></div>
+          <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
         </div>
         <div class="login-btn-wrap">
           <div class="bg login-btn"></div>
@@ -83,15 +84,15 @@
   <div class="popup-wrap checkin-fail hide">
     <div class="bg checkin-fail-content flx-center">
       <div class="bg checkin-fail-btn"></div>
-      <div class="bg popup-close"></div>
     </div>
+    <div class="bg close-btn"></div>
   </div>
   <!-- 登记成功弹窗 -->
   <div class="popup-wrap checkin-success hide">
     <div class="bg checkin-sussess-content flx-center">
       <div class="bg checkin-sussess-btn"></div>
-      <div class="bg popup-close"></div>
     </div>
+    <div class="bg close-btn"></div>
   </div>
   <!-- 抽奖页面 -->
   <div class="bg prize hide">
@@ -138,8 +139,8 @@
         <div class="myprize-text">科沃斯扫地机器人</div>
       </div>
       <div class="bg draw-sussess-btn flx-all-center"></div>
-      <div class="bg popup-close"></div>
     </div>
+    <div class="bg close-btn"></div>
   </div>
   <!-- 我的奖品 -->
   <div class="popup-wrap flx-col flx-all-center hide">
@@ -184,7 +185,7 @@
     <div class="bg close-btn verify-close"></div>
   </div>
   <!-- 核销失败 -->
-  <div class="popup-wrap flx-col flx-all-center verify-fail-wrap">
+  <div class="popup-wrap flx-col flx-all-center verify-fail-wrap hide">
     <div class="bg verify-fail-bg flx-center"></div>
     <div class="bg close-btn verify-close"></div>
   </div>
@@ -196,6 +197,8 @@
 <script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script>
 <!-- 微信jdk -->
 <!-- <script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
+<!-- 微信授权登录关键代码 -->
+<script src="http://wx.szhhhd.com/public/wxLogin.js"></script>
 <!-- 填写分享配置 -->
 <script>
   // var _wxData = {

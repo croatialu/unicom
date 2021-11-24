@@ -70,6 +70,16 @@
   margin-left: 6px;
   background-image: url("../images/p2_login_vcode_btn.png");
 }
+.sendcode-btn-empty {
+  position: absolute;
+  right: 0;
+  z-index: 11;
+  width: 1.66rem;
+  height: .9rem;
+  margin-left: 6px;
+  font-size: .36rem;
+  background-image: url("../images/p2_login_vcode_empty_bg.png");
+}
 .form-item {
   position: absolute;
   top: 6px;
@@ -153,8 +163,19 @@
 }
 
 /* 登记失败弹窗 */
+.checkin-fail, .checkin-success, .draw-success {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .checkin-fail-content {
-  margin-top: -1.3rem;
   position: relative;
   width: 5.2rem;
   height: 7.74rem;
@@ -179,7 +200,6 @@
 }
 /* 登记成功弹窗 */
 .checkin-sussess-content {
-  margin-top: -1.3rem;
   position: relative;
   width: 5.38rem;
   height: 9.72rem;
@@ -289,7 +309,7 @@
 }
 .draw-sussess-btn {
   position: absolute;
-  bottom: -0.2rem;
+  bottom: -0.4rem;
   width: 3.45rem;
   height: 1.1rem;
   background-image: url("../images/popup_drawOk_btn.png");

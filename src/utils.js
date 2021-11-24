@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 // 获取cookie
 export function getCookie(cname) {
   var name = cname + "=";
@@ -19,6 +21,26 @@ export function toggleDisplay(selector) {
     .siblings()
     .removeClass("show")
     .addClass("hide");
+}
+
+// 展示模块
+export function showEl(selector) {
+  selector.removeClass("hide").addClass("show");
+}
+
+// 隐藏模块
+export function hideEl(selector) {
+  selector.removeClass("show").addClass("hide");
+}
+
+// 获取URL上的query
+export function getQueryString(name) {
+  let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  let r = window.location.search.substr(1).match(reg);
+  if (r != null) {
+      return decodeURIComponent(r[2]);
+  };
+  return null;
 }
 
 
@@ -76,7 +98,6 @@ function sendInfo(true_name, true_tel, tv_user) {
       }
     });
 }
-
 
 // 渲染题目内容接口
 const renderQNode = (qNumber) => {
@@ -167,50 +188,7 @@ const renderQNode = (qNumber) => {
   });
 };
 
-/** 用户信息请求 **/
-function getUserInfo() {
-  console.log("getuser");
-  http
-    .get(`/get_user_info?openid=${openid}&act_name=${act_name}`)
-    .then((res) => {
-      if (res.data) {
-        console.log("getuser", res);
-        // 有三种情况：1.第一次进来；2.已答题没留资；3.已答题已留资
-        // has_answer 是否已答题， true_tel 留资
-        // 1.第一次进来,data为null
-        if (!res.data.data) {
-          // 处理奖品显示
-          showPrize(false);
-          toggleDisplay($indexPage);
-        } else {
-          const { has_answer, true_tel, tv_user, answer_prize } =
-            res.data.data || {};
-          tvUser = tv_user;
-          prizeText = answer_prize;
-          // 2.已答题没留资；
-          if (has_answer && !true_tel) {
-            toggleDisplay($infoPage);
-          } else if (has_answer && true_tel) {
-            // 3.已答题已留资, 就去我的奖品页
-            // 去奖品页之前判断一下有没有中奖，有的话需要更换中奖背景图
-            if (answer_prize) {
-              showPrize(true, answer_prize, tv_user);
-            } else {
-              showPrize(false);
-            }
-            toggleDisplay($prizePage);
-            $("#back").removeClass("show").addClass("hide");
-          } else {
-            // 其他情况都去主页
-            toggleDisplay($indexPage);
-          }
-        }
-      } else {
-        // 请求失败显示主页
-        toggleDisplay($indexPage);
-      }
-    });
-}
+
 
 var winHeight = $(window).height(); //获取当前页面高度
 $(window).on("resize", function () {

@@ -14,7 +14,7 @@ body {
 }
 
 .show {
-  display: block !important;
+  display: block;
 }
 
 .hide {
