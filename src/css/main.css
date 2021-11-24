@@ -365,22 +365,78 @@
 .poster-btn {
   background-image: url("../images/p5_draw_invite_poster.png");
 }
-/* .draw-friend-top {
+.draw-friend-top {
   width: 6.81rem;
   height: .67rem;
+  background-size: 100% 100%;
   background-image: url("../images/p5_draw_friends_content_top.png");
 }
 .draw-friend-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 3.6rem;
   width: 6.81rem;
-  height: 1px;
+  background-size: 100% 100%;
   background-repeat: repeat-y;
   background-image: url("../images/p5_draw_friends_content_repeat.png");
 }
 .draw-friend-bottom {
   width: 6.81rem;
-  height: .2rem;
+  height: .52rem;
+  background-size: 100%;
+  margin-bottom: .62rem;
   background-image: url("../images/p5_draw_friends_content_bottom.png");
-} */
+}
+.friend-tips {
+  font-size: .3rem;
+  color: #B4664E;
+  margin: .32rem 0;
+  text-align: center;
+}
+.friends {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  padding: .1rem .38rem;
+}
+.friends-item {
+  text-align: center;
+  margin-right: .28rem;
+  margin-bottom: .28rem;
+  width: 1.3rem;
+}
+.friends-item:nth-child(4n) {
+  margin-right: 0;
+}
+.head {
+  width: 0.82rem;
+  height: .82rem;
+  margin-bottom: .12rem;
+  border-radius: 50%;
+}
+.name {
+  font-size: .2rem;
+  color: #3E4853;
+  height: .52rem;
+}
+.prizing-swiper {
+  /* background-color: chocolate; */
+  width: 6.1rem;
+  height: .4rem;
+  margin-top: 3.4rem;
+  margin-left: 0.2rem;
+  display: flex;
+  overflow: hidden;
+  font-size: .2rem;
+  align-items: center;
+  color: #FFF;
+}
+.prizing-swiper .swiper-slide {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+}
 
 /* 中奖弹窗 */
 .draw-sussess-content {

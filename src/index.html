@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <title>联通-登记有奖</title>
 </head>
 
@@ -47,7 +48,7 @@
     </div>
   </div>
   <!-- 登记页 -->
-  <div class="bg checkin ">
+  <div class="bg checkin hide">
     <div class="logo-wrap">
       <div class="bg logo"></div>
       <div class="decorate"></div>
@@ -139,12 +140,16 @@
     <div class="bg close-btn"></div>
   </div>
   <!-- 抽奖页面 -->
-  <div class="bg prize-page hide">
+  <div class="bg prize-page ">
     <div class="empty-wrap flx-btw top-wrap">
       <div class="bg back"></div>
       <div class="bg rule"></div>
     </div>
     <div class="mt-20 bg flx-center draw">
+      <div class="prizing-swiper">
+        <div class="swiper-wrapper">
+        </div>
+      </div>
       <div class="process-wrap">
         <div class="bg draw-process"></div>
       </div>
@@ -165,14 +170,33 @@
     </div>
     <!-- 我的好友助力 -->
     <div class="empty-wrap flx-col flx-all-center mt-40">
-      <!-- <div class="bg draw-friend-top"></div>
+      <div class="bg draw-friend-top"></div>
       <div class="bg draw-friend-center">
-        <div class="empty-wrap flx-center invite-wrap">
-          <div class="bg invite-btn-wrap link-btn"></div>
-          <div class="bg invite-btn-wrap poster-btn"></div>
+        <div class="friend-tips">当前共呼叫成功x个好友</div>
+        <div class="friends">
+          <div class="flx-col flx-all-center friends-item">
+            <img src="./images/popup_myPrize_content_qwx.png" class="head">
+            <div class="name row-2">师傅卡啊富士康附近</div>
+          </div>
+          <div class="flx-col flx-all-center friends-item">
+            <img src="./images/popup_myPrize_content_qwx.png" class="head">
+            <div class="name row-2">师傅卡啊富士康附近</div>
+          </div>
+          <div class="flx-col flx-all-center friends-item">
+            <img src="./images/popup_myPrize_content_qwx.png" class="head">
+            <div class="name row-2">师傅卡啊富士康附近</div>
+          </div>
+          <div class="flx-col flx-all-center friends-item">
+            <img src="./images/popup_myPrize_content_qwx.png" class="head">
+            <div class="name row-2">师傅卡啊富士康附近</div>
+          </div>
+          <div class="flx-col flx-all-center friends-item">
+            <img src="./images/popup_myPrize_content_qwx.png" class="head">
+            <div class="name row-2">师傅卡啊富士康附近师傅卡啊富士康附近</div>
+          </div>
         </div>
       </div>
-      <div class="bg draw-friend-bottom"></div> -->
+      <div class="bg draw-friend-bottom"></div>
     </div>
   </div>
   <!-- 中奖弹窗 -->
@@ -244,6 +268,7 @@
 
 <!-- 引入公共JQ文件 -->
 <script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
 <!-- 微信jdk -->
 <!-- <script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
 <!-- 微信授权登录关键代码 -->

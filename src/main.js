@@ -143,8 +143,35 @@ function checkin(address, address_more) {
     });
 }
 
+// 获取中奖名单
+function getPrizing() {
+  console.log("getPrizing");
+  http
+    .get(`/draw_list`)
+    .then((res) => {
+      if (res.data) {
+        res.data?.data?.map(item => {
+          $(".prizing-swiper").children(".swiper-wrapper").append(`<div class="swiper-slide">恭喜${item.nickname}抽中${item.prize}</div>`)
+        })
+        runPrizing()
+
+      }
+    });
+}
+
+// 中奖信息滚动
+function runPrizing() {
+  var mySwiper = new Swiper('.prizing-swiper', {
+    loop: true,
+    slidesPerView: "auto",
+    spaceBetween: 30,
+    autoplay: true,
+  })
+}
+
 $(function () {
   setRem(750, 750, 320);
+  getPrizing()
 
   getUserInfo();
 
