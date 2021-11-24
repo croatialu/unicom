@@ -9,8 +9,184 @@
 </head>
 
 <body>
-  <div class="bg">
-    
+  <!-- 首页 -->
+  <div class="index hide">
+    <img src="./images/index.png" width="100%" alt="">
+    <div class="btn-wrap">
+      <div class="up-speed-btn"></div>
+    </div>
+  </div>
+  <!-- 登陆页 -->
+  <div class="bg login hide">
+    <div class="logo-wrap">
+      <div class="bg logo"></div>
+      <div class="decorate"></div>
+    </div>
+    <div class="empty-wrap flx-end">
+      <div class="bg rule"></div>
+    </div>
+    <div class="empty-wrap flx-center mt-20">
+      <div class="bg login-title"></div>
+    </div>
+    <div class="empty-wrap flx-center mt-20">
+      <div class="bg flx-col flx-all-center login-content">
+        <div class="bg tel-wrap">
+          <input id="tel" type="text" style="text-align:center;vertical-align:middle;" class="form-item tel-item">
+        </div>
+        <div class="empty-wrap flx vcode-wrap">
+          <div class="bg vcode-bg">
+            <input id="vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
+          </div>
+          <div class="bg sendcode-btn"></div>
+        </div>
+        <div class="login-btn-wrap">
+          <div class="bg login-btn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 登记页 -->
+  <div class="bg checkin hide">
+    <div class="logo-wrap">
+      <div class="bg logo"></div>
+      <div class="decorate"></div>
+    </div>
+    <div class="empty-wrap flx-end">
+      <div class="bg rule"></div>
+    </div>
+    <div class="empty-wrap flx-center mt-20">
+      <div class="bg login-title"></div>
+    </div>
+    <div class="empty-wrap flx-center mt-20">
+      <div class="bg checkin-prize"></div>
+    </div>
+    <div class="empty-wrap flx-center mt-20">
+      <div class="bg flx-col flx-all-center checkin-content">
+        <div class="bg address-wrap">
+          <input id="address" type="text" placeholder="选择所在的镇/区" style="text-align:center;vertical-align:middle;"
+            class="form-item address-item">
+        </div>
+        <div class="bg address_more-wrap">
+          <input id="address_more" type="text" placeholder="填写详细地址，例x小区x栋501"
+            style="text-align:center;vertical-align:middle;" class="form-item address_more-item">
+        </div>
+        <div class="login-btn-wrap">
+          <div class="bg checkin-btn"></div>
+        </div>
+      </div>
+    </div>
+    <div class="empty-wrap flx-center">
+      <div class="bg checkin-tips"></div>
+    </div>
+  </div>
+  <!-- 登记失败弹窗 -->
+  <div class="popup-wrap checkin-fail hide">
+    <div class="bg checkin-fail-content flx-center">
+      <div class="bg checkin-fail-btn"></div>
+      <div class="bg popup-close"></div>
+    </div>
+  </div>
+  <!-- 登记成功弹窗 -->
+  <div class="popup-wrap checkin-success hide">
+    <div class="bg checkin-sussess-content flx-center">
+      <div class="bg checkin-sussess-btn"></div>
+      <div class="bg popup-close"></div>
+    </div>
+  </div>
+  <!-- 抽奖页面 -->
+  <div class="bg prize hide">
+    <div class="empty-wrap flx-btw top-wrap">
+      <div class="bg back"></div>
+      <div class="bg rule"></div>
+    </div>
+    <div class="mt-20 bg flx-center draw">
+      <div class="process-wrap">
+        <div class="bg draw-process"></div>
+      </div>
+      <div class="draw-btn-wrap">
+        <div class="bg draw-btn"></div>
+      </div>
+    </div>
+    <div class="empty-wrap flx-center">
+      <div class="draw-tips">当前抽奖次数：1</div>
+    </div>
+    <div class="empty-wrap flx-center mt-20">
+      <div class="bg draw-invite">
+        <div class="empty-wrap flx-center invite-wrap">
+          <div class="bg invite-btn-wrap link-btn"></div>
+          <div class="bg invite-btn-wrap poster-btn"></div>
+        </div>
+      </div>
+    </div>
+    <!-- 我的好友助力 -->
+    <div class="empty-wrap flx-col flx-all-center mt-40">
+      <!-- <div class="bg draw-friend-top"></div>
+      <div class="bg draw-friend-center">
+        <div class="empty-wrap flx-center invite-wrap">
+          <div class="bg invite-btn-wrap link-btn"></div>
+          <div class="bg invite-btn-wrap poster-btn"></div>
+        </div>
+      </div>
+      <div class="bg draw-friend-bottom"></div> -->
+    </div>
+  </div>
+  <!-- 中奖弹窗 -->
+  <div class="popup-wrap draw-success hide">
+    <div class="bg draw-sussess-content flx-center">
+      <div class="prize-wrap flx-col flx-all-center">
+        <div class="bg myprize"></div>
+        <div class="myprize-text">科沃斯扫地机器人</div>
+      </div>
+      <div class="bg draw-sussess-btn flx-all-center"></div>
+      <div class="bg popup-close"></div>
+    </div>
+  </div>
+  <!-- 我的奖品 -->
+  <div class="popup-wrap flx-col flx-all-center hide">
+    <div class="bg prize-top"></div>
+    <div class="bg prize-center">
+      <div class="flx-all-center prize-title">
+        <div class="bg star-icon"></div>
+        <div class="title-text">我的号码：18612341234</div>
+        <div class="bg star-icon"></div>
+      </div>
+      <div class="bg prize1-content flx-end">
+        <div class="bg prize-checkin-btn"></div>
+      </div>
+      <div class="mt-20 flx-col flx-all-center">
+        <div class="prize-tips">- 以下奖品需添加客服兑奖 -</div>
+        <div class="bg flx-all-center prize2-content">
+          <div class="bg prize-item"></div>
+          <div>科沃斯扫地机器人</div>
+        </div>
+      </div>
+      <div class="mt-20 flx-center">
+        <div class="bg wxcode"></div>
+      </div>
+      <div class="mt-20 flx-center time-tips">兑换时间：周一至周五9:00-17:00</div>
+    </div>
+    <div class="bg prize-bottom"></div>
+    <div class="bg close-btn"></div>
+  </div>
+  <!-- 核销 -->
+  <div class="popup-wrap flx-col flx-all-center verify-wrap hide">
+    <div class="bg verify-bg flx-center">
+      <input id="averify" type="text" style="text-align:center;vertical-align:middle;" class="form-item averify-item">
+      <div class="verify-btn-wrap">
+        <div class="bg verify-btn"></div>
+      </div>
+    </div>
+    <div class="bg close-btn verify-close"></div>
+  </div>
+  <!-- 核销成功 -->
+  <div class="popup-wrap flx-col flx-all-center verify-success-wrap hide">
+    <div class="bg verify-success-bg flx-center"></div>
+    <div class="bg close-btn verify-close"></div>
+  </div>
+  <!-- 核销失败 -->
+  <div class="popup-wrap flx-col flx-all-center verify-fail-wrap">
+    <div class="bg verify-fail-bg flx-center"></div>
+    <div class="bg close-btn verify-close"></div>
   </div>
 </body>
 

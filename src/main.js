@@ -4,6 +4,7 @@ import http from "./http";
 import setRem from "./setRem.js";
 
 import "./css/reset.css";
+import "./css/common.css";
 import "./css/main.css";
 
 // import VConsole from "vconsole";

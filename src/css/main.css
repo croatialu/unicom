@@ -1,15 +1,420 @@
-/* 公共的样式 */
-html,
-body {
+.index {
   width: 100%;
-  height: 100%;
 }
 
-.bg {
+/* 登陆 */
+.login {
   width: 100%;
-  height: 100%;
-  /* background-image: url("../images/p1_bg.jpg"); */
+  min-height: 100%;
+  background-size: cover;
+  background-image: url("../images/p2_login_bg.jpg");
+}
+.logo-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .43rem .25rem 0;
+  box-sizing: border-box;
+}
+.logo {
+  width: .9rem;
+  height: .52rem;
+  background-image: url("../images/p2_login_logo.png");
+}
+.rule {
+  width: 1.18rem;
+  height: .53rem;
+  background-image: url("../images/p2_login_btn_rule.png");
+}
+.login-title {
+  width: 100%;
+  height: 2.88rem;
+  background-image: url("../images/p2_login_title.png");
+  background-position: right bottom;
+}
+.login-content {
+  position: relative;
+  width: 100%;
+  height: 5.7rem;
+  background-image: url("../images/p2_login_content_bg.png");
+  background-position: center bottom;
+}
+.tel-wrap {
+  position: relative;
+  margin-top: 1rem;
+  width: 5.94rem;
+  height: .9rem;
+  background-image: url("../images/p2_login_tel_bg.png");
+  background-size: 100%;
+}
+.vcode-wrap {
+  position: relative;
+  margin-top: .5rem;
+  width: 5.94rem;
+  height: .9rem;
+}
+.vcode-bg {
+  position: relative;
+  width: 4.08rem;
+  height: .9rem;
+  background-image: url("../images/p2_login_vcode_bg.png");
+  background-position: left;
+}
+.sendcode-btn {
+  position: absolute;
+  right: 0;
+  z-index: 11;
+  width: 1.66rem;
+  height: .9rem;
+  margin-left: 6px;
+  background-image: url("../images/p2_login_vcode_btn.png");
+}
+.form-item {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  z-index: 10;
+  width: 3.9rem;
+  height: 72%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border: none;
+  font-size: .26rem;
+}
+.form-item:focus {
+  border: none;
+  outline: none;
+}
+.vcode-item {
+  width: 2.1rem;
+}
+.login-btn {
+  width: 4.24rem;
+  height: 1.27rem;
+  background-image: url("../images/popup_login_btn.png");
+}
+.login-btn-wrap {
+  position: absolute;
+  bottom: -0.6rem;
+  z-index: 19;
+}
+
+/* 登记页 */
+.checkin {
+  width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-image: url("../images/p3_checkin_bg.jpg");
+}
+.checkin-prize {
+  width: 100%;
+  height: 2.76rem;
+  background-image: url("../images/p3_checkin_prize.png");
+}
+.checkin-content {
+  position: relative;
+  width: 100%;
+  height: 5.26rem;
+  background-image: url("../images/p3_checkin_content_bg.png");
+  background-position: center bottom;
+}
+.checkin-tips {
+  margin-top: 1rem;
+  margin-bottom: 1.88rem;
+  width: 100%;
+  height: .25rem;
+  background-image: url("../images/p3_checkin_content_tips.png");
+}
+.address-wrap {
+  position: relative;
+  margin-top: 1rem;
+  width: 5.94rem;
+  height: .9rem;
+  background-image: url("../images/p3_checkin_address_2.png");
+  background-size: 100%;
+}
+.address_more-wrap {
+  position: relative;
+  margin-top: .5rem;
+  width: 5.94rem;
+  height: .9rem;
+  background-image: url("../images/p3_checkin_address_more_2.png");
+  background-size: 100%;
+}
+.address-item {
+  right: .6rem;
+  width: 3.5rem;
+}
+.checkin-btn {
+  width: 4.24rem;
+  height: 1.27rem;
+  background-image: url("../images/p3_checkin_btn.png");
+}
+
+/* 登记失败弹窗 */
+.checkin-fail-content {
+  margin-top: -1.3rem;
+  position: relative;
+  width: 5.2rem;
+  height: 7.74rem;
+  background-image: url("../images/popup_checkinFail_content.png");
+}
+.checkin-fail-btn {
+  position: absolute;
+  bottom: -0.4rem;
+  width: 3.45rem;
+  height: 1.1rem;
+  background-image: url("../images/popup_checkinFail_btn.png");
+}
+.popup-close {
+  position: absolute;
+  bottom: -1.44rem;
+  width: .74rem;
+  height: .74rem;
+  background-image: url("../images/popup_btn_close.png");
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+/* 登记成功弹窗 */
+.checkin-sussess-content {
+  margin-top: -1.3rem;
+  position: relative;
+  width: 5.38rem;
+  height: 9.72rem;
+  background-image: url("../images/popup_checkinOk_content.png");
+}
+.checkin-sussess-btn {
+  position: absolute;
+  bottom: -0.2rem;
+  width: 3.45rem;
+  height: 1.1rem;
+  background-image: url("../images/popup_checkinOk_btn.png");
+}
+
+/* 抽奖页面 */
+.prize {
+  width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-image: url("../images/p5_draw_bg.jpg");
+}
+
+.back {
+  width: 1.38rem;
+  height: .53rem;
+  background-image: url("../images/p5_draw_btn_back.png");
+}
+.top-wrap {
+  padding: .43rem 0 0;
+}
+.draw {
+  position: relative;
+  width: 100%;
+  height: 9.72rem;
+  background-image: url("../images/p5_draw_prize_bg.png");
+}
+.process-wrap {
+  position: absolute;
+  bottom: .8rem;
+  z-index: 19;
+}
+.draw-process {
+  width: 4.46rem;
+  height: 1.35rem;
+  background-image: url("../images/p5_draw_prize_jindu_type1.png");
+  
+}
+.draw-btn-wrap {
+  position: absolute;
+  bottom: -0.6rem;
+  z-index: 19;
+}
+.draw-btn {
+  width: 4.15rem;
+  height: 1.26rem;
+  background-image: url("../images/p5_draw_prize_btn.png");
+}
+.draw-tips {
+  margin: .8rem 0 .4rem;
+  font-size: .26rem;
+  color: #3E4853;
+}
+.draw-invite {
+  position: relative;
+  width: 100%;
+  height: 5.2rem;
+  background-image: url("../images/p5_draw_invite_content.png");
+}
+.invite-wrap {
+  position: absolute;
+  bottom: .8rem;
+}
+.invite-btn-wrap {
+  width: 2.83rem;
+  height: .92rem;
+}
+.link-btn {
+  background-image: url("../images/p5_draw_invite_link.png");
+  margin-right: .42rem;
+}
+.poster-btn {
+  background-image: url("../images/p5_draw_invite_poster.png");
+}
+/* .draw-friend-top {
+  width: 6.81rem;
+  height: .67rem;
+  background-image: url("../images/p5_draw_friends_content_top.png");
+}
+.draw-friend-center {
+  width: 6.81rem;
+  height: 1px;
+  background-repeat: repeat-y;
+  background-image: url("../images/p5_draw_friends_content_repeat.png");
+}
+.draw-friend-bottom {
+  width: 6.81rem;
+  height: .2rem;
+  background-image: url("../images/p5_draw_friends_content_bottom.png");
+} */
+
+/* 中奖弹窗 */
+.draw-sussess-content {
+  margin-top: -1.3rem;
+  position: relative;
+  width: 5.1rem;
+  height: 6.76rem;
+  background-image: url("../images/popup_drawOk_content_bg.png");
+}
+.draw-sussess-btn {
+  position: absolute;
+  bottom: -0.2rem;
+  width: 3.45rem;
+  height: 1.1rem;
+  background-image: url("../images/popup_drawOk_btn.png");
+}
+.myprize {
+  margin-top: 1.6rem;
+  width: 2.8rem;
+  height: 2rem;
+  background-image: url("../images/icon_prize_A06.png");
+}
+.myprize-text {
+  font-size: .26rem;
+  color: #3E4853;
+}
+
+/* 我的奖品 */
+.prize-top {
+  width: 6.5rem;
+  height: 1.2rem;
   background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url("../images/popup_myPrize_content_top.png");
+}
+.prize-center {
+  width: 6.5rem;
+  background-size: 100% 100%;
+  background-image: url("../images/popup_myPrize_content_repeat.png");
+  background-repeat: repeat-y;
+}
+.prize-bottom {
+  width: 6.5rem;
+  height: .68rem;
+  background-size: 100%;
+  background-image: url("../images/popup_myPrize_content_bottom.png");
+}
+.prize-title {
+  margin-bottom: .32rem;
+}
+.title-text {
+  font-size: .32rem;
+  color: #3E4853;
+}
+.star-icon {
+  width: 0.38rem;
+  height: .38rem;
+  background-image: url("../images/popup_myPrize_content_star.png");
+  margin: 0 .14rem;
+}
+.prize1-content {
+  width: 100%;
+  height: 1.48rem;
+  background-image: url("../images/popup_myPrize_router_bg.png");
+  align-items: center;
+}
+.prize-checkin-btn {
+  width: 1.3rem;
+  height: .53rem;
+  background-image: url("../images/popup_myPrize_router_btn.png");
+  margin-right: 1rem;
+  margin-top: -.3rem;
+}
+.prize-tips {
+  font-size: .28rem;
+  color: #3E4853;
+  margin-top: .3rem;
+  margin-bottom: .2rem;
+}
+.prize2-content {
+  width: 100%;
+  height: 1.12rem;
+  background-image: url("../images/popup_myPrize_prize_bg.png");
+  justify-content: flex-start;
+  color: #3E4853;
+  font-size: .26rem;
+}
+.prize-item {
+  margin-left: .78rem;
+  margin-right: .38rem;
+  width: 1rem;
+  height: .57rem;
+  background-image: url("../images/popup_drawOk_prize_1.png");
+}
+.wxcode {
+  width: 1.9rem;
+  height: 1.9rem;
+  background-image: url("../images/popup_myPrize_content_qwx.png");
+}
+.time-tips {
+  font-size: .24rem;
+  color: #B4664E;
+}
+
+/* 核销 */
+.verify-bg {
+  position: relative;
+  width: 6.5rem;
+  height: 4.7rem;
+  background-image: url("../images/popup_hexiao_content.png");
+  background-size: 100%;
+} 
+.averify-item {
+  width: 3.66rem;
+  height: .72rem;
+  top: 2.4rem;
+  right: .6rem;
+}
+.verify-btn {
+  width: 3.45rem;
+  height: 1.1rem;
+  background-image: url("../images/popup_hexiao_btn.png");
+}
+.verify-btn-wrap {
+  position: absolute;
+  bottom: -0.4rem;
+  z-index: 19;
+}
+.verify-close {
+  margin: 1rem 0 .2rem;
+}
+.verify-success-bg {
+  width: 5.18rem;
+  height: 2.9rem;
+  background-image: url("../images/popup_hexiao_success.png");
+}
+.verify-fail-bg {
+  width: 5.18rem;
+  height: 2.9rem;
+  background-image: url("../images/popup_hexiao_fail.png");
 }

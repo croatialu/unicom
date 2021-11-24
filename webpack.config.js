@@ -14,6 +14,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          // options: {}
+        }
+      },
+      {
         test: /\.css$/,
         use: [
           {
@@ -40,7 +47,8 @@ module.exports = {
           // 小于该值的图片会使用base64编码
           limit: 1024,
           // 打包后的图片名称 [ext]指图片格式
-          name: "./images/[name].[hash:8].[ext]",
+          name: "images/[name].[hash:8].[ext]",
+          // publicPath: "./"
         },
       },
     ],
@@ -72,7 +80,7 @@ module.exports = {
   ],
   devServer: {
     disableHostCheck: true,
-    port: 8080,
+    port: 8900,
     proxy: {
       '/api': {
         target: 'http://h5.intech.szhhhd.com',
