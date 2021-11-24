@@ -49,9 +49,19 @@ function getUserInfo() {
           } else {
             // a2. 登录过(有tel)：漫画页去到【登记页】;
             user = res.data.data
+            // 存在即登记过
+            if (user.address) {
+              $(".icon-phone").text("联系号码：" + user.tel)
+              $(".icon-addr").text("联系地址：" + user.address + user.address_more)
+              showEl($(".checkin-success-result"))
+              hideEl($(".checkin-result"))
+            } else {
+              showEl($(".checkin-fail-result"))
+              hideEl($(".checkin-result"))
+            }
           }
         }
-        toggleDisplay($(".index"));
+        // toggleDisplay($(".index"));
       } else {
         // 请求失败显示主页
         toggleDisplay($(".index"));
@@ -109,6 +119,30 @@ function login(tel, vcode) {
     });
 }
 
+// 登记信息
+function checkin(address, address_more) {
+  console.log("checkin");
+  http
+    .get(`/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}`)
+    .then((res) => {
+      if (res.data) {
+        // 登记成功 -> 登记成功弹窗，修改登记页面显示(在userinfo接口也应判断显示)
+        if (res.data.code == 0) {
+          showEl($(".checkin-success"))
+          $(".icon-phone").text("联系号码：" + user.tel)
+          $(".icon-addr").text("联系地址：" + user.address + user.address_more)
+          showEl($(".checkin-success-result"))
+          hideEl($(".checkin-result"))
+        } else {
+          // 登记失败 -> 登记失败弹窗，修改登记页面显示(在userinfo接口也应判断显示)
+          showEl($(".checkin-fail"))
+          showEl($(".checkin-fail-result"))
+          hideEl($(".checkin-result"))
+        }
+      }
+    });
+}
+
 $(function () {
   setRem(750, 750, 320);
 
@@ -147,5 +181,26 @@ $(function () {
   $(".close-btn").on("click", function () {
     const popup = $(this).parent(".popup-wrap")
     hideEl(popup)
+  });
+
+  // 打开地址选择弹窗
+  $("#address").on("click", function () {
+    showEl($(".address-select-bg"))
+  });
+
+  // 选择地址
+  $(".select-address").on("click", "li", function (ev) {
+    const value = ev.target.innerText;
+    $("#address").val(value);
+    hideEl($(".address-select-bg"))
+  });
+
+  // 登记
+  $(".checkin-btn").on("click", function () {
+    const address = $("#address").val();
+    const address_more = $("#address_more").val();
+    if (address && address_more) {
+      checkin(address, address_more)
+    }
   });
 });

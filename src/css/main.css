@@ -130,7 +130,6 @@
   background-position: center bottom;
 }
 .checkin-tips {
-  margin-top: 1rem;
   margin-bottom: 1.88rem;
   width: 100%;
   height: .25rem;
@@ -160,6 +159,72 @@
   width: 4.24rem;
   height: 1.27rem;
   background-image: url("../images/p3_checkin_btn.png");
+}
+.checkin-result {
+  margin-bottom: 1rem;
+}
+.fail-result {
+  width: 100%;
+  height: 3.74rem;
+  background-image: url("../images/p3_checkin_fail_content.png");
+  background-position: center bottom;
+}
+.success-result {
+  width: 100%;
+  height: 3.74rem;
+  background-image: url("../images/p3_checkin_success_content_bg.png");
+  background-position: center bottom;
+}
+.icon {
+  padding-left: .6rem;
+  margin-left: 1rem;
+  font-size: .28rem;
+  background-position: left center;
+  color: #3E4853;
+}
+.icon-phone {
+  margin-top: 1rem;
+  background-image: url("../images/icon_address.png");
+}
+.icon-addr {
+  margin-top: .2rem;
+  background-image: url("../images/icon_position.png");
+}
+/* 地址选择 */
+.address-select-bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 0;
+}
+.address-select-wrap {
+  height: 8.45rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.address-select {
+  width: 100%;
+  height: 3.46rem;
+  background-image: url("../images/select.png");
+}
+.select-content {
+  background-color: #FFF;
+  height: 5rem;
+  overflow: scroll;
+}
+.select-content ul {
+  padding: 0;
+  padding-left: .4rem;
+}
+.select-content li {
+  list-style: none;
+  line-height: 3;
+  font-size: .28rem;
 }
 
 /* 登记失败弹窗 */
