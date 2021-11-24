@@ -190,6 +190,24 @@
   margin-top: .2rem;
   background-image: url("../images/icon_position.png");
 }
+.right-icon {
+  position: fixed;
+  right: 0;
+  top: 40%;
+  width: 1.14rem;
+  height: 1.14rem;
+}
+.icon-service {
+  height: 1.4rem;
+  background-position: right center;
+  background-image: url("../images/p3_checkin_btn_customer.png");
+}
+.icon-draw {
+  top: 56%;
+  background-position: right center;
+  background-image: url("../images/p3_checkin_btn_draw.png");
+}
+
 /* 地址选择 */
 .address-select-bg {
   position: fixed;
@@ -279,7 +297,7 @@
 }
 
 /* 抽奖页面 */
-.prize {
+.prize-page {
   width: 100%;
   min-height: 100%;
   background-size: cover;

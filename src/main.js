@@ -203,4 +203,9 @@ $(function () {
       checkin(address, address_more)
     }
   });
+
+  // 抽奖按钮
+  $(".icon-draw").on("click", function () {
+    toggleDisplay($(".prize-page"))
+  });
 });
