@@ -18,6 +18,8 @@ const act_name = "20211118_zslt";
 let user = {};
 // 倒计时
 let countdown = 60;
+// 抽奖奖品
+const prizes = ["千兆路由器100元代金券", "500元加油卡", "科沃斯扫地机器人", "随机金额微信红包", "10元话费", "免3个月宽带费用"]
 
 
 /** 用户信息请求
@@ -154,7 +156,6 @@ function getPrizing() {
           $(".prizing-swiper").children(".swiper-wrapper").append(`<div class="swiper-slide">恭喜${item.nickname}抽中${item.prize}</div>`)
         })
         runPrizing()
-
       }
     });
 }
@@ -169,9 +170,34 @@ function runPrizing() {
   })
 }
 
+// 构建奖品信息
+function makePrizes() {
+  console.log("makePrizes");
+  prizes.map((item, index) => {
+    $(".draw-prize-swiper")
+      .children(".swiper-wrapper")
+      .append(`<div class="swiper-slide">
+      <div class="bg ${index % 2 === 0 ? 'greed-wrap' : 'red-wrap'}">
+        <div class="bg prize1"></div>
+      </div>
+      <div class="prize-text row-2">${item}</div>
+    </div>`)
+  })
+  runPrizeItem()
+}
+
+function runPrizeItem() {
+  var mySwiper = new Swiper('.draw-prize-swiper', {
+    loop: true,
+    slidesPerView: 3,
+    autoplay: true,
+  })
+}
+
 $(function () {
   setRem(750, 750, 320);
-  getPrizing()
+  getPrizing();
+  makePrizes();
 
   getUserInfo();
 

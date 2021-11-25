@@ -437,6 +437,50 @@
   display: inline-flex;
   align-items: center;
 }
+.draw-prize-swiper {
+  position: absolute;
+  width: 5.9rem;
+  height: 2.25rem;
+  top: 4.48rem;
+  left: .9rem;
+  display: flex;
+  overflow: hidden;
+  font-size: .2rem;
+  align-items: center;
+  color: #fff;
+}
+.draw-prize-swiper .swiper-wrapper .swiper-slide{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.greed-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1.47rem;
+  height: 1.55rem;
+  background-image: url("../images/p5_draw_prize_border_green.png");
+}
+.red-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1.47rem;
+  height: 1.55rem;
+  background-image: url("../images/p5_draw_prize_border_red.png");
+}
+.prize1 {
+  width: 1.3rem;
+  height: 1.3rem;
+  background-image: url("../images/icon_prize_A06.png");
+}
+.prize-text {
+  width: 1.47rem;
+  font-size: .2rem;
+  color: #3E4853;
+}
 
 /* 中奖弹窗 */
 .draw-sussess-content {
