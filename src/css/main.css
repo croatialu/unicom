@@ -326,8 +326,24 @@
 .draw-process {
   width: 4.46rem;
   height: 1.35rem;
+}
+.progress1 {
   background-image: url("../images/p5_draw_prize_jindu_type1.png");
-  
+}
+.progress2 {
+  background-image: url("../images/p5_draw_prize_jindu_type2.png");
+}
+.progress3 {
+  background-image: url("../images/p5_draw_prize_jindu_type3.png");
+}
+.progress4 {
+  background-image: url("../images/p5_draw_prize_jindu_type4.png");
+}
+.progress5 {
+  background-image: url("../images/p5_draw_prize_jindu_type5.png");
+}
+.progress6 {
+  background-image: url("../images/p5_draw_prize_jindu_type6.png");
 }
 .draw-btn-wrap {
   position: absolute;
@@ -471,10 +487,27 @@
   height: 1.55rem;
   background-image: url("../images/p5_draw_prize_border_red.png");
 }
-.prize1 {
+.prize-item-wrap {
   width: 1.3rem;
   height: 1.3rem;
+}
+.prize1 {
+  background-image: url("../images/icon_prize_A052.png");
+}
+.prize2 {
+  background-image: url("../images/icon_prize_a501.png");
+}
+.prize3 {
   background-image: url("../images/icon_prize_A06.png");
+}
+.prize4 {
+  background-image: url("../images/icon_prize_hongbao.png");
+}
+.prize5 {
+  background-image: url("../images/icon_prize_A02.png");
+}
+.prize6 {
+  background-image: url("../images/icon_prize_A04.png");
 }
 .prize-text {
   width: 1.47rem;
@@ -506,6 +539,23 @@
 .myprize-text {
   font-size: .26rem;
   color: #3E4853;
+}
+.draw-fail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: calc();
+}
+.draw-fail-content {
+  width: 5.18rem;
+  height: 2.92rem;
+  background-image: url("../images/popup_drawFail_content.png");
 }
 
 /* 我的奖品 */

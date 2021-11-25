@@ -14,13 +14,36 @@ import "./css/main.css";
 const areas = ["广州", "深圳", "珠海", "中山", "江门"]
 const openid = getCookie("openid");
 const act_name = "20211118_zslt";
+// 能否抽奖
+let canDraw = true;
+// 剩余抽奖次数
+let canDrawCount = 1;
+// 总抽奖次数
+let drawTotal = 0;
 // 用户信息
 let user = {};
 // 倒计时
 let countdown = 60;
 // 抽奖奖品
-const prizes = ["千兆路由器100元代金券", "500元加油卡", "科沃斯扫地机器人", "随机金额微信红包", "10元话费", "免3个月宽带费用"]
-
+const prizes = [{
+  name: "千兆路由器100元代金券",
+  image: ""
+}, {
+  name: "500元加油卡",
+  image: "",
+}, {
+  name: "科沃斯扫地机器人",
+  image: ""
+}, {
+  name: "随机金额微信红包",
+  image: ""
+}, {
+  name: "10元话费",
+  image: ""
+}, {
+  name: "免3个月宽带费用",
+  image: ""
+}]
 
 /** 用户信息请求
  * A用户 
@@ -61,6 +84,9 @@ function getUserInfo() {
               showEl($(".checkin-fail-result"))
               hideEl($(".checkin-result"))
             }
+            // 配置抽奖进度条和抽奖次数
+            drawTotal = user?.prize_list?.length;
+            $(".draw-process").addClass(`progress${drawTotal + 1}`)
           }
         }
         // toggleDisplay($(".index"));
@@ -162,7 +188,7 @@ function getPrizing() {
 
 // 中奖信息滚动
 function runPrizing() {
-  var mySwiper = new Swiper('.prizing-swiper', {
+  new Swiper('.prizing-swiper', {
     loop: true,
     slidesPerView: "auto",
     spaceBetween: 30,
@@ -178,20 +204,47 @@ function makePrizes() {
       .children(".swiper-wrapper")
       .append(`<div class="swiper-slide">
       <div class="bg ${index % 2 === 0 ? 'greed-wrap' : 'red-wrap'}">
-        <div class="bg prize1"></div>
+        <div class="bg prize-item-wrap prize${index + 1}"></div>
       </div>
-      <div class="prize-text row-2">${item}</div>
+      <div class="prize-text row-2">${item.name}</div>
     </div>`)
   })
   runPrizeItem()
 }
 
 function runPrizeItem() {
-  var mySwiper = new Swiper('.draw-prize-swiper', {
+  new Swiper('.draw-prize-swiper', {
     loop: true,
     slidesPerView: 3,
     autoplay: true,
   })
+}
+
+// 抽奖
+function drawPrize() {
+  console.log("draw");
+  if (canDraw) {
+    canDraw = !canDraw
+    http
+      .get(`/draw?openid=${openid}`)
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data, res.data.code == 0)
+          // 抽奖成功，改变进度条，减少抽奖次数
+          canDrawCount = canDrawCount - 1;
+          $(".draw-tips").text("当前抽奖次数：" + canDrawCount)
+          drawTotal = drawTotal + 1;
+          $(".draw-process").addClass(`progress${drawTotal + 1}`)
+          if (res.data.code == 0) {
+            canDraw = !canDraw
+            showEl($(".draw-success"))
+          } else {
+            // 抽奖失败
+            showEl($(".draw-fail"))
+          }
+        }
+      });
+  }
 }
 
 $(function () {
@@ -257,8 +310,13 @@ $(function () {
     }
   });
 
-  // 抽奖按钮
+  // 右侧抽奖按钮
   $(".icon-draw").on("click", function () {
     toggleDisplay($(".prize-page"))
+  });
+
+  // 抽奖
+  $(".draw-btn").on("click", function () {
+    drawPrize()
   });
 });
