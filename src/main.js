@@ -19,7 +19,7 @@ let canDraw = true;
 // 剩余抽奖次数
 let canDrawCount = 1;
 // 总抽奖次数
-let drawTotal = 0;
+let drawTotal = 0;// 最多是5次
 // 用户信息
 let user = {};
 // 倒计时
@@ -74,22 +74,39 @@ function getUserInfo() {
           } else {
             // a2. 登录过(有tel)：漫画页去到【登记页】;
             user = res.data.data
-            // 存在即登记过
-            if (user.address) {
+            // 判断登记失败还是成功
+            if (areas.includes(user?.tel_city) && user.address) {
               $(".icon-phone").text("联系号码：" + user.tel)
               $(".icon-addr").text("联系地址：" + user.address + user.address_more)
               showEl($(".checkin-success-result"))
               hideEl($(".checkin-result"))
-            } else {
+            } else if (!areas.includes(user?.tel_city)) {
               showEl($(".checkin-fail-result"))
               hideEl($(".checkin-result"))
             }
             // 配置抽奖进度条和抽奖次数
-            drawTotal = user?.prize_list?.length;
-            $(".draw-process").addClass(`progress${drawTotal + 1}`)
+            drawTotal = user?.help_list?.length % 3 || 0;
+            if (drawTotal > 5) drawTotal = 5;
+            const prized = user?.prize_list?.length || 0;
+            canDrawCount = drawTotal - prized + 1
+            $(".draw-tips").text("当前抽奖次数：" + canDrawCount)
+            $(".draw-process").addClass(`progress${user?.prize_list?.length + 1}`)
+            // 配置我的好友
+            if (!user?.help_list?.length) {
+              $(".friend-tips").text("当前未有呼叫成功的好友")
+              hideEl($(".friends"))
+            } else {
+              $(".friend-tips").text(`当前共呼叫成功${user?.help_list?.length}个好友`)
+              user?.help_list.map(item => {
+                $(".friends").append(`<div class="flx-col flx-all-center friends-item">
+                <img src=${item.headimgurl} class="head">
+                <div class="name row-2">${item.nickname}</div>
+              </div>`)
+              })
+            }
           }
         }
-        // toggleDisplay($(".index"));
+        toggleDisplay($(".index"));
       } else {
         // 请求失败显示主页
         toggleDisplay($(".index"));
@@ -139,6 +156,8 @@ function login(tel, vcode) {
         // 如果不在5个城市内，打开登记失败弹窗
         if (!areas.includes(area)) {
           showEl($(".checkin-fail"))
+          showEl($(".checkin-fail-result"))
+          hideEl($(".checkin-result"))
         } else {
           // 符合要求，去登记页
           toggleDisplay(".checkin")
@@ -229,17 +248,19 @@ function drawPrize() {
       .get(`/draw?openid=${openid}`)
       .then((res) => {
         if (res.data) {
-          console.log(res.data, res.data.code == 0)
+          // 抽奖次数不足
+          if (res.data.code === 20003) {
+            showEl($(".draw-fail"))
+            return
+          }
           // 抽奖成功，改变进度条，减少抽奖次数
-          canDrawCount = canDrawCount - 1;
           $(".draw-tips").text("当前抽奖次数：" + canDrawCount)
-          drawTotal = drawTotal + 1;
-          $(".draw-process").addClass(`progress${drawTotal + 1}`)
+          $(".draw-process").addClass(`progress${user?.prize_list?.length + 2}`)
           if (res.data.code == 0) {
             canDraw = !canDraw
             showEl($(".draw-success"))
-          } else {
-            // 抽奖失败
+          } else if (res.data.msg == "C02") {
+            // 谢谢惠顾
             showEl($(".draw-fail"))
           }
         }
@@ -249,9 +270,6 @@ function drawPrize() {
 
 $(function () {
   setRem(750, 750, 320);
-  getPrizing();
-  makePrizes();
-
   getUserInfo();
 
   // 首页点击
@@ -312,11 +330,33 @@ $(function () {
 
   // 右侧抽奖按钮
   $(".icon-draw").on("click", function () {
+    getPrizing();
+    makePrizes();
     toggleDisplay($(".prize-page"))
   });
 
   // 抽奖
   $(".draw-btn").on("click", function () {
     drawPrize()
+  });
+
+  // 我的奖品页
+  $(".draw-sussess-btn").on("click", function () {
+    // 重新获取一下用户的中奖信息
+    getUserInfo()
+    hideEl($(".draw-success"))
+    showEl($(".my-prize-wrap"))
+  });
+
+  // 抽奖页都返回按钮
+  $(".back-btn").on("click", function () {
+    toggleDisplay($(".prize-page"))
+  });
+
+  // 登记失败弹窗按钮 -> 奖品页
+  $(".checkin-fail-btn").on("click", function () {
+    getPrizing();
+    makePrizes();
+    toggleDisplay($(".prize-page"))
   });
 });

@@ -184,7 +184,7 @@
 }
 .icon-phone {
   margin-top: 1rem;
-  background-image: url("../images/icon_address.png");
+  background-image: url("../images/icon_phone.png");
 }
 .icon-addr {
   margin-top: .2rem;
@@ -304,7 +304,7 @@
   background-image: url("../images/p5_draw_bg.jpg");
 }
 
-.back {
+.back-btn{
   width: 1.38rem;
   height: .53rem;
   background-image: url("../images/p5_draw_btn_back.png");
@@ -391,7 +391,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-height: 3.6rem;
+  min-height: 1.6rem;
   width: 6.81rem;
   background-size: 100% 100%;
   background-repeat: repeat-y;
@@ -475,6 +475,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 1.47rem;
   height: 1.55rem;
   background-image: url("../images/p5_draw_prize_border_green.png");
@@ -483,6 +484,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 1.47rem;
   height: 1.55rem;
   background-image: url("../images/p5_draw_prize_border_red.png");
@@ -550,7 +552,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: calc();
+  justify-content: center;
 }
 .draw-fail-content {
   width: 5.18rem;
@@ -559,6 +561,13 @@
 }
 
 /* 我的奖品 */
+.my-prize-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+}
 .prize-top {
   width: 6.5rem;
   height: 1.2rem;
