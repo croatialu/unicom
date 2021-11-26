@@ -547,7 +547,7 @@
   align-items: center;
   color: #FFF;
   position: absolute;
-  bottom: 6.8rem;
+  bottom: 6.5rem;
   left: .7rem;
 }
 .index-prizing-swiper .swiper-slide {
@@ -559,7 +559,7 @@
   position: absolute;
   width: 5.9rem;
   height: 2.25rem;
-  bottom: 3.8rem;
+  bottom: 3.5rem;
   left: .8rem;
   display: flex;
   overflow: hidden;
@@ -748,8 +748,8 @@
   margin-bottom: .2rem;
 }
 .prize2-content {
-  width: 100%;
-  height: 1.12rem;
+  width: 5.88rem;
+  height: 1.21rem;
   background-image: url("../images/popup_myPrize_prize_bg.png");
   justify-content: flex-start;
   color: #3E4853;
@@ -778,10 +778,10 @@
   background-image: url("../images/icon_prize_hongbao.png");
 }
 .prize-item {
-  margin-left: .78rem;
+  margin-left: .28rem;
   margin-right: .38rem;
   width: 1rem;
-  height: .57rem;
+  height: 1.21rem;
   /* background-image: url("../images/popup_drawOk_prize_1.png"); */
 }
 .wxcode {
