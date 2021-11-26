@@ -99,6 +99,7 @@ function getUserInfo(flag = true) {
         if (share_openid && share_openid != openid) {
           if (!res.data.data) showEl($(".index-login-wrap"))
           else {
+            user = res.data.data
             if (localStorage.getItem("helpCount") != 0) {
               showEl($(".index-help-wrap"))
             } else {
@@ -146,6 +147,7 @@ function getUserInfo(flag = true) {
             <div class="name row-2">${item.nickname}</div>
           </div>`)
           })
+          showEl($(".friends"))
         }
         // 配置我的奖品展示
         if (user?.prize_list?.length) {
@@ -626,7 +628,7 @@ $(function () {
   //  确认核销
   $(".verify-btn").on("click", function () {
     const verifycode = $("#averify").val()
-    if(verifycode && prizeId) {
+    if (verifycode && prizeId) {
       verifyPrize(prizeId, verifycode)
     }
   });
