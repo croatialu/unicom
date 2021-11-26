@@ -12,10 +12,57 @@
 <body>
   <!-- 首页 -->
   <div class="index hide">
-    <img src="./images/index.png" width="100%" alt="">
-    <div class="btn-wrap">
-      <div class="up-speed-btn"></div>
+    <img src="./images/p1_manhua_1.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_2.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_3.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_4.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_5.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_6.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_8.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_9.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_10.jpg" alt="" width="100%">
+  </div>
+  <!-- 登陆弹窗 -->
+  <div class="popup-wrap index-login-wrap hide">
+    <div class="empty-wrap flx-center">
+      <div class="bg flx-col flx-all-center login-content">
+        <div class="bg tel-wrap">
+          <input id="tel" type="text" style="text-align:center;vertical-align:middle;" class="form-item tel-item">
+        </div>
+        <div class="empty-wrap flx vcode-wrap">
+          <div class="bg vcode-bg">
+            <input id="vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
+          </div>
+          <div class="bg sendcode-btn"></div>
+          <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
+        </div>
+        <div class="login-btn-wrap">
+          <div class="bg login-btn"></div>
+        </div>
+      </div>
     </div>
+    <div class="bg close-btn back-close-btn"></div>
+  </div>
+  <!-- 助力弹窗 -->
+  <div class="popup-wrap flx-col  flx-all-center index-help-wrap hide">
+    <div class="bg flx-center help-content ">
+      <div class="bg help-btn"></div>
+    </div>
+    <div class="bg close-btn back-close-btn"></div>
+  </div>
+  <!-- 助力成功 -->
+  <div class="popup-wrap flx-col flx-all-center help-success-wrap hide">
+    <div class="bg flx-center help-success-content ">
+      <div class="bg help-success-btn help-index-btn"></div>
+    </div>
+    <div class="bg close-btn back-close-btn"></div>
+  </div>
+  <!-- 助力失败 -->
+  <div class="popup-wrap flx-col  flx-all-center help-fail-wrap hide">
+    <div class="bg flx-center help-fail-content">
+      <div class="bg help-fail-btn help-index-btn"></div>
+    </div>
+    <div class="bg close-btn back-close-btn"></div>
   </div>
   <!-- 登陆页 -->
   <div class="bg login hide">
@@ -140,11 +187,12 @@
     <div class="bg close-btn"></div>
   </div>
   <!-- 抽奖页面 -->
-  <div class="bg prize-page ">
+  <div class="bg prize-page hide">
     <div class="empty-wrap flx-btw top-wrap">
       <div class="bg back-btn"></div>
       <div class="bg rule"></div>
     </div>
+    <div class="prize-btn"></div>
     <div class="mt-20 bg flx-center draw">
       <div class="prizing-swiper">
         <div class="swiper-wrapper"></div>
@@ -153,7 +201,7 @@
         <div class="swiper-wrapper"></div>
       </div>
       <div class="process-wrap">
-        <div class="bg draw-process process1"></div>
+        <div class="bg draw-process"></div>
       </div>
       <div class="draw-btn-wrap">
         <div class="bg draw-btn"></div>
@@ -183,10 +231,6 @@
   <!-- 中奖弹窗 -->
   <div class="popup-wrap draw-success hide">
     <div class="bg draw-sussess-content flx-center">
-      <div class="prize-wrap flx-col flx-all-center">
-        <div class="bg myprize"></div>
-        <div class="myprize-text">科沃斯扫地机器人</div>
-      </div>
       <div class="bg draw-sussess-btn flx-all-center"></div>
     </div>
     <div class="bg close-btn"></div>
@@ -202,23 +246,19 @@
     <div class="bg prize-center">
       <div class="flx-all-center prize-title">
         <div class="bg star-icon"></div>
-        <div class="title-text">我的号码：18612341234</div>
+        <div class="title-text"></div>
         <div class="bg star-icon"></div>
       </div>
-      <div class="bg prize1-content flx-end">
-        <div class="bg prize-checkin-btn"></div>
-      </div>
-      <div class="mt-20 flx-col flx-all-center">
-        <div class="prize-tips">- 以下奖品需添加客服兑奖 -</div>
-        <div class="bg flx-all-center prize2-content">
-          <div class="bg prize-item"></div>
-          <div>科沃斯扫地机器人</div>
+      <div class="has-prize">
+        <div class="mt-20 flx-col flx-all-center prize-verify">
+          <div class="prize-tips">- 以下奖品需添加客服兑奖 -</div>
         </div>
+        <div class="mt-20 flx-center">
+          <div class="bg wxcode"></div>
+        </div>
+        <div class="mt-20 flx-center time-tips">兑换时间：周一至周五9:00-17:00</div>
       </div>
-      <div class="mt-20 flx-center">
-        <div class="bg wxcode"></div>
-      </div>
-      <div class="mt-20 flx-center time-tips">兑换时间：周一至周五9:00-17:00</div>
+      <div class="none-prize hide">哟，当前还没有中奖礼品哟</div>
     </div>
     <div class="bg prize-bottom"></div>
     <div class="bg close-btn"></div>
@@ -243,6 +283,11 @@
     <div class="bg verify-fail-bg flx-center"></div>
     <div class="bg close-btn verify-close"></div>
   </div>
+  <!-- 海报 -->
+  <div class="popup-wrap poster hide">
+    <canvas id="canvas" class="canvas"></canvas>
+    <div class="bg poster-bg"></div>
+  </div>
   <!-- 客服弹窗 -->
   <!-- <div class="popup-wrap flx-col flx-all-center verify-success-wrap hide">
     <div class="bg verify-success-bg flx-center"></div>
@@ -256,21 +301,30 @@
 <script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
 <!-- 微信jdk -->
-<!-- <script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <!-- 微信授权登录关键代码 -->
 <script src="http://wx.szhhhd.com/public/wxLogin.js"></script>
 <!-- 填写分享配置 -->
-<script>
-  // var _wxData = {
-  //   shareTitle: "有奖调研，参与即有礼",//分享标题
-  //   shareDesc: "人人都有惊喜哦～",//分享描述
-  //   shareImgUrl: "http://h5.szhhhd.com/a20211027_answer/dati.jpg"//分享图，必须带有协议头
-  // };
-</script>
 <!--  引入分享关键代码 -->
-<!-- <script src="http://h5.szhhhd.com/wx/share.js?v7"></script> -->
-<!-- 微信授权登录关键代码 -->
-<!-- <script src="http://wx.szhhhd.com/public/wxLogin.js"></script> -->
+<script src="http://h5.szhhhd.com/wx/share.js?v"></script>
+<script type="text/javascript">
+  var _wxData = {
+    shareTitle: "全民齐抽奖，一起领科沃斯扫地机器人",//分享标题
+    shareDesc: "还有微信红包即开即中，等你哟！",//分享描述
+    shareImgUrl: "http://h5.szhhhd.com/jx/a20211118_zslt/share.jpg"//分享图，必须带有协议头
+  };
+  function getQueryString(name) {
+    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    let r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return decodeURIComponent(r[2]);
+    };
+    return null;
+  }
+  const share_openid = getQueryString("share_openid") || localStorage.getItem("share_openid");
+  _wxData.shareLink = location.href.split("#")[0] + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
+  _pWxShare.init(); //刷新分享配置使之生效，注意，必须先用上面的基础分享激活权限后才能重写分享地址，否则腾讯不放行
+</script>
 <!-- 百度统计 -->
 <script>
   // var _hmt = _hmt || [];
