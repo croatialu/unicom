@@ -41,7 +41,8 @@
         </div>
         <div class="empty-wrap flx vcode-wrap">
           <div class="bg vcode-bg">
-            <input id="index-vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
+            <input id="index-vcode" type="text" style="text-align:center;vertical-align:middle;"
+              class="form-item vcode-item">
           </div>
           <div class="bg sendcode-btn"></div>
           <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
@@ -309,8 +310,8 @@
     <div class="bg rule-back-btn"></div>
     <img src="./images/popup_rule.jpg" alt="" width="100%">
   </div>
-   <!-- 生成链接的弹窗 -->
-   <div class="popup-wrap link-wrap hide">
+  <!-- 生成链接的弹窗 -->
+  <div class="popup-wrap link-wrap hide">
     <div class="bg link-bg"></div>
     <div class="bg close-btn link-close"></div>
   </div>
@@ -336,15 +337,18 @@
 <!--  引入分享关键代码 -->
 <script src="http://h5.szhhhd.com/wx/share.js?v"></script>
 <script type="text/javascript">
-  function getQueryString(name) {
-    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    let r = window.location.search.substr(1).match(reg);
-    if (r != null) {
-      return decodeURIComponent(r[2]);
-    };
-    return null;
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i].trim();
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
-  const share_openid = getQueryString("share_openid") || localStorage.getItem("share_openid");
+  const share_openid = getCookie("openid");
   _wxData.shareLink = location.href.split("#")[0] + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
   _pWxShare.init(); //刷新分享配置使之生效，注意，必须先用上面的基础分享激活权限后才能重写分享地址，否则腾讯不放行
 </script>

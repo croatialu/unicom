@@ -94,9 +94,9 @@ function getUserInfo(flag = true) {
       if (res.data) {
         console.log("getuser", res);
         // 先判断是否是分享进来的
-        const share_openid = getQueryString("share_openid");
+        share_openid = getQueryString("share_openid");
         localStorage.setItem("share_openid", share_openid || "")
-        if (share_openid) {
+        if (share_openid && share_openid != openid) {
           if (!res.data.data) showEl($(".index-login-wrap"))
           else {
             if (localStorage.getItem("helpCount") != 0) {
@@ -228,6 +228,7 @@ function login(tel, vcode) {
         const area = res.data.data
         // 如果是助力流程
         console.log("share_openid", share_openid)
+        getUserInfo(false)
         if (share_openid) {
           console.log("hrere")
           hideEl($(".index-login-wrap"))
