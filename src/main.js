@@ -3,12 +3,13 @@ import http from "./http";
 import { getCookie, toggleDisplay, getQueryString, showEl, hideEl } from "./utils";
 import setRem from "./setRem.js";
 import "./css/reset.css";
+import "./css/swiper-bundle.min.css";
 import "./css/common.css";
 import "./css/main.css";
 
-// import VConsole from "vconsole";
-// new VConsole();
-// console.info("vconsole-info-测试");
+import VConsole from "vconsole";
+new VConsole();
+console.info("vconsole-info-测试");
 
 const QRCode = require('qrcode');
 const areas = ["广州", "深圳", "珠海", "中山", "江门"]
@@ -627,5 +628,10 @@ $(function () {
     if(verifycode && prizeId) {
       verifyPrize(prizeId, verifycode)
     }
+  });
+
+  //  清缓存
+  $(".index-cache").on("click", function () {
+    localStorage.clear()
   });
 });

@@ -110,6 +110,14 @@
   bottom: -0.6rem;
   z-index: 19;
 }
+.index-cache {
+  width: 3.77rem;
+  height: 1.1rem;
+  position: absolute;
+  bottom: 8.6rem;
+  left: 1.8rem;
+  z-index: 10;
+}
 .index-next {
   width: 5rem;
   height: 1.4rem;
@@ -131,8 +139,10 @@
 }
 
 /* 助力 */
-.help-fail-wrap, .help-success-wrap, .service-wrap, .verify-wrap,
-.verify-fail-wrap, .verify-success-wrap, .link-wrap  {
+.help-fail-wrap, .help-success-wrap, 
+.service-wrap, .verify-wrap,
+.verify-fail-wrap, .verify-success-wrap, .link-wrap, 
+.index-help-wrap,  .help-success-wrap, .help-fail-wrap {
   position: fixed;
   top: 0;
   left: 0;
