@@ -12,18 +12,24 @@
 <body>
   <!-- 首页 -->
   <div class="index hide">
-    <!-- <img src="./images/p1_manhua_1.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_1.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_2.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_3.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_4.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_5.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_6.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_8.jpg" alt="" width="100%">
-    <img src="./images/p1_manhua_9.jpg" alt="" width="100%"> -->
+    <img src="./images/p1_manhua_9.jpg" alt="" width="100%">
     <div class="empty-wrap index-manhua">
       <img src="./images/p1_manhua_10.jpg" alt="" width="100%">
       <div class="index-next"></div>
       <div class="index-prize"></div>
+      <div class="index-prizing-swiper">
+        <div class="swiper-wrapper"></div>
+      </div>
+      <div class="swiper index-prize-swiper">
+        <div class="swiper-wrapper"></div>
+      </div>
     </div>
   </div>
   <!-- 登陆弹窗 -->
@@ -31,11 +37,11 @@
     <div class="empty-wrap flx-center">
       <div class="bg flx-col flx-all-center login-content">
         <div class="bg tel-wrap">
-          <input id="tel" type="text" style="text-align:center;vertical-align:middle;" class="form-item tel-item">
+          <input id="index-tel" type="text" style="text-align:center;vertical-align:middle;" class="form-item tel-item">
         </div>
         <div class="empty-wrap flx vcode-wrap">
           <div class="bg vcode-bg">
-            <input id="vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
+            <input id="index-vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
           </div>
           <div class="bg sendcode-btn"></div>
           <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
@@ -196,6 +202,7 @@
       <div class="bg back-btn"></div>
       <div class="bg rule"></div>
     </div>
+    <div class="bg right-icon icon-service"></div>
     <div class="prize-btn"></div>
     <div class="mt-20 bg flx-center draw">
       <div class="prizing-swiper">
@@ -253,7 +260,7 @@
         <div class="title-text"></div>
         <div class="bg star-icon"></div>
       </div>
-      <div class="has-prize">
+      <div class="has-prize flx-col flx-all-center">
         <div class="mt-20 flx-col flx-all-center prize-verify">
           <div class="prize-tips">- 以下奖品需添加客服兑奖 -</div>
         </div>
@@ -293,10 +300,20 @@
     <div class="bg poster-bg"></div>
   </div>
   <!-- 客服弹窗 -->
-  <!-- <div class="popup-wrap flx-col flx-all-center verify-success-wrap hide">
-    <div class="bg verify-success-bg flx-center"></div>
+  <div class="popup-wrap flx-col flx-all-center service-wrap hide">
+    <div class="bg service-bg flx-center"></div>
     <div class="bg close-btn verify-close"></div>
-  </div> -->
+  </div>
+  <!-- 规则 -->
+  <div class="popup-wrap rule-wrap hide">
+    <div class="bg rule-back-btn"></div>
+    <img src="./images/popup_rule.jpg" alt="" width="100%">
+  </div>
+   <!-- 生成链接的弹窗 -->
+   <div class="popup-wrap link-wrap hide">
+    <div class="bg link-bg"></div>
+    <div class="bg close-btn link-close"></div>
+  </div>
 </body>
 
 </html>

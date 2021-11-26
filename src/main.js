@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $, { type } from "jquery";
 import http from "./http";
 import { getCookie, toggleDisplay, getQueryString, showEl, hideEl } from "./utils";
 import setRem from "./setRem.js";
@@ -9,12 +9,14 @@ import "./css/main.css";
 // import VConsole from "vconsole";
 // new VConsole();
 // console.info("vconsole-info-测试");
+
 const QRCode = require('qrcode');
 const areas = ["广州", "深圳", "珠海", "中山", "江门"]
 const openid = getCookie("openid");
 const act_name = "20211118_zslt";
 // 能否抽奖
 let canDraw = true;
+let prizeId = ""
 // 剩余抽奖次数
 if (localStorage.getItem("initCount") == null) {
   localStorage.setItem("initCount", 1)
@@ -68,6 +70,8 @@ const prizeMap = {
   '8.88元微信红包': "money",
   '8.88元微信红包': "money",
 }
+// 标志login跳转
+let loginToNext = "verify"
 
 /** 用户信息请求
  * A用户 
@@ -90,8 +94,8 @@ function getUserInfo(flag = true) {
         console.log("getuser", res);
         // 先判断是否是分享进来的
         const share_openid = getQueryString("share_openid");
+        localStorage.setItem("share_openid", share_openid || "")
         if (share_openid) {
-          localStorage.setItem("share_openid", share_openid)
           if (!res.data.data) showEl($(".index-login-wrap"))
           else {
             if (localStorage.getItem("helpCount") != 0) {
@@ -100,7 +104,6 @@ function getUserInfo(flag = true) {
               showEl($(".help-fail-wrap"))
             }
           }
-          toggleDisplay($(".index"));
         } else {
           // a1. 第一次进入：漫画页（首页） 
           if (!res.data.data) {
@@ -118,58 +121,63 @@ function getUserInfo(flag = true) {
               showEl($(".checkin-fail-result"))
               hideEl($(".checkin-result"))
             }
-            // 配置抽奖次数
-            drawTotal = user?.help_list?.length ? parseInt(user?.help_list?.length / 3) : 0;
-            if (drawTotal > 5) drawTotal = 5;
-            const process = user?.prize_list?.length ? user?.prize_list?.length + 1 : 1;
-            const canDrawCount = drawTotal + Number(localStorage.getItem("initCount"));
-            $(".draw-tips").text("当前抽奖次数：" + canDrawCount)
-            $(".draw-process").addClass(`progress${process}`)
-            // 配置我的好友
-            if (!user?.help_list?.length) {
-              $(".friend-tips").text("当前未有呼叫成功的好友")
-              hideEl($(".friends"))
-            } else {
-              $(".friend-tips").text(`当前共呼叫成功${user?.help_list?.length}个好友`)
-              user?.help_list.map(item => {
-                $(".friends").append(`<div class="flx-col flx-all-center friends-item">
-                <img src=${item.headimgurl} class="head">
-                <div class="name row-2">${item.nickname}</div>
-              </div>`)
-              })
-            }
-            // 配置我的奖品展示
-            console.log("user?.prize_list", user?.prize_list?.length)
-            if (user?.prize_list?.length) {
-              $(".title-text").text(`我的号码：${user.tel}`)
-              $(".prize1-content").remove();
-              $(".prize-verify").find(".prize2-content").remove();
-              user?.prize_list?.map(item => {
-                if (shouldPrize.includes(item.prize)) {
-                  console.log("sdfas", shouldPrize)
-                  $(".has-prize").prepend(`
-                  <div class="bg prize1-content flx-end">
-                    <div class="bg prize-checkin-btn"></div>
-                  </div>`)
-                }
-                if (!["千兆路由器100元代金券", "谢谢惠顾"].includes(item.prize) && prizeMap[item.prize]) {
-                  $(".prize-verify").append(`
-                  <div class="bg flx-all-center prize2-content">
-                    <div class="bg prize-item ${prizeMap[item.prize]}"></div>
-                    <div>${item.prize}</div>
-                  </div>`)
-                }
-              })
-            } else {
-              // 没有奖品
-              $(".title-text").text(`我的号码：${user.tel}`)
-              hideEl($(".has-prize"))
-              showEl($(".none-prize"))
-            }
           }
           if (flag) {
             toggleDisplay($(".index"));
           }
+        }
+        // 配置抽奖次数
+        drawTotal = user?.help_list?.length ? parseInt(user?.help_list?.length / 3) : 0;
+        if (drawTotal > 5) drawTotal = 5;
+        const process = user?.prize_list?.length ? user?.prize_list?.length + 1 : 1;
+        const canDrawCount = drawTotal + Number(localStorage.getItem("initCount"));
+        $(".draw-tips").text("当前抽奖次数：" + canDrawCount)
+        $(".draw-process").addClass(`progress${process}`)
+        // 配置我的好友
+        if (!user?.help_list?.length) {
+          $(".friend-tips").text("当前未有呼叫成功的好友")
+          hideEl($(".friends"))
+        } else {
+          $(".friend-tips").text(`当前共呼叫成功${user?.help_list?.length}个好友`)
+          user?.help_list.map(item => {
+            $(".friends").append(`<div class="flx-col flx-all-center friends-item">
+            <img src=${item.headimgurl} class="head">
+            <div class="name row-2">${item.nickname}</div>
+          </div>`)
+          })
+        }
+        // 配置我的奖品展示
+        if (user?.prize_list?.length) {
+          $(".title-text").text(`我的号码：${user.tel}`)
+          $(".prize1-content").remove();
+          $(".prize1-tips").remove();
+          $(".prize-verify").find(".prize2-content").remove();
+          let count = 0
+          user?.prize_list?.map(item => {
+            if (shouldPrize.includes(item.prize)) {
+              count += 1
+              $(".has-prize").prepend(`
+              <div class="bg prize1-content prize1-content-${count} flx-end">
+                <div id=${item.prize_id} class="bg prize-checkin-btn"></div>
+              </div>`)
+            }
+            if (!["千兆路由器100元代金券", "谢谢惠顾"].includes(item.prize) && prizeMap[item.prize]) {
+              $(".prize-verify").append(`
+              <div class="bg flx-all-center prize2-content">
+                <div class="bg prize-item ${prizeMap[item.prize]}"></div>
+                <div>${item.prize}</div>
+              </div>`)
+            }
+          })
+          $(`.prize1-content-${count}`).after(`<div class="bg prize1-tips"></div>`)
+
+          showEl($(".has-prize"))
+          hideEl($(".none-prize"))
+        } else {
+          // 没有奖品
+          $(".title-text").text(`我的号码：${user.tel}`)
+          hideEl($(".has-prize"))
+          showEl($(".none-prize"))
         }
       } else {
         // 请求失败显示主页
@@ -218,9 +226,18 @@ function login(tel, vcode) {
       if (res.data) {
         const area = res.data.data
         // 如果是助力流程
+        console.log("share_openid", share_openid)
         if (share_openid) {
+          console.log("hrere")
           hideEl($(".index-login-wrap"))
           showEl($(".index-help-wrap"))
+          return
+        }
+        // 判断一下是抽奖页还是登记页
+        if (loginToNext === "prize") {
+          getPrizing();
+          makePrizes();
+          toggleDisplay($(".prize-page"))
           return
         }
         // 如果不在5个城市内，打开登记失败弹窗
@@ -320,15 +337,14 @@ function drawPrize() {
       .get(`/draw?openid=${openid}`)
       .then((res) => {
         if (res.data) {
+          localStorage.setItem("initCount", 0)
           // 抽奖次数不足
           if (res.data.code === 20003) {
             showEl($(".draw-fail"))
             return
           }
-          localStorage.setItem("initCount", 0)
           if (res.data.code == 0) {
             // 抽奖成功，改变进度条，减少抽奖次数，直接调用user接口
-            getUserInfo(false)
             canDraw = !canDraw
             // "千兆路由器100元代金券", 
             if (!["谢谢惠顾"].includes(res.data.data) && prizeMap[res.data.data]) {
@@ -344,6 +360,7 @@ function drawPrize() {
             // 谢谢惠顾
             showEl($(".draw-fail"))
           }
+          getUserInfo(false)
         }
       });
   }
@@ -379,10 +396,62 @@ function helpFriend() {
     })
 }
 
+
+// 核销
+function verifyPrize(prizeid, tel) {
+  http
+    .get(`/hexiao?openid=${openid}&prizeid=${prizeid}&tel=${tel}`)
+    .then((res) => {
+      if (res.data.code == 0) {
+        hideEl($(".verify-wrap"))
+        hideEl($(".verify-fail-wrap"))
+        showEl($(".verify-success-wrap"))
+      } else {
+        hideEl($(".verify-wrap"))
+        hideEl($(".verify-success-wrap"))
+        showEl($(".verify-fail-wrap"))
+      }
+    })
+}
+
+// 首页轮播
+function getIndexSwiper() {
+  http
+    .get(`/draw_list`)
+    .then((res) => {
+      if (res.data) {
+        res.data?.data?.map(item => {
+          $(".index-prizing-swiper").children(".swiper-wrapper").append(`<div class="swiper-slide">恭喜${item.nickname}抽中${item.prize}</div>`)
+        })
+        new Swiper('.index-prizing-swiper', {
+          loop: true,
+          slidesPerView: "auto",
+          spaceBetween: 30,
+          autoplay: true,
+        })
+      }
+    });
+  prizes.map((item, index) => {
+    $(".index-prize-swiper")
+      .children(".swiper-wrapper")
+      .append(`<div class="swiper-slide">
+        <div class="bg ${index % 2 === 0 ? 'greed-wrap' : 'red-wrap'}">
+          <div class="bg prize-item-wrap prize${index + 1}"></div>
+        </div>
+        <div class="prize-text row-2">${item.name}</div>
+      </div>`)
+  })
+  new Swiper('.index-prize-swiper', {
+    loop: true,
+    slidesPerView: 3,
+    autoplay: true,
+  })
+}
+
 $(function () {
   setRem(750, 750, 320);
   getUserInfo();
-
+  getIndexSwiper()
   // 首页点击
   $(".index-next").on("click", function () {
     if (user.tel) {
@@ -393,12 +462,20 @@ $(function () {
   });
 
   $(".index-prize").on("click", function () {
-    toggleDisplay($(".prize-page"));
+    if (!user.tel) {
+      toggleDisplay($(".login"));
+      loginToNext = "prize"
+      return
+    }
+    getPrizing();
+    makePrizes();
+    toggleDisplay($(".prize-page"))
   });
 
   // 发送验证码
   $(".sendcode-btn").on("click", function () {
-    const tel = $("#tel").val();
+    const tel = $("#tel").val() || $("#index-tel").val();
+    console.log("tel", tel)
     if (tel) {
       showEl($(".sendcode-btn-empty"))
       hideEl($(".sendcode-btn"))
@@ -409,8 +486,8 @@ $(function () {
 
   // 登陆按钮
   $(".login-btn").on("click", function () {
-    const tel = $("#tel").val();
-    const vcode = $("#vcode").val();
+    const tel = $("#tel").val() || $("#index-tel").val();
+    const vcode = $("#vcode").val() || $("#index-vcode").val();
     if (tel && vcode) {
       login(tel, vcode)
     }
@@ -477,7 +554,7 @@ $(function () {
 
   // 生成链接
   $(".link-btn").on("click", function () {
-    toggleDisplay($(".prize-page"))
+    showEl($(".link-wrap"))
   });
 
   // 生成链接
@@ -511,5 +588,44 @@ $(function () {
   // 我要拿红包按钮
   $(".help-index-btn").on("click", function () {
     toggleDisplay($(".index"))
+  });
+
+  // 打开规则也
+  $(".rule").on("click", function () {
+    showEl($(".rule-wrap"))
+  });
+
+  // 关闭规则也
+  $(".rule-back-btn").on("click", function () {
+    hideEl($(".rule-wrap"))
+  });
+
+  // 打开客服弹窗
+  $(".icon-service").on("click", function () {
+    showEl($(".service-wrap"))
+  });
+
+  // 去抽奖
+  $(".checkin-sussess-btn").on("click", function () {
+    getPrizing();
+    makePrizes();
+    toggleDisplay($(".prize-page"))
+  });
+
+  // 核销
+  $(".has-prize").on("click", ".prize-checkin-btn", function (ev) {
+    prizeId = $(this).attr("id");
+    // 获取元素id(选择的值)
+    console.log("answer", prizeId);
+    showEl($(".verify-wrap"))
+    hideEl($(".my-prize-wrap"))
+  });
+
+  //  确认核销
+  $(".verify-btn").on("click", function () {
+    const verifycode = $("#averify").val()
+    if(verifycode && prizeId) {
+      verifyPrize(prizeId, verifycode)
+    }
   });
 });
