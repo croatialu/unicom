@@ -384,13 +384,17 @@ $(function () {
   getUserInfo();
 
   // 首页点击
-  // $(".index").on("click", function () {
-  //   if (user.tel) {
-  //     toggleDisplay($(".checkin"));
-  //     return
-  //   }
-  //   toggleDisplay($(".login"));
-  // });
+  $(".index-next").on("click", function () {
+    if (user.tel) {
+      toggleDisplay($(".checkin"));
+      return
+    }
+    toggleDisplay($(".login"));
+  });
+
+  $(".index-prize").on("click", function () {
+    toggleDisplay($(".prize-page"));
+  });
 
   // 发送验证码
   $(".sendcode-btn").on("click", function () {

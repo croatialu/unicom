@@ -110,6 +110,27 @@
   bottom: -0.6rem;
   z-index: 19;
 }
+.index-next {
+  width: 5rem;
+  height: 1.4rem;
+  background-color: red;
+  position: absolute;
+  bottom: 11.9rem;
+  left: 1.2rem;
+  z-index: 10;
+}
+.index-prize {
+  width: 3.77rem;
+  height: 1.1rem;
+  background-color: #8a2be2;
+  position: absolute;
+  bottom: 2rem;
+  left: 1.8rem;
+  z-index: 10;
+}
+.index-manhua {
+  position: relative;
+}
 
 /* 助力 */
 .help-content {

@@ -12,15 +12,19 @@
 <body>
   <!-- 首页 -->
   <div class="index hide">
-    <img src="./images/p1_manhua_1.jpg" alt="" width="100%">
+    <!-- <img src="./images/p1_manhua_1.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_2.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_3.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_4.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_5.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_6.jpg" alt="" width="100%">
     <img src="./images/p1_manhua_8.jpg" alt="" width="100%">
-    <img src="./images/p1_manhua_9.jpg" alt="" width="100%">
-    <img src="./images/p1_manhua_10.jpg" alt="" width="100%">
+    <img src="./images/p1_manhua_9.jpg" alt="" width="100%"> -->
+    <div class="empty-wrap index-manhua">
+      <img src="./images/p1_manhua_10.jpg" alt="" width="100%">
+      <div class="index-next"></div>
+      <div class="index-prize"></div>
+    </div>
   </div>
   <!-- 登陆弹窗 -->
   <div class="popup-wrap index-login-wrap hide">
@@ -305,14 +309,16 @@
 <!-- 微信授权登录关键代码 -->
 <script src="http://wx.szhhhd.com/public/wxLogin.js"></script>
 <!-- 填写分享配置 -->
-<!--  引入分享关键代码 -->
-<script src="http://h5.szhhhd.com/wx/share.js?v"></script>
-<script type="text/javascript">
+<script>
   var _wxData = {
     shareTitle: "全民齐抽奖，一起领科沃斯扫地机器人",//分享标题
     shareDesc: "还有微信红包即开即中，等你哟！",//分享描述
     shareImgUrl: "http://h5.szhhhd.com/jx/a20211118_zslt/share.jpg"//分享图，必须带有协议头
   };
+</script>
+<!--  引入分享关键代码 -->
+<script src="http://h5.szhhhd.com/wx/share.js?v"></script>
+<script type="text/javascript">
   function getQueryString(name) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = window.location.search.substr(1).match(reg);
