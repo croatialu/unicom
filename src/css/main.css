@@ -7,7 +7,7 @@
 .login {
   width: 100%;
   min-height: 100%;
-  background-size: cover;
+  background-size: 100% 100%;
   background-image: url("../images/p2_login_bg.jpg");
 }
 .logo-wrap {
@@ -17,8 +17,12 @@
   width: 100%;
   padding: .43rem .25rem 0;
   box-sizing: border-box;
+  margin-bottom: .3rem;
 }
 .logo {
+  position: fixed;
+  top: .3rem;
+  left: .3rem;
   width: .9rem;
   height: .52rem;
   background-image: url("../images/p2_login_logo.png");
@@ -41,6 +45,9 @@
   background-image: url("../images/p2_login_content_bg.png");
   background-position: center bottom;
 }
+.popup-login-content {
+  background-image: url("../images/p2_login_bg2.png");
+}
 .tel-wrap {
   position: relative;
   margin-top: 1rem;
@@ -48,6 +55,9 @@
   height: .9rem;
   background-image: url("../images/p2_login_tel_bg.png");
   background-size: 100%;
+}
+.popup-tel {
+  margin-top: 0;
 }
 .vcode-wrap {
   position: relative;
@@ -110,6 +120,9 @@
   bottom: -0.6rem;
   z-index: 19;
 }
+.pupop-login-btn-wrap {
+  bottom: 0;
+}
 .index-next {
   width: 5rem;
   height: 1.4rem;
@@ -141,6 +154,10 @@
   bottom: 0;
   right: 0;
   z-index: 20;
+}
+.index-help-wrap {
+  background-size: 100% 100%;
+  background-image: url("../images/p6_help_bg.jpg");
 }
 .help-content {
   width: 100%;

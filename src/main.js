@@ -360,11 +360,6 @@ function drawPrize() {
   }
 }
 
-// 生成链接
-function shareLink() {
-
-}
-
 // 生成二维码
 function sharePost() {
   QRCode.toCanvas(document.getElementById('canvas'),
