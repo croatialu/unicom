@@ -17,23 +17,14 @@ const openid = getCookie("openid");
 const act_name = "20211118_zslt";
 // 能否抽奖
 let canDraw = true;
+// 核销的时候使用
 let prizeId = ""
-// 剩余抽奖次数
-if (localStorage.getItem("initCount") == null) {
-  localStorage.setItem("initCount", 1)
-}
-// 剩余助力次数
-if (localStorage.getItem("helpCount") == null) {
-  localStorage.setItem("helpCount", 1)
-}
-// 总抽奖次数
-let drawTotal = 0;// 最多是5次
 // 用户信息
 let user = {};
 // 倒计时
 let countdown = 60;
 // 助力openid
-let share_openid = localStorage.getItem("share_openid") || "";
+let share_openid = "";
 // 抽奖奖品
 const prizes = [{
   name: "千兆路由器100元代金券",
@@ -95,15 +86,20 @@ function getUserInfo(flag = true) {
         console.log("getuser", res);
         // 先判断是否是分享进来的
         share_openid = getQueryString("share_openid");
-        localStorage.setItem("share_openid", share_openid || "")
+        user = res.data.data
         if (share_openid && share_openid != openid) {
           if (!res.data.data) showEl($(".index-login-wrap"))
           else {
-            user = res.data.data
-            if (localStorage.getItem("helpCount") != 0) {
+            if (flag) {
+              // 判断重复扫码，help_list share_openid
+              // 漫画页（首页），并且弹出助力成功弹窗
+              const item = user?.help_list?.findIndex(item => item.openid === share_openid)
+              console.log(item)
+              if (item) {
+                showEl($(".help-success-wrap"))
+                return
+              }
               showEl($(".index-help-wrap"))
-            } else {
-              showEl($(".help-fail-wrap"))
             }
           }
         } else {
@@ -112,7 +108,6 @@ function getUserInfo(flag = true) {
             // 暂无需要操作
           } else {
             // a2. 登录过(有tel)：漫画页去到【登记页】;
-            user = res.data.data
             // 判断登记失败还是成功
             if (areas.includes(user?.tel_city) && user.address) {
               $(".icon-phone").text("联系号码：" + user.tel)
@@ -129,18 +124,15 @@ function getUserInfo(flag = true) {
           }
         }
         // 配置抽奖次数
-        drawTotal = user?.help_list?.length ? parseInt(user?.help_list?.length / 3) : 0;
-        if (drawTotal > 5) drawTotal = 5;
-        const process = user?.prize_list?.length ? user?.prize_list?.length + 1 : 1;
-        const canDrawCount = drawTotal + Number(localStorage.getItem("initCount"));
-        $(".draw-tips").text("当前抽奖次数：" + canDrawCount)
-        $(".draw-process").addClass(`progress${process}`)
+        $(".draw-tips").text("当前抽奖次数：" + (user.chance))
+        $(".draw-process").addClass(`progress${user?.prize_all_list?.length + 1}`)
         // 配置我的好友
         if (!user?.help_list?.length) {
           $(".friend-tips").text("当前未有呼叫成功的好友")
           hideEl($(".friends"))
         } else {
           $(".friend-tips").text(`当前共呼叫成功${user?.help_list?.length}个好友`)
+          $(".friends").empty()
           user?.help_list.map(item => {
             $(".friends").append(`<div class="flx-col flx-all-center friends-item">
             <img src=${item.headimgurl} class="head">
@@ -335,13 +327,12 @@ function runPrizeItem() {
 // 抽奖
 function drawPrize() {
   console.log("draw");
-  if (canDraw && drawTotal + Number(localStorage.getItem("initCount"))) {
+  if (canDraw) {
     canDraw = !canDraw
     http
       .get(`/draw?openid=${openid}`)
       .then((res) => {
         if (res.data) {
-          localStorage.setItem("initCount", 0)
           // 抽奖次数不足
           if (res.data.code === 20003) {
             showEl($(".draw-fail"))
@@ -549,6 +540,11 @@ $(function () {
     toggleDisplay($(".checkin"))
   });
 
+  // 海报页返回按钮 -> 抽奖页
+  $(".poster-back-btn").on("click", function () {
+    toggleDisplay($(".prize-page"))
+  });
+
   // 登记失败弹窗按钮 -> 抽奖
   $(".checkin-fail-btn").on("click", function () {
     getPrizing();
@@ -580,13 +576,7 @@ $(function () {
 
   // 确认助力
   $(".help-btn").on("click", function () {
-    if (localStorage.getItem("helpCount")) {
-      localStorage.setItem("helpCount", 0)
-      helpFriend()
-    } else {
-      hideEl($(".index-help-wrap"))
-      showEl($(".help-fail-wrap"))
-    }
+    helpFriend()
   });
 
   // 我要拿红包按钮

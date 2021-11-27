@@ -394,6 +394,12 @@
   top: 3.6rem;
   z-index: 19;
 }
+.poster-back-btn {
+  position: absolute;
+  width: 1.38rem;
+  height: .53rem;
+  background-image: url("../images/p5_draw_btn_back.png");
+}
 .back-btn{
   width: 1.38rem;
   height: .53rem;
@@ -493,6 +499,8 @@
   background-size: 100%;
   margin-bottom: .62rem;
   background-image: url("../images/p5_draw_friends_content_bottom.png");
+  position: relative;
+  top: -0.02rem;
 }
 .friend-tips {
   font-size: .3rem;
