@@ -7,9 +7,9 @@ import "./css/swiper-bundle.min.css";
 import "./css/common.css";
 import "./css/main.css";
 
-import VConsole from "vconsole";
-new VConsole();
-console.info("vconsole-info-测试");
+// import VConsole from "vconsole";
+// new VConsole();
+// console.info("vconsole-info-测试");
 
 const QRCode = require('qrcode');
 const areas = ["广州", "深圳", "珠海", "中山", "江门"]
@@ -24,7 +24,7 @@ let user = {};
 // 倒计时
 let countdown = 60;
 // 助力openid
-let share_openid = "";
+let share_openid = getQueryString("share_openid");
 // 抽奖奖品
 const prizes = [{
   name: "千兆路由器100元代金券",
@@ -83,10 +83,9 @@ function getUserInfo(flag = true) {
     .get(`/get_user_info?openid=${openid}&act_name=${act_name}`)
     .then((res) => {
       if (res.data) {
-        console.log("getuser", res);
         // 先判断是否是分享进来的
-        share_openid = getQueryString("share_openid");
-        user = res.data.data
+        user = res.data.data || { change: 1, prize_all_list: [], prize_list: [], help_list: [] }
+        console.log("getuser", share_openid, res.data.data);
         if (share_openid && share_openid != openid) {
           if (!res.data.data) showEl($(".index-login-wrap"))
           else {
@@ -94,7 +93,6 @@ function getUserInfo(flag = true) {
               // 判断重复扫码，help_list share_openid
               // 漫画页（首页），并且弹出助力成功弹窗
               const item = user?.help_list?.findIndex(item => item.openid === share_openid)
-              console.log(item)
               if (item) {
                 showEl($(".help-success-wrap"))
                 return
@@ -103,6 +101,7 @@ function getUserInfo(flag = true) {
             }
           }
         } else {
+          share_openid = ""
           // a1. 第一次进入：漫画页（首页） 
           if (!res.data.data) {
             // 暂无需要操作
@@ -202,7 +201,7 @@ function settime(val) {
 function getVcode(tel) {
   console.log("getVcode");
   http
-    .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}&type=test`)
+    .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}`) //&type=test
     .then((res) => {
       if (res.data) {
         // 正常逻辑不需要处理什么
@@ -621,10 +620,5 @@ $(function () {
     if (verifycode && prizeId) {
       verifyPrize(prizeId, verifycode)
     }
-  });
-
-  //  清缓存
-  $(".index-cache").on("click", function () {
-    localStorage.clear()
   });
 });

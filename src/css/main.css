@@ -110,14 +110,6 @@
   bottom: -0.6rem;
   z-index: 19;
 }
-.index-cache {
-  width: 3.77rem;
-  height: 1.1rem;
-  position: absolute;
-  bottom: 8.6rem;
-  left: 1.8rem;
-  z-index: 10;
-}
 .index-next {
   width: 5rem;
   height: 1.4rem;

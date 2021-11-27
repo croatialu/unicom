@@ -21,7 +21,6 @@
     <img src="./images/p1_manhua_9.jpg" alt="" width="100%">
     <div class="empty-wrap index-manhua">
       <img src="./images/p1_manhua_10.jpg" alt="" width="100%">
-      <div class="index-cache"></div>
       <div class="index-next"></div>
       <div class="index-prize"></div>
       <div class="index-prizing-swiper">
@@ -350,8 +349,10 @@
     return "";
   }
   const share_openid = getCookie("openid");
-  _wxData.shareLink = location.href.split("#")[0] + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
-  _pWxShare.init(); //刷新分享配置使之生效，注意，必须先用上面的基础分享激活权限后才能重写分享地址，否则腾讯不放行
+  if (share_openid) {
+    _wxData.shareLink = location.href.split("#")[0] + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
+    _pWxShare.init(); //刷新分享配置使之生效，注意，必须先用上面的基础分享激活权限后才能重写分享地址，否则腾讯不放行
+  }
 </script>
 <!-- 百度统计 -->
 <script>
