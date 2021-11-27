@@ -203,11 +203,11 @@ function getVcode(tel) {
   http
     .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}`) //&type=test
     .then((res) => {
-      if (res.data) {
-        // 正常逻辑不需要处理什么
-        const code = res.data.msg?.split("：")[1]
-        $("#vcode").val(code)
-      }
+      // if (res.data) {
+      //   // 正常逻辑不需要处理什么
+      //   const code = res.data.msg?.split("：")[1]
+      //   $("#vcode").val(code)
+      // }
     });
 }
 
