@@ -43,15 +43,15 @@
             <input id="index-vcode" type="text" style="text-align:center;vertical-align:middle;"
               class="form-item vcode-item">
           </div>
-          <div class="bg sendcode-btn"></div>
+          <div class="bg sendcode-btn" id="popup-vcode"></div>
           <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
         </div>
         <div class="login-btn-wrap">
-          <div class="bg login-btn"></div>
+          <div class="bg login-btn" id="popup-login"></div>
         </div>
       </div>
     </div>
-    <div class="bg close-btn back-close-btn"></div>
+    <div class="bg close-btn back-close-btn" id="login-close"></div>
   </div>
   <!-- 助力弹窗 -->
   <div class="popup-wrap flx-col  flx-all-center index-help-wrap hide">
@@ -63,16 +63,16 @@
   <!-- 助力成功 -->
   <div class="popup-wrap flx-col flx-all-center help-success-wrap hide">
     <div class="bg flx-center help-success-content ">
-      <div class="bg help-success-btn help-index-btn"></div>
+      <div class="bg help-success-btn help-index-btn" id="help-success-btn"></div>
     </div>
-    <div class="bg close-btn back-close-btn"></div>
+    <div class="bg close-btn back-close-btn" id="help-success"></div>
   </div>
   <!-- 助力失败 -->
   <div class="popup-wrap flx-col  flx-all-center help-fail-wrap hide">
     <div class="bg flx-center help-fail-content">
-      <div class="bg help-fail-btn help-index-btn"></div>
+      <div class="bg help-fail-btn help-index-btn" id="help-success-btn"></div>
     </div>
-    <div class="bg close-btn back-close-btn"></div>
+    <div class="bg close-btn back-close-btn" id="help-fail"></div>
   </div>
   <!-- 登陆页 -->
   <div class="bg login hide">
@@ -81,7 +81,7 @@
       <div class="decorate"></div>
     </div>
     <div class="empty-wrap flx-end">
-      <div class="bg rule"></div>
+      <div class="bg rule login-rule" id="login-rule"></div>
     </div>
     <div class="empty-wrap flx-center mt-20">
       <div class="bg login-title"></div>
@@ -95,11 +95,11 @@
           <div class="bg vcode-bg">
             <input id="vcode" type="text" style="text-align:center;vertical-align:middle;" class="form-item vcode-item">
           </div>
-          <div class="bg sendcode-btn"></div>
+          <div class="bg sendcode-btn" id="page-vcode"></div>
           <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
         </div>
         <div class="login-btn-wrap">
-          <div class="bg login-btn"></div>
+          <div class="bg login-btn" id="page-login"></div>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@
       <div class="decorate"></div>
     </div>
     <div class="empty-wrap flx-end">
-      <div class="bg rule"></div>
+      <div class="bg rule" id="checkin-rule"></div>
     </div>
     <div class="empty-wrap flx-center mt-20">
       <div class="bg login-title"></div>
@@ -146,7 +146,7 @@
     <div class="empty-wrap flx-center">
       <div class="bg checkin-tips"></div>
     </div>
-    <div class="bg right-icon icon-service"></div>
+    <div class="bg right-icon icon-service" id="checkin-service"></div>
     <div class="bg right-icon icon-draw"></div>
   </div>
   <!-- 地址选择弹窗 -->
@@ -187,22 +187,22 @@
     <div class="bg checkin-fail-content flx-center">
       <div class="bg checkin-fail-btn"></div>
     </div>
-    <div class="bg close-btn"></div>
+    <div class="bg close-btn" id="checkin-login-fail"></div>
   </div>
   <!-- 登记成功弹窗 -->
   <div class="popup-wrap checkin-success hide">
     <div class="bg checkin-sussess-content flx-center">
       <div class="bg checkin-sussess-btn"></div>
     </div>
-    <div class="bg close-btn"></div>
+    <div class="bg close-btn" id="checkin-login-success"></div>
   </div>
   <!-- 抽奖页面 -->
   <div class="bg prize-page hide">
     <div class="empty-wrap flx-btw top-wrap">
       <div class="bg back-btn"></div>
-      <div class="bg rule"></div>
+      <div class="bg rule" id="prize-rule"></div>
     </div>
-    <div class="bg right-icon icon-service"></div>
+    <div class="bg right-icon icon-service" id="prize-service"></div>
     <div class="prize-btn"></div>
     <div class="mt-20 bg flx-center draw">
       <div class="prizing-swiper">
@@ -244,12 +244,12 @@
     <div class="bg draw-sussess-content flx-center">
       <div class="bg draw-sussess-btn flx-all-center"></div>
     </div>
-    <div class="bg close-btn"></div>
+    <div class="bg close-btn" id="prize-success"></div>
   </div>
   <!-- 抽奖失败弹窗/谢谢惠顾 -->
   <div class="popup-wrap draw-fail hide">
     <div class="bg draw-fail-content flx-center"></div>
-    <div class="bg close-btn"></div>
+    <div class="bg close-btn" id="prize-fail"></div>
   </div>
   <!-- 我的奖品 -->
   <div class="popup-wrap flx-col flx-all-center my-prize-wrap hide">
@@ -272,7 +272,7 @@
       <div class="none-prize hide">哟，当前还没有中奖礼品哟</div>
     </div>
     <div class="bg prize-bottom"></div>
-    <div class="bg close-btn"></div>
+    <div class="bg close-btn" id="prize-close"></div>
   </div>
   <!-- 核销 -->
   <div class="popup-wrap flx-col flx-all-center verify-wrap hide">
@@ -282,17 +282,17 @@
         <div class="bg verify-btn"></div>
       </div>
     </div>
-    <div class="bg close-btn verify-close"></div>
+    <div class="bg close-btn verify-close" id="verify-popup"></div>
   </div>
   <!-- 核销成功 -->
   <div class="popup-wrap flx-col flx-all-center verify-success-wrap hide">
     <div class="bg verify-success-bg flx-center"></div>
-    <div class="bg close-btn verify-close"></div>
+    <div class="bg close-btn verify-close" id="verify-success"></div>
   </div>
   <!-- 核销失败 -->
   <div class="popup-wrap flx-col flx-all-center verify-fail-wrap hide">
     <div class="bg verify-fail-bg flx-center"></div>
-    <div class="bg close-btn verify-close"></div>
+    <div class="bg close-btn verify-close" id="verify-fail"></div>
   </div>
   <!-- 海报 -->
   <div class="popup-wrap poster hide">
@@ -303,7 +303,7 @@
   <!-- 客服弹窗 -->
   <div class="popup-wrap flx-col flx-all-center service-wrap hide">
     <div class="bg service-bg flx-center"></div>
-    <div class="bg close-btn verify-close"></div>
+    <div class="bg close-btn verify-close" id="service-close"></div>
   </div>
   <!-- 规则 -->
   <div class="popup-wrap rule-wrap hide">
@@ -356,11 +356,11 @@
 </script>
 <!-- 百度统计 -->
 <script>
-  // var _hmt = _hmt || [];
-  // (function () {
-  //   var hm = document.createElement("script");
-  //   hm.src = "https://hm.baidu.com/hm.js?c8471e072575f6cb3a288f75851abe7e";
-  //   var s = document.getElementsByTagName("script")[0];
-  //   s.parentNode.insertBefore(hm, s);
-  // })();
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c8471e072575f6cb3a288f75851abe7e";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
 </script>
