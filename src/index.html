@@ -354,7 +354,7 @@
   }
   const share_openid = getCookie("openid");
   if (share_openid) {
-    _wxData.shareLink = location.href.split("#")[0] + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
+    _wxData.shareLink = location.origin + location.pathname + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
     _pWxShare.init(); //刷新分享配置使之生效，注意，必须先用上面的基础分享激活权限后才能重写分享地址，否则腾讯不放行
   }
 </script>

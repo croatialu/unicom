@@ -25,6 +25,7 @@ let user = {};
 let countdown = 60;
 // 助力openid
 let share_openid = getQueryString("share_openid");
+console.log("init share_openid", share_openid)
 // 抽奖奖品
 const prizes = [{
   name: "千兆路由器100元代金券",
@@ -66,6 +67,7 @@ const prizeMap = {
 let loginToNext = "verify"
 // 为了埋点配置的登记状态
 let verifyStatus = "form"; // form success fail
+
 
 /** 用户信息请求
  * A用户 
@@ -285,7 +287,11 @@ function getPrizing() {
     .get(`/draw_list`)
     .then((res) => {
       if (res.data) {
-        res.data?.data?.map(item => {
+        const data = res.data?.data || []
+        if(data?.length > 30) {
+          data.length = 30
+        }
+        data?.map(item => {
           $(".prizing-swiper").children(".swiper-wrapper").append(`<div class="swiper-slide">恭喜${item.nickname}抽中${item.prize}</div>`)
         })
         runPrizing()
@@ -414,7 +420,11 @@ function getIndexSwiper() {
     .get(`/draw_list`)
     .then((res) => {
       if (res.data) {
-        res.data?.data?.map(item => {
+        const data = res.data?.data || []
+        if(data?.length > 30) {
+          data.length = 30
+        }
+        data?.map(item => {
           $(".index-prizing-swiper").children(".swiper-wrapper").append(`<div class="swiper-slide">恭喜${item.nickname}抽中${item.prize}</div>`)
         })
         new Swiper('.index-prizing-swiper', {
