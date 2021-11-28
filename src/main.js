@@ -204,7 +204,7 @@ function settime(val) {
 function getVcode(tel) {
   console.log("getVcode");
   http
-    .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}&type=test`) //&type=test
+    .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}`) //&type=test
     .then((res) => {
       // if (res.data) {
       //   // 正常逻辑不需要处理什么
