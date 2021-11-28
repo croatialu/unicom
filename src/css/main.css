@@ -758,6 +758,12 @@
   background-image: url("../images/popup_myPrize_router_btn.png");
   margin-right: .3rem;
 }
+.prize-checked-btn {
+  width: 1.3rem;
+  height: .53rem;
+  background-image: url("../images/popup_myPrize_router_btn_done.png");
+  margin-right: .3rem;
+}
 .prize-tips {
   font-size: .28rem;
   color: #3E4853;
