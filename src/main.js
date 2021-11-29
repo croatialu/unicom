@@ -1,4 +1,5 @@
-import $, { type } from "jquery";
+import $ from "jquery";
+import html2canvas from "html2canvas";
 import http from "./http";
 import { getCookie, toggleDisplay, getQueryString, showEl, hideEl } from "./utils";
 import setRem from "./setRem.js";
@@ -6,6 +7,7 @@ import "./css/reset.css";
 import "./css/swiper-bundle.min.css";
 import "./css/common.css";
 import "./css/main.css";
+import Swiper from "./swiper-bundle.min.js";
 
 // import VConsole from "vconsole";
 // new VConsole();
@@ -89,6 +91,10 @@ function getUserInfo(flag = true) {
       if (res.data) {
         // 先判断是否是分享进来的
         user = res.data.data || { change: 1, prize_all_list: [], prize_list: [], help_list: [] }
+        if (user?.headimgurl) {
+          $(".head-image").css("background-image", `url(${user?.headimgurl})`)
+          $(".poster-name").text("呢称：" + (user.nickname || "未知"))
+        }
         console.log("getuser", share_openid, res.data.data);
         if (share_openid && share_openid != openid) {
           if (!res.data.data) showEl($(".index-login-wrap"))
@@ -222,7 +228,7 @@ function login(tel, vcode) {
   http
     .get(`/tel_login?openid=${openid}&act_name=${act_name}&tel=${tel}&vcode=${vcode}`)
     .then((res) => {
-      if (res.data) {
+      if (res.data && res.data.code == 0) {
         const area = res.data.data
         // 如果是助力流程
         console.log("share_openid", share_openid)
@@ -288,7 +294,7 @@ function getPrizing() {
     .then((res) => {
       if (res.data) {
         const data = res.data?.data || []
-        if(data?.length > 30) {
+        if (data?.length > 30) {
           data.length = 30
         }
         data?.map(item => {
@@ -305,7 +311,10 @@ function runPrizing() {
     loop: true,
     slidesPerView: "auto",
     spaceBetween: 30,
-    autoplay: true,
+    autoplay: {
+      delay: 800,
+    },
+    speed: 200,
   })
 }
 
@@ -330,7 +339,11 @@ function runPrizeItem() {
   new Swiper('.draw-prize-swiper', {
     loop: true,
     slidesPerView: 3,
-    autoplay: true,
+    speed: 10,
+    autoplay: {
+      // 0.1秒切换一次
+      delay: 200,
+    },
   })
 }
 
@@ -371,13 +384,48 @@ function drawPrize() {
   }
 }
 
+function drawToPic(scale = 2) {
+  showEl($("#poster"))
+  // box -- 需要截取的屏幕的可视区域
+  const height = document.getElementById("poster").clientHeight
+  const width = document.getElementById("poster").clientWidth
+  const canvas = document.createElement('canvas')
+  canvas.width = width * scale
+  canvas.height = height * scale
+  const content = canvas.getContext('2d')
+  content.scale(scale, scale)
+  const rect = document.getElementById("poster").getBoundingClientRect()
+  content.translate(-rect.left, -rect.top)
+  console.log(scale, width, height)
+  setTimeout(() => {
+    html2canvas(document.getElementById("poster"), {
+      allowTaint: true,
+      taintTest: true,
+      useCORS: true,
+      scale: scale / 2,
+      canvas: canvas,
+      width: width,
+      height: height,
+      scrollY: 0
+    }).then((c) => {
+      // 微信浏览器下，可长按图片保存
+      const elemImg = `<img src="${c.toDataURL('image/png')}"" style='width: 100%'/>`
+      $("#poster-img").append(elemImg)
+      hideEl($("#poster"))
+      showEl($("#poster-img"))
+    }).catch(e => {
+      console.log("html2canvas", e)
+    })
+  }, 10)
+}
+
 // 生成二维码
 function sharePost() {
   QRCode.toCanvas(document.getElementById('canvas'),
     `http://h5.szhhhd.com/jx/a20211118_zslt?share_openid=${openid}`,
     function (error) {
       if (error) console.error(error)
-      showEl($(".poster"))
+      drawToPic()
     })
 }
 
@@ -421,7 +469,7 @@ function getIndexSwiper() {
     .then((res) => {
       if (res.data) {
         const data = res.data?.data || []
-        if(data?.length > 30) {
+        if (data?.length > 30) {
           data.length = 30
         }
         data?.map(item => {
@@ -431,7 +479,10 @@ function getIndexSwiper() {
           loop: true,
           slidesPerView: "auto",
           spaceBetween: 30,
-          autoplay: true,
+          autoplay: {
+            delay: 800,
+          },
+          speed: 200,
         })
       }
     });
@@ -448,7 +499,10 @@ function getIndexSwiper() {
   new Swiper('.index-prize-swiper', {
     loop: true,
     slidesPerView: 3,
-    autoplay: true,
+    speed: 10,
+    autoplay: {
+      delay: 200,
+    },
   })
 }
 

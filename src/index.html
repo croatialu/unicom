@@ -55,7 +55,7 @@
   </div>
   <!-- 助力弹窗 -->
   <div class="popup-wrap flx-col  flx-all-center bg index-help-wrap hide">
-    <div class="logo-wrap">
+    <div class="logo-wrap help-logo-wrap ">
       <div class="bg logo"></div>
     </div>
     <div class="bg right-icon icon-service" id="help-service"></div>
@@ -299,10 +299,16 @@
     <div class="bg close-btn verify-close" id="verify-fail"></div>
   </div>
   <!-- 海报 -->
-  <div class="popup-wrap poster hide">
+  <div class="popup-wrap poster hide" id="poster-img">
     <div class="bg poster-back-btn"></div>
+  </div>
+  <div class="popup-wrap poster hide" id="poster">
+    <div class="bg head-image"></div>
+    <div class="bg head-tips"></div>
+    <div class="poster-name"></div>
     <canvas id="canvas" class="canvas"></canvas>
-    <div class="bg poster-bg"></div>
+    <!-- <div class="bg poster-bg"></div> -->
+    <img class="poster-bg" src="./images/p4_poster_content_bg.png" alt="">
   </div>
   <!-- 客服弹窗 -->
   <div class="popup-wrap flx-col flx-all-center service-wrap hide">
@@ -325,7 +331,7 @@
 
 <!-- 引入公共JQ文件 -->
 <script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+<!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script> -->
 <!-- 微信jdk -->
 <script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <!-- 微信授权登录关键代码 -->

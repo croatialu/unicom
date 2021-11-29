@@ -15,14 +15,17 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: .43rem .25rem 0;
   box-sizing: border-box;
   margin-bottom: .3rem;
 }
+.help-logo-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 .logo {
-  position: fixed;
-  top: .3rem;
-  left: .3rem;
+  margin-top: .3rem;
+  margin-left: .3rem;
   width: .9rem;
   height: .52rem;
   background-image: url("../images/p2_login_logo.png");
@@ -202,7 +205,7 @@
 .checkin {
   width: 100%;
   min-height: 100%;
-  background-size: cover;
+  background-size: 100% 100%;
   background-image: url("../images/p3_checkin_bg.jpg");
 }
 .checkin-prize {
@@ -283,7 +286,7 @@
   position: fixed;
   z-index: 11;
   right: 0;
-  top: 40%;
+  top: 7rem;
   width: 1.14rem;
   height: 1.14rem;
 }
@@ -293,7 +296,7 @@
   background-image: url("../images/p3_checkin_btn_customer.png");
 }
 .icon-draw {
-  top: 56%;
+  top: 9rem;
   background-position: right center;
   background-image: url("../images/p3_checkin_btn_draw.png");
 }
@@ -391,7 +394,7 @@
   position: relative;
   width: 100%;
   min-height: 100%;
-  background-size: cover;
+  background-size: 100% 100%;
   background-image: url("../images/p5_draw_bg.jpg");
 }
 .prize-btn {
@@ -407,6 +410,8 @@
   position: absolute;
   width: 1.38rem;
   height: .53rem;
+  top: .2rem;
+  left: .1rem;
   background-image: url("../images/p5_draw_btn_back.png");
 }
 .back-btn{
@@ -861,19 +866,22 @@
 
 /* 海报 */
 .poster {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 30;
   background-image: url("../images/p4_poster_bg.jpg");
-  overflow: scroll;
-  height: 100%;
+}
+#poster-img {
+  background-image: none;
+  padding: 0;
+  width: 100%;
+  height: inherit;
 }
 .poster-bg{
   width: 7.2rem;
   height: 13.1rem;
   margin-bottom: .4rem;
-  background-image: url("../images/p4_poster_content_bg.png");
 }
 #canvas {
   position: absolute;
@@ -882,7 +890,36 @@
   left: 2.9rem;
   top: 8.5rem;
 }
-
+.head-image {
+  position: absolute;
+  right: 0;
+  margin: auto;
+  background-color: #0ff;
+  width: 1.3rem;
+  height: 1.28rem;
+  left: .05rem;
+  border-radius: 50%;
+  top: .64rem;
+}
+.head-tips {
+  width: 3.57rem;
+  height: 1.03rem;
+  position: absolute;
+  left: 0.08rem;
+  right: 0;
+  margin: auto;
+  top: 1.5rem;
+  background-image: url("../images/p4_poster_content_tips.png");
+}
+.poster-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 2.8rem;
+  font-size: .26rem;
+  text-align: center;
+}
 /* 登陆弹窗 */
 .index-login-wrap {
   position: fixed;
@@ -919,8 +956,8 @@
   background-image: url("../images/p5_draw_btn_back.png");
 }
 .link-bg {
-  width: 2.5rem;
-  height: 2.15rem;
+  width: 4.5rem;
+  height: 3.15rem;
   background-image: url("../images/popup_share_tips.png");
 }
 .link-wrap {
@@ -929,5 +966,5 @@
   align-items: flex-end;
 }
 .link-close {
-  margin: .6rem .9rem;
+  margin: .6rem 1.8rem;
 }
