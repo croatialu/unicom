@@ -30,7 +30,7 @@ let share_openid = getQueryString("share_openid");
 console.log("init share_openid", share_openid)
 // 抽奖奖品
 const prizes = [{
-  name: "千兆路由器100元代金券",
+  name: "路由器100元代金券",
   image: ""
 }, {
   name: "500元加油卡",
@@ -49,7 +49,7 @@ const prizes = [{
   image: ""
 }]
 // 需要核销的产品
-const shouldPrize = ["千兆路由器100元代金券"];
+const shouldPrize = ["路由器100元代金券"];
 // 奖品对照的样式映射
 const prizeMap = {
   '10元话费': "phoneBill", // 电话费
@@ -93,7 +93,7 @@ function getUserInfo(flag = true) {
         user = res.data.data || { change: 1, prize_all_list: [], prize_list: [], help_list: [] }
         if (user?.headimgurl) {
           $(".head-image").css("background-image", `url(${user?.headimgurl})`)
-          $(".poster-name").text("呢称：" + (user.nickname || "未知"))
+          $(".poster-name").text("@" + (user.nickname || "未知"))
         }
         console.log("getuser", share_openid, res.data.data);
         if (share_openid && share_openid != openid) {
@@ -124,6 +124,13 @@ function getUserInfo(flag = true) {
             verifyStatus = "success"
             $(".icon-phone").text("联系号码：" + user?.tel)
             $(".icon-addr").text("联系地址：" + user.address + user.address_more)
+            if(user?.tvid) {
+              $(".icon-network").text("宽带号码：" + user?.tvid)
+              showEl($(".icon-network"))
+            } else if(user?.idcard) {
+              $(".icon-idcard").text("身份证：" + user?.idcard)
+              showEl($(".icon-idcard"))
+            }
             showEl($(".checkin-success-result"))
             hideEl($(".checkin-result"))
           } else if (!areas.includes(user?.tel_city)) {
@@ -166,7 +173,7 @@ function getUserInfo(flag = true) {
                 <div id=${item.prize_id} class="bg ${item.status == 0 ? 'prize-checkin-btn' : 'prize-checked-btn'}"></div>
               </div>`)
             }
-            if (!["千兆路由器100元代金券", "谢谢惠顾"].includes(item.prize) && prizeMap[item.prize]) {
+            if (!["路由器100元代金券", "谢谢惠顾"].includes(item.prize) && prizeMap[item.prize]) {
               $(".prize-verify").append(`
               <div class="bg flx-all-center prize2-content">
                 <div class="bg prize-item ${prizeMap[item.prize]}"></div>
@@ -261,10 +268,18 @@ function login(tel, vcode) {
 }
 
 // 登记信息
-function checkin(address, address_more) {
+function checkin(address, address_more, options) {
   console.log("checkin");
+  let url = ""
+  if(options.tvid) {
+    url = `/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}&tvid=${options.tvid}`
+  } else if(options.idcard) {
+    url = `/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}&idcard=${options.idcard}`
+  } else {
+    return
+  }
   http
-    .get(`/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}`)
+    .get(url)
     .then((res) => {
       if (res.data) {
         // 登记成功 -> 登记成功弹窗，修改登记页面显示(在userinfo接口也应判断显示)
@@ -273,8 +288,19 @@ function checkin(address, address_more) {
           showEl($(".checkin-success"))
           $(".icon-phone").text("联系号码：" + user.tel)
           $(".icon-addr").text("联系地址：" + address + address_more)
+          if(options.tvid) {
+            $(".icon-network").text("宽带号码：" + options.tvid)
+            showEl($(".icon-network"))
+          } else if(options.idcard) {
+            $(".icon-idcard").text("身份证：" + options.idcard)
+            showEl($(".icon-idcard"))
+          }
           showEl($(".checkin-success-result"))
           hideEl($(".checkin-result"))
+        } else if(res.data.code == 20012) {
+          showEl($(".checkin-network-error"))
+        } else if(res.data.code == 20011) {
+          showEl($(".checkin-idcard-error"))
         } else {
           // 登记失败 -> 登记失败弹窗，修改登记页面显示(在userinfo接口也应判断显示)
           verifyStatus = "fail"
@@ -364,7 +390,7 @@ function drawPrize() {
           if (res.data.code == 0) {
             // 抽奖成功，改变进度条，减少抽奖次数，直接调用user接口
             canDraw = !canDraw
-            // "千兆路由器100元代金券", 
+            // "路由器100元代金券", 
             if (!["谢谢惠顾"].includes(res.data.data) && prizeMap[res.data.data]) {
               $(".draw-sussess-content").prepend(`
             <div class="prize-wrap flx-col flx-all-center">
@@ -765,7 +791,9 @@ $(function () {
   $(".checkin-btn").on("click", function () {
     const address = $("#address").val();
     const address_more = $("#address_more").val();
-    if (address && address_more) {
+    const tvid = $("#tvid").val();
+    const idcard = $("#idcard").val();
+    if (address && address_more && (tvid || idcard)) {
       const baiduHtm = [
         "a20211118_zslt",
         "click",
@@ -779,7 +807,13 @@ $(function () {
         baiduHtm[2],
         baiduHtm[3],
       ]);
-      checkin(address, address_more)
+      if(tvid) {
+        checkin(address, address_more, {tvid})
+      } else if(idcard) {
+        checkin(address, address_more, {idcard})
+      }
+    } else {
+      alert("请先填写身份证或者宽带号")
     }
   });
 
