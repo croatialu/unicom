@@ -15,7 +15,9 @@ export function getCookie(cname) {
 
 // 切换展示的模块
 export function toggleDisplay(selector) {
-  $("htlm,body").animate({ scrollTop: 0 }, 0);
+  $("html,body").animate({ scrollTop: 0 }, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
   selector
     .removeClass("hide")
     .addClass("show")

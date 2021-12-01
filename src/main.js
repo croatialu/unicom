@@ -91,8 +91,8 @@ function getUserInfo(flag = true) {
       if (res.data) {
         // 先判断是否是分享进来的
         user = res.data.data || { change: 1, prize_all_list: [], prize_list: [], help_list: [] }
-        if (user?.headimgurl) {
-          $(".head-image").css("background-image", `url(${user?.headimgurl})`)
+        if (user?.nickname) {
+          // $(".head-image").css("background-image", `url(${user?.headimgurl})`)
           $(".poster-name").text("@" + (user.nickname || "未知"))
         }
         console.log("getuser", share_openid, res.data.data);
@@ -124,10 +124,11 @@ function getUserInfo(flag = true) {
             verifyStatus = "success"
             $(".icon-phone").text("联系号码：" + user?.tel)
             $(".icon-addr").text("联系地址：" + user.address + user.address_more)
-            if(user?.tvid) {
+            if (user?.tvid) {
               $(".icon-network").text("宽带号码：" + user?.tvid)
               showEl($(".icon-network"))
-            } else if(user?.idcard) {
+            } 
+            if (user?.idcard) {
               $(".icon-idcard").text("身份证：" + user?.idcard)
               showEl($(".icon-idcard"))
             }
@@ -270,13 +271,13 @@ function login(tel, vcode) {
 // 登记信息
 function checkin(address, address_more, options) {
   console.log("checkin");
-  let url = ""
-  if(options.tvid) {
-    url = `/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}&tvid=${options.tvid}`
-  } else if(options.idcard) {
-    url = `/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}&idcard=${options.idcard}`
-  } else {
-    return
+  let url = `/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}`
+  // 接口的校验顺序是先身份证后宽带号
+  if (options.tvid) {
+    url = url + `&tvid=${options.tvid}`
+  }
+  if (options.idcard) {
+    url = url + `&idcard=${options.idcard}`
   }
   http
     .get(url)
@@ -288,18 +289,19 @@ function checkin(address, address_more, options) {
           showEl($(".checkin-success"))
           $(".icon-phone").text("联系号码：" + user.tel)
           $(".icon-addr").text("联系地址：" + address + address_more)
-          if(options.tvid) {
+          if (options.tvid) {
             $(".icon-network").text("宽带号码：" + options.tvid)
             showEl($(".icon-network"))
-          } else if(options.idcard) {
+          } 
+          if (options.idcard) {
             $(".icon-idcard").text("身份证：" + options.idcard)
             showEl($(".icon-idcard"))
           }
           showEl($(".checkin-success-result"))
           hideEl($(".checkin-result"))
-        } else if(res.data.code == 20012) {
+        } else if (res.data.code == 20012) {
           showEl($(".checkin-network-error"))
-        } else if(res.data.code == 20011) {
+        } else if (res.data.code == 20011) {
           showEl($(".checkin-idcard-error"))
         } else {
           // 登记失败 -> 登记失败弹窗，修改登记页面显示(在userinfo接口也应判断显示)
@@ -365,10 +367,9 @@ function runPrizeItem() {
   new Swiper('.draw-prize-swiper', {
     loop: true,
     slidesPerView: 3,
-    speed: 10,
+    speed: 300,
     autoplay: {
-      // 0.1秒切换一次
-      delay: 200,
+      delay: 600,
     },
   })
 }
@@ -410,29 +411,27 @@ function drawPrize() {
   }
 }
 
-function drawToPic(scale = 2) {
+function drawToPic() {
   showEl($("#poster"))
   // box -- 需要截取的屏幕的可视区域
   const height = document.getElementById("poster").clientHeight
   const width = document.getElementById("poster").clientWidth
-  const canvas = document.createElement('canvas')
-  canvas.width = width * scale
-  canvas.height = height * scale
-  const content = canvas.getContext('2d')
-  content.scale(scale, scale)
-  const rect = document.getElementById("poster").getBoundingClientRect()
-  content.translate(-rect.left, -rect.top)
-  console.log(scale, width, height)
+  // const canvas = document.createElement('canvas')
+  // canvas.width = width
+  // canvas.height = height
+  // const content = canvas.getContext('2d')
+  // const rect = document.getElementById("poster").getBoundingClientRect()
+  // content.translate(-rect.left, -rect.top)
   setTimeout(() => {
     html2canvas(document.getElementById("poster"), {
       allowTaint: true,
       taintTest: true,
       useCORS: true,
-      scale: scale / 2,
-      canvas: canvas,
+      // canvas: canvas,÷
       width: width,
       height: height,
-      scrollY: 0
+      scrollY: 0,
+      scrollX: 0
     }).then((c) => {
       // 微信浏览器下，可长按图片保存
       const elemImg = `<img src="${c.toDataURL('image/png')}"" style='width: 100%'/>`
@@ -525,9 +524,9 @@ function getIndexSwiper() {
   new Swiper('.index-prize-swiper', {
     loop: true,
     slidesPerView: 3,
-    speed: 10,
+    speed: 300,
     autoplay: {
-      delay: 200,
+      delay: 600,
     },
   })
 }
@@ -807,13 +806,17 @@ $(function () {
         baiduHtm[2],
         baiduHtm[3],
       ]);
-      if(tvid) {
-        checkin(address, address_more, {tvid})
-      } else if(idcard) {
-        checkin(address, address_more, {idcard})
+      if (tvid || idcard) {
+        checkin(address, address_more, { tvid, idcard })
       }
     } else {
-      alert("请先填写身份证或者宽带号")
+      if (!address) {
+        alert("请先填写地址")
+      } else if (!address_more) {
+        alert("请先填写详细地址")
+      } else if (!(tvid || idcard)) {
+        alert("请先填写身份证或者宽带号")
+      }
     }
   });
 

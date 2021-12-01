@@ -263,7 +263,7 @@
   height: .3rem;
   margin: .3rem 0;
   background-image: url("../images/p3_checkin_word1.png");
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
 .checkin-tvid-tip{
   width: 5.1rem;
@@ -431,10 +431,10 @@
 }
 .checkin-sussess-btn {
   position: absolute;
-  bottom: -0.2rem;
+  bottom: 0;
   width: 3.45rem;
   height: 1.1rem;
-  background-image: url("../images/popup_checkinOk_btn.png");
+  /* background-image: url("../images/popup_checkinOk_btn.png"); */
 }
 
 /* 抽奖页面 */
