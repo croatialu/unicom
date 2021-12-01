@@ -863,7 +863,7 @@
 .wxcode {
   width: 1.9rem;
   height: 1.9rem;
-  background-image: url("../images/popup_myPrize_content_qwx.png");
+  /* background-image: url("../images/popup_myPrize_content_qwx.png"); */
 }
 .time-tips {
   font-size: .24rem;
@@ -986,7 +986,7 @@
 .service-bg {
   width: 5.18rem;
   height: 7rem;
-  background-image: url("../images/popup_customer_content.png");
+  /* background-image: url("../images/popup_customer_content.png"); */
 }
 
 .rule-wrap {

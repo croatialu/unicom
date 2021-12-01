@@ -222,11 +222,13 @@ function getVcode(tel) {
   http
     .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}`) //&type=test
     .then((res) => {
-      // if (res.data) {
-      //   // 正常逻辑不需要处理什么
-      //   const code = res.data.msg?.split("：")[1]
-      //   $("#vcode").val(code)
-      // }
+      if (res.data && res?.data?.code == 0) {
+        // 正常逻辑不需要处理什么
+        // const code = res.data.msg?.split("：")[1]
+        // $("#vcode").val(code)
+      } else {
+        alert(res.data?.msg)
+      }
     });
 }
 
@@ -264,6 +266,8 @@ function login(tel, vcode) {
           // 符合要求，去登记页
           toggleDisplay($(".checkin"))
         }
+      } else {
+        alert(res.data?.msg)
       }
     });
 }
@@ -412,6 +416,7 @@ function drawPrize() {
 }
 
 function drawToPic() {
+  $("#poster-last").remove()
   showEl($("#poster"))
   // box -- 需要截取的屏幕的可视区域
   const height = document.getElementById("poster").clientHeight
@@ -434,7 +439,7 @@ function drawToPic() {
       scrollX: 0
     }).then((c) => {
       // 微信浏览器下，可长按图片保存
-      const elemImg = `<img src="${c.toDataURL('image/png')}"" style='width: 100%'/>`
+      const elemImg = `<img id="poster-last" src="${c.toDataURL('image/png')}"" style='width: 100%'/>`
       $("#poster-img").append(elemImg)
       hideEl($("#poster"))
       showEl($("#poster-img"))
