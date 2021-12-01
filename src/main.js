@@ -102,11 +102,11 @@ function getUserInfo(flag = true) {
             if (flag) {
               // 判断重复扫码，help_list share_openid
               // 漫画页（首页），并且弹出助力成功弹窗
-              const item = user?.help_list?.findIndex(item => item.openid === share_openid)
-              if (item != -1) {
-                showEl($(".help-success-wrap"))
-                return
-              }
+              // const item = user?.help_list?.findIndex(item => item.openid === share_openid)
+              // if (item != -1) {
+              //   showEl($(".help-success-wrap"))
+              // } else {
+              // }
               showEl($(".index-help-wrap"))
             }
           }
@@ -127,7 +127,7 @@ function getUserInfo(flag = true) {
             if (user?.tvid) {
               $(".icon-network").text("宽带号码：" + user?.tvid)
               showEl($(".icon-network"))
-            } 
+            }
             if (user?.idcard) {
               $(".icon-idcard").text("身份证：" + user?.idcard)
               showEl($(".icon-idcard"))
@@ -296,7 +296,7 @@ function checkin(address, address_more, options) {
           if (options.tvid) {
             $(".icon-network").text("宽带号码：" + options.tvid)
             showEl($(".icon-network"))
-          } 
+          }
           if (options.idcard) {
             $(".icon-idcard").text("身份证：" + options.idcard)
             showEl($(".icon-idcard"))
@@ -387,14 +387,12 @@ function drawPrize() {
       .get(`/draw?openid=${openid}`)
       .then((res) => {
         if (res.data) {
+          canDraw = !canDraw
           // 抽奖次数不足
           if (res.data.code === 20003) {
             showEl($(".draw-fail"))
-            return
-          }
-          if (res.data.code == 0) {
+          } else if (res.data.code == 0) {
             // 抽奖成功，改变进度条，减少抽奖次数，直接调用user接口
-            canDraw = !canDraw
             // "路由器100元代金券", 
             if (!["谢谢惠顾"].includes(res.data.data) && prizeMap[res.data.data]) {
               $(".draw-sussess-content").prepend(`
@@ -404,6 +402,9 @@ function drawPrize() {
             </div>
             `)
               showEl($(".draw-success"))
+            } else if (res.data.msg == "C02") {
+              // 谢谢惠顾
+              showEl($(".draw-fail"))
             }
           } else if (res.data.msg == "C02") {
             // 谢谢惠顾
@@ -894,7 +895,11 @@ $(function () {
       baiduHtm[2],
       baiduHtm[3],
     ]);
-    drawPrize()
+    if(user?.chance == 0) {
+      alert("没有抽奖次数了")
+    } else {
+      drawPrize()
+    }
   });
 
   // 我的奖品页
