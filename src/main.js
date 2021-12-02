@@ -172,6 +172,7 @@ function getUserInfo(flag = true) {
               $(".has-prize").prepend(`
               <div class="bg prize1-content prize1-content-${count} flx-end">
                 <div id=${item.prize_id} class="bg ${item.status == 0 ? 'prize-checkin-btn' : 'prize-checked-btn'}"></div>
+                <div style="color: #e15852;position: absolute;top: .12rem;right: .5rem;font-size: .24rem;">ID: ${item.prize_id}</div>
               </div>`)
             }
             if (!["路由器100元代金券", "谢谢惠顾"].includes(item.prize) && prizeMap[item.prize]) {
@@ -179,6 +180,7 @@ function getUserInfo(flag = true) {
               <div class="bg flx-all-center prize2-content">
                 <div class="bg prize-item ${prizeMap[item.prize]}"></div>
                 <div>${item.prize}</div>
+                <div style="color: #e15852;position: absolute;right: .5rem;font-size: .24rem;">ID: ${item.prize_id}</div>
               </div>`)
             }
           })
@@ -895,7 +897,7 @@ $(function () {
       baiduHtm[2],
       baiduHtm[3],
     ]);
-    if(user?.chance == 0) {
+    if (user?.chance == 0) {
       alert("没有抽奖次数了")
     } else {
       drawPrize()

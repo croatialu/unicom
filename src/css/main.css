@@ -795,6 +795,7 @@
   margin: 0 .14rem;
 }
 .prize1-content {
+  position: relative;
   width: 5.88rem;
   height: 1.48rem;
   background-image: url("../images/popup_myPrize_router_bg.png");
@@ -824,6 +825,7 @@
   margin-bottom: .2rem;
 }
 .prize2-content {
+  position: relative;
   width: 5.88rem;
   height: 1.21rem;
   background-image: url("../images/popup_myPrize_prize_bg.png");
