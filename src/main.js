@@ -339,6 +339,15 @@ function getPrizing() {
     });
 }
 
+
+// 海报自定义埋点
+function setPostLog() {
+  console.log("setPostLog");
+  http
+    .get(`/set_poster_log?openid=${openid}`)
+    .then((res) => {});
+}
+
 // 中奖信息滚动
 function runPrizing() {
   new Swiper('.prizing-swiper', {
@@ -435,7 +444,7 @@ function drawToPic() {
       allowTaint: true,
       taintTest: true,
       useCORS: true,
-      // canvas: canvas,÷
+      // canvas: canvas,
       width: width,
       height: height,
       scrollY: 0,
@@ -1001,6 +1010,7 @@ $(function () {
       baiduHtm[2],
       baiduHtm[3],
     ]);
+    setPostLog()
     sharePost()
   });
 
