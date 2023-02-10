@@ -32,7 +32,7 @@ axios.defaults.onResError = function (error) {
 
 // export default axios
 let http = axios.create({
-  baseURL: "http://h5.intech.szhhhd.com/out/A20211118_zslt",
+  baseURL: "http://h5.intech.szhhhd.com/out/A20230215_mh",
   paramsSerializer: axios.defaults.paramsSerializer,
 });
 http.interceptors.request.use(

@@ -48,7 +48,6 @@ body {
 .close-btn {
   width: .74rem;
   height: .74rem;
-  background-image: url("../images/popup_btn_close.png");
   margin: .6rem 0 .2rem;
 }
 
