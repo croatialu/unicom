@@ -7,7 +7,7 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
   entry: path.join(__dirname, "src/main.js"),
   output: {
-    // publicPath: "http://h5.szhhhd.com/a20211027_answer/",
+    // publicPath: "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/",
     path: path.join(__dirname, "dist"),
     filename: "[name].[contenthash:8].js",
   },
@@ -47,7 +47,8 @@ module.exports = {
           // 小于该值的图片会使用base64编码
           limit: 1024,
           // 打包后的图片名称 [ext]指图片格式
-          name: "images/[name].[hash:8].[ext]",
+          // name: "images/[name].[hash:8].[ext]",
+          name: "images/[name].[ext]",
           // publicPath: "./"
         },
       },

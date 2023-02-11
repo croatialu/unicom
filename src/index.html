@@ -9,8 +9,12 @@
 </head>
 
 <body>
+  <div class="loading">
+    <div class="c"></div>
+    <div class="">loading...</div>
+  </div>
   <!-- 首页 -->
-  <div class="index">
+  <div class="index hide">
     <div class="index-bg1-wrap index-bg1">
       <div class="a-login"></div>
     </div>
@@ -55,6 +59,9 @@
       <div class="shadow shadow8"></div>
       <div data-index="9" class="item item9"></div>
       <div class="shadow shadow9"></div>
+      <!-- rule and box btn -->
+      <div class="rule-btn"></div>
+      <div class="box-btn"></div>
     </div>
     <div class="manghe-bg3-wrap"></div>
     <div class="award award1 popup-wrap hide" data-index="1">
@@ -126,6 +133,15 @@
     </div>
   </div>
   <!-- 活动页2 -->
+  <!-- <div class="jp hide">
+    <div class="light_award">
+      <div class="jp_item jp-price1 gift"></div>
+      <div class="jp_item jp-price1"></div>
+      <div class="jp_click-btn hide"></div>
+      <div class="close-btn jp_prize-close-btn hide"></div>
+    </div>
+    <div class="jp-btn"></div>
+  </div> -->
   <!-- 留资弹框 -->
   <div class="info hide">
     <div class="info-bg">
@@ -137,23 +153,62 @@
   </div>
   <!-- 观看15s广告 -->
   <div class="ad hide">
-    <image src="http://h5.szhhhd.com/jx/a20230215_mh/ad1.jpg" width="100%" alt="" srcset="">
-    <div class="time">倒计时15秒</div>
-    <div class="time-close-btn hide">关闭</div>
+      <div class=" time"> 倒计时15秒</div>
+     <div class="time-close-btn hide">关闭</div>
   </div>
   <!-- 抽奖次数用完 -->
   <div class="draw-fail hide">
-    <!-- <div class="draw-fail-bg"> -->
+    <div class="draw-fail-bg">
       <div class="draw-fail-btn"></div>
-    <!-- </div> -->
+    </div>
+  </div>
+  <!-- 我的奖品 -->
+  <div class="my-prize-wrap hide">
+    <div class="box-wrap">
+      <div class="c-wrap">
+        <div data-id="1" class="hide prizing p1">
+          <div class="p-btn"></div>
+        </div>
+        <div data-id="2" class="hide prizing p2">
+          <div class="p-btn"></div>
+        </div>
+        <div data-id="3" class="hide prizing p3">
+          <div class="p-btn"></div>
+        </div>
+        <div data-id="4" class="hide prizing p4">
+          <div class="p-btn"></div>
+        </div>
+        <div data-id="5" class="hide prizing p5">
+          <div class="p-btn p-btn-2"></div>
+        </div>
+        <div data-id="6" class="hide prizing p6">
+          <div class="p-btn p-btn-2"></div>
+        </div>
+        <div data-id="7" class="hide prizing p7">
+          <div class="p-btn p-btn-2"></div>
+        </div>
+      </div>
+      <div class="draw-fail-btn prize-close"></div>
+    </div>
+  </div>
+  <!-- 你的奖品已领完 -->
+  <div class="draw-finish hide">
+    <div class="draw-finish-bg draw-finish-bg2">
+      <div class="draw-fail-btn"></div>
+    </div>
+  </div>
+  <!-- 规则 -->
+  <div class="rule-wrap hide">
+    <div class="rule-wrap-bg rule-wrap-bg2">
+      <div class="draw-fail-btn"></div>
+    </div>
   </div>
 </body>
 
 </html>
 
 <!-- 引入公共JQ文件 -->
-<!-- <script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script> -->
-<!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script> -->
+<script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script>
 <!-- 微信jdk -->
 <!-- <script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
 <!-- 微信授权登录关键代码 -->
@@ -168,24 +223,6 @@
 </script>
 <!--  引入分享关键代码 -->
 <!-- <script src="http://h5.szhhhd.com/wx/share.js?v"></script> -->
-<script type="text/javascript">
-  // function getCookie(cname) {
-  //   var name = cname + "=";
-  //   var ca = document.cookie.split(";");
-  //   for (var i = 0; i < ca.length; i++) {
-  //     var c = ca[i].trim();
-  //     if (c.indexOf(name) == 0) {
-  //       return c.substring(name.length, c.length);
-  //     }
-  //   }
-  //   return "";
-  // }
-  // const share_openid = getCookie("openid");
-  // if (share_openid) {
-  //   _wxData.shareLink = location.origin + location.pathname + "?share_openid=" + share_openid; //改写分享路径，加入分享者openid
-  //   _pWxShare.init(); //刷新分享配置使之生效，注意，必须先用上面的基础分享激活权限后才能重写分享地址，否则腾讯不放行
-  // }
-</script>
 <!-- 百度统计 -->
 <script>
   // var _hmt = _hmt || [];

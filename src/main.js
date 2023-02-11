@@ -18,12 +18,51 @@ let look_ad_times = 0;
 let user = {};
 let tel = last_date >= date ? localStorage.getItem("tel") : "";
 let countdown = 60
-let adCount = 15
+let adCount = 2 //15
+let t_d = "2023-02-16"
+
+// Image对象来预加载图片
+var images = new Array()
+function preload() {
+  for (let i = 0; i < arguments.length; i++) {
+    images[i] = new Image()
+    images[i].src = arguments[i]
+  }
+}
+
+preload(
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad1.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad2.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad3.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad4.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad5.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/1-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/1-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/3-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/3-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/4-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/4-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/5-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/5-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/6-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/6-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/7-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/7-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/8-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/8-2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/9-1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/9-2.gif",
+)
 
 function getUserInfo() {
   if (!tel) return
   return http
-    .get(`/get_userinfo?tel=${tel}&act_name=${act_name}`)
+    .get(`/get_userinfo?tel=${tel}&act_name=${act_name}&t_d=${t_d}`)
     .then((res) => {
       if (res.data) {
         user = res.data.data;
@@ -103,79 +142,73 @@ function login(u_tel, vcode) {
 // 抽奖
 function drawPrize() {
   console.log("darpriz", get_prize_times, look_ad_times)
-    if (get_prize_times) {
-      http
-        .get(`/get_prize?act_name=${act_name}&tel=${tel}&t_d=2023-02-15`) // t_d
-        .then((res) => {
-          if (res.data) {
-            canDraw = !canDraw
-            // 当天抽奖次数已达上限
-            if (res.data.code === 10020) {
-              showEl($(".draw-fail"))
-            } else if (res.data.code == 0) {
-              // 抽奖成功，减少抽奖次数，直接调用user接口
-              // 1号 - 15GB畅视融合包
-              // 2号 - 10GB定向流量大礼包
-              // 3号 - 5GB通用流量包+联通云盘100GB乐享会员
-              // 4号 - 25GB快手定向流量包
-              // 5号 - 兔墩墩毛绒钥匙扣一个
-              // 6号 - 兔墩墩吉祥如意徽章一个
-              // 7号 - 兔墩墩盲盒一个
-              console.log(res.data.prize_id)
-              const prizeId = res.data.prize_id;
-              $(".award").addClass("hide")
-              $(".prize-wrap").removeClass("hide")
-              $(`.prize${prizeId}`).removeClass("hide")
-              
-            } else {
-              // alert(res.data?.msg || "您无抽奖资格")
-            }
-            getUserInfo()
-            //test
-            // const prizeId = 4;
-            // $(".award").addClass("hide")
-            // $(".prize-wrap").removeClass("hide")
-            // $(`.prize${prizeId}`).removeClass("hide")
+  if (get_prize_times == 0 || (get_prize_times == 1 && look_ad_times == 1)) {
+    http
+      .get(`/get_prize?act_name=${act_name}&tel=${tel}&t_d=${t_d}`) // t_d
+      .then((res) => {
+        if (res.data) {
+          // 当天抽奖次数已达上限
+          if (res.data.code == 10020 || res.data.code === 10021) {
+            showEl($(".draw-fail"))
+          } else if (res.data.code == 0) {
+            // 抽奖成功，减少抽奖次数，直接调用user接口
+            // 1号 - 15GB畅视融合包
+            // 2号 - 10GB定向流量大礼包
+            // 3号 - 5GB通用流量包+联通云盘100GB乐享会员
+            // 4号 - 25GB快手定向流量包
+            // 5号 - 兔墩墩毛绒钥匙扣一个
+            // 6号 - 兔墩墩吉祥如意徽章一个
+            // 7号 - 兔墩墩盲盒一个
+            const prizeId = res.data.data.prize_id;
+            $(".award").addClass("hide")
+            $(".prize-wrap").removeClass("hide")
+            $(`.prize${prizeId}`).removeClass("hide")
+            $(`.jp-prize${prizeId}`).removeClass("hide")
+          } else {
+            // alert(res.data?.msg || "您无抽奖资格")
           }
-        });
-    } else if(look_ad_times == 0){
-      // 放广告
-      adTimer()
-      
-      showEl($(".ad"))
-      // "look_ad_times":0,	//今天观看的广告次数
-      // "get_prize_times":0,	//今天抽奖次数
-    } else {
-      // 抽奖次数已用完
-      showEl($(".draw-fail"))
-      hideEl($(".award"))
-    }
+          getUserInfo()
+        }
+      });
+  } else if (look_ad_times == 0) {
+    // 放广告
+    adTimer()
+    const num = Math.floor(Math.random() * 5) + 1;
+    $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad${num}.jpg" width="100%"" />`)
+    showEl($(".ad"))
+    // "look_ad_times":0,	//今天观看的广告次数
+    // "get_prize_times":0,	//今天抽奖次数
+  } else {
+    // 抽奖次数已用完
+    showEl($(".draw-fail"))
+    hideEl($(".award"))
+  }
 }
 
 // 登记信息
 function checkin(address, true_tel, username) {
   console.log("checkin");
-  if(address && true_tel && username) {
+  if (address && true_tel && username) {
     let url = `/leave_userinfo?act_name=${act_name}&address=${address}&tel=${tel}&username=${username}&true_tel=${true_tel}`
-  http
-    .get(url)
-    .then((res) => {
-      if (res.data.code == 0) {
-        alert("登记成功")
-        $(".info").addClass("hide")
-      } else {
-        alert(res.data?.msg || "登记失败")
-      }
-    });
+    http
+      .get(url)
+      .then((res) => {
+        if (res.data.code == 0) {
+          alert("登记成功")
+          $(".info").addClass("hide")
+        } else {
+          alert(res.data?.msg || "登记失败")
+        }
+      });
   } else {
     alert("请填写完整收货信息")
   }
 }
 
-//set_ad_info
+// 看广告
 function set_ad_info() {
   console.log("set_ad_info");
-  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}`
+  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}&t_d=${t_d}`
   http
     .get(url)
     .then((res) => {
@@ -183,9 +216,25 @@ function set_ad_info() {
     });
 }
 
+function link(id) {
+  const map = {
+    1: "https://wo.zj186.com/v/6jiaqm", // 15G
+    2: "https://wo.zj186.com/v/eaUJ7b", // 多视频
+    3: "https://wo.zj186.com/v/JRjQni", // 5G
+    4: "https://wo.zj186.com/v/qyENbe", // 25G
+  }
+  if (map[id]) {
+    window.location.href = map[id];
+  }
+}
+
 
 
 $(function () {
+  setTimeout(() => {
+    hideEl($(".loading"))
+    showEl($(".index"))
+  }, 2000)
   setRem(750, 750, 325);
   getUserInfo();
 
@@ -225,6 +274,11 @@ $(function () {
     const index = $(this).attr("data-index")
     console.log("index", index)
     $(`.award${index}`).removeClass("hide")
+    $(`.jp`).removeClass("hide")
+    setTimeout(() => {
+      $(`.jp_click-btn`).removeClass("hide")
+      $(`.jp_prize-close-btn`).removeClass("hide")
+    }, 1500)
   })
 
   // 弹窗的关闭按钮
@@ -246,6 +300,19 @@ $(function () {
     popup.addClass(`award${index}_2`)
     // 调抽奖接口
     drawPrize()
+    setTimeout(() => {
+      hideEl(popup)
+    }, 1000)
+  });
+
+  $(".jp_click-btn").on("click", function () {
+    // const popup = $(this).parent(".popup-wrap")
+    // const index = popup.attr("data-index");
+    // 设置popup背景图
+    $(".jp_item").addClass(`gift`)
+    // popup.addClass(`gift`)
+    // 调抽奖接口
+    drawPrize()
     // setTimeout(() => {
     //   hideEl(popup)
     // }, 1000)
@@ -254,15 +321,7 @@ $(function () {
   /** 点击跳转到外部链接 */
   $(".buy-btn").on("click", function () {
     const id = $(this).attr("data-id")
-    const map = {
-      1: "https://wo.zj186.com/v/6jiaqm", // 15G
-      2: "https://wo.zj186.com/v/eaUJ7b", // 多视频
-      3: "https://wo.zj186.com/v/JRjQni", // 5G
-      4: "https://wo.zj186.com/v/qyENbe", // 25G
-    }
-    if (map[id]) {
-      window.location.href = map[id];
-    }
+    link(id)
   })
 
   /** 点击留资 */
@@ -279,192 +338,57 @@ $(function () {
     checkin(addr, tel, name)
   })
 
-  $(".draw-fail-btn").on("click", function() {
+  $(".draw-fail-btn").on("click", function () {
     hideEl($(".draw-fail"))
+    hideEl($(".draw-finish"))
+    hideEl($(".rule-wrap"))
   })
 
   // -------------------------
   // 关闭
-  $(".time-close-btn").on("click", function() {
+  $(".time-close-btn").on("click", function () {
     hideEl($(".ad"))
     // 
     set_ad_info()
   })
 
-  // 登记
-  $(".checkin-btn").on("click", function () {
-    const address = $("#address").val();
-    const address_more = $("#address_more").val();
-    const tvid = $("#tvid").val();
-    const idcard = $("#idcard").val();
-    if (address && address_more && (tvid || idcard)) {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "page3_button5",
-        "登记页-登记按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-      if (tvid || idcard) {
-        checkin(address, address_more, { tvid, idcard })
-      }
-    } else {
-      if (!address) {
-        alert("请先填写地址")
-      } else if (!address_more) {
-        alert("请先填写详细地址")
-      } else if (!(tvid || idcard)) {
-        alert("请先填写身份证或者宽带号")
-      }
-    }
-  });
-
-
-  // 我的奖品页
-  $(".draw-sussess-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "popup_button5",
-      "弹窗-中奖-查看奖品",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    // 重新获取一下用户的中奖信息
-    getUserInfo(false)
-    hideEl($(".draw-success"))
-    showEl($(".my-prize-wrap"))
-  });
-
-
   // 我的奖品按钮
-  $(".prize-btn ").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page4_button3",
-      "抽奖页-我的奖品",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
+  $(".box-btn ").on("click", function () {
     // 重新获取一下用户的中奖信息
-    getUserInfo(false)
+
     showEl($(".my-prize-wrap"))
+    user.prize_log?.map(item => {
+      const id = item.prize_id;
+      $(".c-wrap").children(`.p${id}`).removeClass("hide")
+    })
+  });
+
+  $(".p-btn").on("click", function () {
+    const id = $(this).parent(".prizing").attr("data-id")
+    link(id)
+  });
+
+  $(".p-btn-2").on("click", function () {
+    // if(!user.address) {
+    //   $(".info").removeClass("hide")
+    // } else {
+    $(".draw-finish").removeClass("hide")
+    // }
+    hideEl($(".my-prize-wrap"))
   });
 
   // 打开规则也
-  $(".rule").on("click", function () {
-    const id = $(this).attr("id");
-    if (id == "login-rule") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "page2_button3",
-        "登录页-规则按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "checkin-rule") {
-      if (verifyStatus == "form") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page3_button4",
-          "登记页-规则按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (verifyStatus == "success") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page5_button3",
-          "登记成功页-规则",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (verifyStatus == "fail") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page6_button3",
-          "登记失败页-规则",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      }
-
-    } else if (id == "prize-rule") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "page4_button7",
-        "抽奖页-规则按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "verify-popup") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button10",
-        "弹窗-核销-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    }
+  $(".rule-btn").on("click", function () {
     showEl($(".rule-wrap"))
   });
 
   // 关闭规则也
   $(".rule-back-btn").on("click", function () {
     hideEl($(".rule-wrap"))
+  });
+
+  $(".prize-close").on("click", function () {
+    hideEl($(".my-prize-wrap"))
   });
 
   // 去抽奖
