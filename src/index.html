@@ -18,15 +18,135 @@
     </div>
   </div>
   <!-- 首页 end -->
-  <!-- 登录页 -->
-  <div class="login">
-    <div class="login-bg1-wrap login-bg1">
-      <div class="a-login"></div>
-    </div>
-    <div class="login-bg2-wrap login-bg2">
+  <!-- 登录弹框 -->
+  <div class="login hide">
+    <div class="login-bg">
+      <input id="tel" class="input phone" placeholder="请输入手机号" />
+      <input id="vcode" class="input code" placeholder="请输入验证码" />
+      <div style="position: relative;">
+        <div class="sendcode-btn" id="popup-vcode">获取验证码</div>
+        <div class="flx-all-center bg sendcode-btn-empty hide">60</div>
+      </div>
+      <div class="login-btn a-login-btn"></div>
     </div>
   </div>
-
+  <!-- 活动页 -->
+  <div class="manghe hide">
+    <div class="logo"></div>
+    <div class="manghe-bg1-wrap manghe-bg1">
+      <div class="a-manghe"></div>
+    </div>
+    <div class="manghe-bg2-wrap manghe-bg2">
+      <div data-index="1" class="item item1"></div>
+      <div class="shadow shadow1"></div>
+      <div data-index="2" class="item item2"></div>
+      <div class="shadow shadow2"></div>
+      <div data-index="3" class="item item3"></div>
+      <div class="shadow shadow3"></div>
+      <div data-index="4" class="item item4"></div>
+      <div class="shadow shadow4"></div>
+      <div data-index="5" class="item item5"></div>
+      <div class="shadow shadow5"></div>
+      <div data-index="6" class="item item6"></div>
+      <div class="shadow shadow6"></div>
+      <div data-index="7" class="item item7"></div>
+      <div class="shadow shadow7"></div>
+      <div data-index="8" class="item item8"></div>
+      <div class="shadow shadow8"></div>
+      <div data-index="9" class="item item9"></div>
+      <div class="shadow shadow9"></div>
+    </div>
+    <div class="manghe-bg3-wrap"></div>
+    <div class="award award1 popup-wrap hide" data-index="1">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award2 popup-wrap hide" data-index="2">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award3 popup-wrap hide" data-index="3">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award4 popup-wrap hide" data-index="4">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award5 popup-wrap hide" data-index="5">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award6 popup-wrap hide" data-index="6">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award7 popup-wrap hide" data-index="7">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award8 popup-wrap hide" data-index="8">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <div class="award award9 popup-wrap hide" data-index="9">
+      <div class="choose-btn"></div>
+      <div class="close-btn"></div>
+    </div>
+    <!-- 奖品 -->
+    <div class="prize-wrap hide">
+      <div class="prize prize1 hide">
+        <div class="buy-btn" data-id="1"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+      <div class="prize prize2 hide">
+        <div class="buy-btn" data-id="2"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+      <div class="prize prize3 hide">
+        <div class="buy-btn" data-id="3"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+      <div class="prize prize4 hide">
+        <div class="buy-btn" data-id="4"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+      <div class="prize prize5 hide">
+        <div class="buy-2-btn" data-id="5"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+      <div class="prize prize6 hide">
+        <div class="buy-2-btn" data-id="6"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+      <div class="prize prize7 hide">
+        <div class="buy-2-btn" data-id="7"></div>
+        <div class="close-btn prize-close-btn"></div>
+      </div>
+    </div>
+  </div>
+  <!-- 活动页2 -->
+  <!-- 留资弹框 -->
+  <div class="info hide">
+    <div class="info-bg">
+      <input id="info-name" class="input info-name" placeholder="收件人" />
+      <input id="info-tel" class="input info-phone" placeholder="联系电话" />
+      <input id="info-addr" class="input info-addr" placeholder="收件地址" />
+      <div class="info-btn a-info-btn"></div>
+    </div>
+  </div>
+  <!-- 观看15s广告 -->
+  <div class="ad hide">
+    <image src="http://h5.szhhhd.com/jx/a20230215_mh/ad1.jpg" width="100%" alt="" srcset="">
+    <div class="time">倒计时15秒</div>
+    <div class="time-close-btn hide">关闭</div>
+  </div>
+  <!-- 抽奖次数用完 -->
+  <div class="draw-fail hide">
+    <!-- <div class="draw-fail-bg"> -->
+      <div class="draw-fail-btn"></div>
+    <!-- </div> -->
+  </div>
 </body>
 
 </html>

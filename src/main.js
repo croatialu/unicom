@@ -6,22 +6,29 @@ import "./css/reset.css";
 import "./css/swiper-bundle.min.css";
 import "./css/common.css";
 import "./css/main.css";
-import Swiper from "./swiper-bundle.min.js";
 
 const act_name = "0215_mh";
+const last_login_time = localStorage.getItem("last")
+const last_date = last_login_time ? last_login_time.split(" ")[0].split("-")[2] : 0
+const date = new Date().getDate()
 // 能否抽奖
-let canDraw = true;
+let get_prize_times = 0;
+let look_ad_times = 0;
 // 用户信息
 let user = {};
-let tel = ""
+let tel = last_date >= date ? localStorage.getItem("tel") : "";
+let countdown = 60
+let adCount = 15
 
 function getUserInfo() {
-  if(!tel) return
-  http
+  if (!tel) return
+  return http
     .get(`/get_userinfo?tel=${tel}&act_name=${act_name}`)
     .then((res) => {
       if (res.data) {
-        
+        user = res.data.data;
+        look_ad_times = user.look_ad_times;
+        get_prize_times = user.get_prize_times;
       } else {
         // 请求失败显示主页
         toggleDisplay($(".index"));
@@ -34,7 +41,6 @@ function settime(val) {
   var int = setTimeout(function () {
     settime(val)
   }, 1000)
-
   if (countdown == 0) {
     showEl($(".sendcode-btn"))
     hideEl($(".sendcode-btn-empty"))
@@ -46,16 +52,31 @@ function settime(val) {
   }
 }
 
+function adTimer(val) {
+  var int = setTimeout(function () {
+    adTimer(val)
+  }, 1000)
+  if (adCount == 0) {
+    showEl($(".time-close-btn"))
+    hideEl($(".time"))
+    clearInterval(int);
+    adCount = 15;
+  } else {
+    $(".time").text(`倒计时${adCount}秒`)
+    adCount--;
+  }
+}
+
 // 验证码--test mode
 function getVcode(tel) {
   console.log("getVcode");
   http
-    .get(`/get_vcode?openid=${openid}&act_name=${act_name}&tel=${tel}&type=test`) //&type=test
+    .get(`/get_vcode?&act_name=${act_name}&tel=${tel}&type=test`) //&type=test
     .then((res) => {
       if (res.data && res?.data?.code == 0) {
         // 正常逻辑不需要处理什么
-        // const code = res.data.msg?.split("：")[1]
-        // $("#vcode").val(code)
+        const code = res.data.msg
+        $("#vcode").val(code)
       } else {
         alert(res.data?.msg)
       }
@@ -63,172 +84,135 @@ function getVcode(tel) {
 }
 
 // 登陆
-function login(tel, vcode) {
+function login(u_tel, vcode) {
   console.log("login");
   http
-    .get(`/tel_login?openid=${openid}&act_name=${act_name}&tel=${tel}&vcode=${vcode}`)
+    .get(`/tel_login?act_name=${act_name}&tel=${u_tel}&vcode=${vcode}`)
     .then((res) => {
       if (res.data && res.data.code == 0) {
-        
+        toggleDisplay($(".manghe"));
+        tel = u_tel
+        localStorage.setItem("tel", tel)
+        localStorage.setItem("last", res.data.data?.last_login_time)
       } else {
         alert(res.data?.msg)
       }
     });
 }
 
+// 抽奖
+function drawPrize() {
+  console.log("darpriz", get_prize_times, look_ad_times)
+    if (get_prize_times) {
+      http
+        .get(`/get_prize?act_name=${act_name}&tel=${tel}&t_d=2023-02-15`) // t_d
+        .then((res) => {
+          if (res.data) {
+            canDraw = !canDraw
+            // 当天抽奖次数已达上限
+            if (res.data.code === 10020) {
+              showEl($(".draw-fail"))
+            } else if (res.data.code == 0) {
+              // 抽奖成功，减少抽奖次数，直接调用user接口
+              // 1号 - 15GB畅视融合包
+              // 2号 - 10GB定向流量大礼包
+              // 3号 - 5GB通用流量包+联通云盘100GB乐享会员
+              // 4号 - 25GB快手定向流量包
+              // 5号 - 兔墩墩毛绒钥匙扣一个
+              // 6号 - 兔墩墩吉祥如意徽章一个
+              // 7号 - 兔墩墩盲盒一个
+              console.log(res.data.prize_id)
+              const prizeId = res.data.prize_id;
+              $(".award").addClass("hide")
+              $(".prize-wrap").removeClass("hide")
+              $(`.prize${prizeId}`).removeClass("hide")
+              
+            } else {
+              // alert(res.data?.msg || "您无抽奖资格")
+            }
+            getUserInfo()
+            //test
+            // const prizeId = 4;
+            // $(".award").addClass("hide")
+            // $(".prize-wrap").removeClass("hide")
+            // $(`.prize${prizeId}`).removeClass("hide")
+          }
+        });
+    } else if(look_ad_times == 0){
+      // 放广告
+      adTimer()
+      
+      showEl($(".ad"))
+      // "look_ad_times":0,	//今天观看的广告次数
+      // "get_prize_times":0,	//今天抽奖次数
+    } else {
+      // 抽奖次数已用完
+      showEl($(".draw-fail"))
+      hideEl($(".award"))
+    }
+}
+
 // 登记信息
-function checkin(address, address_more, options) {
+function checkin(address, true_tel, username) {
   console.log("checkin");
-  let url = `/leave_userinfo?openid=${openid}&act_name=${act_name}&address=${address}&address_more=${address_more}`
-  // 接口的校验顺序是先身份证后宽带号
-  if (options.tvid) {
-    url = url + `&tvid=${options.tvid}`
-  }
-  if (options.idcard) {
-    url = url + `&idcard=${options.idcard}`
-  }
+  if(address && true_tel && username) {
+    let url = `/leave_userinfo?act_name=${act_name}&address=${address}&tel=${tel}&username=${username}&true_tel=${true_tel}`
   http
     .get(url)
     .then((res) => {
-      if (res.data) {
-        // 登记成功 -> 登记成功弹窗，修改登记页面显示(在userinfo接口也应判断显示)
-        if (res.data.code == 0) {
-          verifyStatus = "success"
-          showEl($(".checkin-success"))
-          $(".icon-phone").text("联系号码：" + user.tel)
-          $(".icon-addr").text("联系地址：" + address + address_more)
-          if (options.tvid) {
-            $(".icon-network").text("宽带号码：" + options.tvid)
-            showEl($(".icon-network"))
-          }
-          if (options.idcard) {
-            $(".icon-idcard").text("身份证：" + options.idcard)
-            showEl($(".icon-idcard"))
-          }
-          showEl($(".checkin-success-result"))
-          hideEl($(".checkin-result"))
-        } else if (res.data.code == 20012) {
-          showEl($(".checkin-network-error"))
-        } else if (res.data.code == 20011) {
-          showEl($(".checkin-idcard-error"))
-        } else {
-          // 登记失败 -> 登记失败弹窗，修改登记页面显示(在userinfo接口也应判断显示)
-          verifyStatus = "fail"
-          showEl($(".checkin-fail"))
-          showEl($(".checkin-fail-result"))
-          hideEl($(".checkin-result"))
-        }
+      if (res.data.code == 0) {
+        alert("登记成功")
+        $(".info").addClass("hide")
+      } else {
+        alert(res.data?.msg || "登记失败")
       }
+    });
+  } else {
+    alert("请填写完整收货信息")
+  }
+}
+
+//set_ad_info
+function set_ad_info() {
+  console.log("set_ad_info");
+  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}`
+  http
+    .get(url)
+    .then((res) => {
+      getUserInfo()
     });
 }
 
-// 构建奖品信息
-function makePrizes() {
-  // console.log("makePrizes");
-  // prizes.map((item, index) => {
-  //   $(".draw-prize-swiper")
-  //     .children(".swiper-wrapper")
-  //     .append(`<div class="swiper-slide">
-  //     <div class="bg ${index % 2 === 0 ? 'greed-wrap' : 'red-wrap'}">
-  //       <div class="bg prize-item-wrap prize${index + 1}"></div>
-  //     </div>
-  //     <div class="prize-text row-2">${item.name}</div>
-  //   </div>`)
-  // })
-  // runPrizeItem()
-}
 
-// 抽奖
-function drawPrize() {
-  console.log("draw");
-  if (canDraw) {
-    canDraw = !canDraw
-    http
-      .get(`/draw?openid=${openid}`)
-      .then((res) => {
-        if (res.data) {
-          canDraw = !canDraw
-          // 抽奖次数不足
-          if (res.data.code === 20003) {
-            showEl($(".draw-fail"))
-          } else if (res.data.code == 0) {
-            // 抽奖成功，改变进度条，减少抽奖次数，直接调用user接口
-            // "路由器100元代金券", 
-            if (!["谢谢惠顾"].includes(res.data.data) && prizeMap[res.data.data]) {
-              $(".draw-sussess-content").prepend(`
-            <div class="prize-wrap flx-col flx-all-center">
-              <div class="bg myprize ${prizeMap[res.data.data]}"></div>
-              <div class="myprize-text">${res.data.data}</div>
-            </div>
-            `)
-              showEl($(".draw-success"))
-            } else if (res.data.msg == "C02") {
-              // 谢谢惠顾
-              showEl($(".draw-fail"))
-            }
-          } else if (res.data.msg == "C02") {
-            // 谢谢惠顾
-            showEl($(".draw-fail"))
-          }
-          getUserInfo()
-        }
-      });
-  }
-}
 
 $(function () {
   setRem(750, 750, 325);
   getUserInfo();
-  // 首页点击
-  // $(".index-next").on("click", function () {
-  //   if (user.tel) {
-  //     toggleDisplay($(".checkin"));
-  //     return
-  //   }
-  //   toggleDisplay($(".login"));
-  // });
 
+  // 打开登陆弹窗
   $(".a-login").on("click", function () {
-    if (!user.tel) {
-      toggleDisplay($(".login"));
-      return
+    console.log("login", tel)
+    if (!tel) {
+      showEl($(".login"));
+    } else {
+      toggleDisplay($(".manghe"))
+    }
+  });
+
+  //点击登录
+  $(".login-btn").on("click", function () {
+    const tel = $("#tel").val() || $("#index-tel").val();
+    const vcode = $("#vcode").val() || $("#index-vcode").val();
+    console.log("login,", tel, vcode)
+    if (tel && vcode) {
+      login(tel, vcode);
     }
   });
 
   // 发送验证码
   $(".sendcode-btn").on("click", function () {
     const tel = $("#tel").val() || $("#index-tel").val();
-    const id = $(this).attr("id");
     if (tel) {
-      if (id == "page-vcode") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page2_button1",
-          "登录页-发送验证码",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (id == "popup-vcode") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "popup_button11",
-          "弹窗-登录-验证码",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      }
       showEl($(".sendcode-btn-empty"))
       hideEl($(".sendcode-btn"))
       settime($(".sendcode-btn-empty"))
@@ -236,195 +220,76 @@ $(function () {
     }
   });
 
-  // 登陆按钮
-  $(".login-btn").on("click", function () {
-    const tel = $("#tel").val() || $("#index-tel").val();
-    const vcode = $("#vcode").val() || $("#index-vcode").val();
-    const id = $(this).attr("id")
-    console.log("id", id)
-    if (tel && vcode) {
-      if (id == "page-login") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page2_button2",
-          "登录页-登录按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (id == "popup-login") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "popup_button12",
-          "弹窗-登录-登录按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      }
-
-
-      login(tel, vcode)
-    }
-  });
+  // 点击奖品
+  $(".item").on("click", function () {
+    const index = $(this).attr("data-index")
+    console.log("index", index)
+    $(`.award${index}`).removeClass("hide")
+  })
 
   // 弹窗的关闭按钮
   $(".close-btn").on("click", function () {
-    const id = $(this).attr("id")
-    if (id == "checkin-login-fail") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button2",
-        "弹窗-登录登记失败-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "checkin-login-success") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button4",
-        "弹窗-登记成功-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "prize-success") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button6",
-        "弹窗-中奖-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "prize-fail") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button14",
-        "弹窗-奖品没有了-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "verify-success") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button8",
-        "弹窗-核销成功-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "service-close") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button15",
-        "弹窗-客服-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "prize-close") {
-      if (user?.prize_list?.length) {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "popup_button18",
-          "弹窗-我的奖品-关闭按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "popup_button16",
-          "弹窗-我的奖品空白-关闭按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      }
-
-    }
     const popup = $(this).parent(".popup-wrap")
     hideEl(popup)
   });
 
-  // 打开地址选择弹窗
-  $("#address").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page3_button1",
-      "登记页-下拉框按钮",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    showEl($(".address-select-bg"))
+  $(".prize-close-btn").on("click", function () {
+    const popup = $(this).parent(".prize").parent(".prize-wrap")
+    hideEl(popup)
   });
 
-  // 选择地址
-  $(".select-address").on("click", "li", function (ev) {
-    const value = ev.target.innerText;
-    $("#address").val(value);
-    hideEl($(".address-select-bg"))
+  // 选择
+  $(".choose-btn").on("click", function () {
+    const popup = $(this).parent(".popup-wrap")
+    const index = popup.attr("data-index");
+    // 设置popup背景图
+    popup.addClass(`award${index}_2`)
+    // 调抽奖接口
+    drawPrize()
+    // setTimeout(() => {
+    //   hideEl(popup)
+    // }, 1000)
   });
+
+  /** 点击跳转到外部链接 */
+  $(".buy-btn").on("click", function () {
+    const id = $(this).attr("data-id")
+    const map = {
+      1: "https://wo.zj186.com/v/6jiaqm", // 15G
+      2: "https://wo.zj186.com/v/eaUJ7b", // 多视频
+      3: "https://wo.zj186.com/v/JRjQni", // 5G
+      4: "https://wo.zj186.com/v/qyENbe", // 25G
+    }
+    if (map[id]) {
+      window.location.href = map[id];
+    }
+  })
+
+  /** 点击留资 */
+  $(".buy-2-btn").on("click", function () {
+    // const id = $(this).attr("data-id")
+    // 打开留资弹窗
+    $(".info").removeClass("hide")
+  })
+
+  $(".info-btn").on("click", function () {
+    const name = $("#info-name").val();
+    const tel = $("#info-tel").val();
+    const addr = $("#info-addr").val();
+    checkin(addr, tel, name)
+  })
+
+  $(".draw-fail-btn").on("click", function() {
+    hideEl($(".draw-fail"))
+  })
+
+  // -------------------------
+  // 关闭
+  $(".time-close-btn").on("click", function() {
+    hideEl($(".ad"))
+    // 
+    set_ad_info()
+  })
 
   // 登记
   $(".checkin-btn").on("click", function () {
@@ -460,81 +325,6 @@ $(function () {
     }
   });
 
-  // 右侧抽奖按钮
-  $(".icon-draw").on("click", function () {
-    const id = $(this).attr("id")
-    if (id === "verify-draw") {
-      if (verifyStatus == "form") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page3_button3",
-          "登记页-抽奖按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (verifyStatus == "success") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page5_button2",
-          "登记成功页-抽奖",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (verifyStatus == "fail") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page6_button2",
-          "登记失败页-抽奖",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      }
-    }
-
-    getPrizing();
-    makePrizes();
-    toggleDisplay($(".prize-page"))
-  });
-
-  // 抽奖
-  $(".draw-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page4_button1",
-      "抽奖页-立即抽奖",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    if (user?.chance == 0) {
-      alert("没有抽奖次数了")
-    } else {
-      drawPrize()
-    }
-  });
 
   // 我的奖品页
   $(".draw-sussess-btn").on("click", function () {
@@ -557,85 +347,6 @@ $(function () {
     showEl($(".my-prize-wrap"))
   });
 
-  // 抽奖页都返回按钮 -> 登记页
-  $(".back-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page4_button6",
-      "抽奖页-返回按钮",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    toggleDisplay($(".checkin"))
-  });
-
-  // 海报页返回按钮 -> 抽奖页
-  $(".poster-back-btn").on("click", function () {
-    toggleDisplay($(".prize-page"))
-  });
-
-  // 登记失败弹窗按钮 -> 抽奖
-  $(".checkin-fail-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "popup_button1",
-      "弹窗-登录登记失败-领红包",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    getPrizing();
-    makePrizes();
-    toggleDisplay($(".prize-page"))
-  });
-
-  // 生成链接
-  $(".link-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page4_button4",
-      "抽奖页-生成链接",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    showEl($(".link-wrap"))
-  });
-
-  // 生成海报
-  $(".poster-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page4_button5",
-      "抽奖页-生成海报",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    setPostLog()
-    sharePost()
-  });
 
   // 我的奖品按钮
   $(".prize-btn ").on("click", function () {
@@ -655,108 +366,6 @@ $(function () {
     // 重新获取一下用户的中奖信息
     getUserInfo(false)
     showEl($(".my-prize-wrap"))
-  });
-
-  // 助力弹窗返回首页
-  $(".back-close-btn").on("click", function () {
-    const id = $(this).attr("id")
-    if (id == "help-success") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button20",
-        "弹窗-助力成功-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "help-fail") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button22",
-        "弹窗-助力失败-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "login-close") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button13",
-        "弹窗-登录-关闭按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    }
-    toggleDisplay($(".index"))
-  });
-
-  // 确认助力
-  $(".help-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "page7_button1",
-      "助力页-我要帮他",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    helpFriend()
-  });
-
-  // 我要拿红包按钮
-  $(".help-index-btn").on("click", function () {
-    const id = $(this).attr("id")
-    if (id == "help-success-btn") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button19",
-        "弹窗-助力成功-我要拿红包",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "help-fail-btn") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button21",
-        "弹窗-助力失败-我要拿红包",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    }
-    toggleDisplay($(".index"))
   });
 
   // 打开规则也
@@ -856,87 +465,6 @@ $(function () {
   // 关闭规则也
   $(".rule-back-btn").on("click", function () {
     hideEl($(".rule-wrap"))
-  });
-
-  // 打开客服弹窗
-  $(".icon-service").on("click", function () {
-    const id = $(this).attr("id");
-    if (id == "checkin-service") {
-      if (verifyStatus == "form") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page3_button2",
-          "登记页-客服按钮",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (verifyStatus == "success") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page5_button1",
-          "登记成功页-客服",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      } else if (verifyStatus == "fail") {
-        const baiduHtm = [
-          "a20211118_zslt",
-          "click",
-          "page6_button1",
-          "登记失败页-客服",
-        ];
-        _hmt.push([
-          "_trackEvent",
-          baiduHtm[0],
-          baiduHtm[1],
-          baiduHtm[2],
-          baiduHtm[3],
-        ]);
-      }
-
-    } else if (id == "prize-service") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "page4_button2",
-        "抽奖页-客服",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    } else if (id == "help-service") {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "page7_button1",
-        "助力页-抽奖按钮",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-    }
-
-    showEl($(".service-wrap"))
   });
 
   // 去抽奖

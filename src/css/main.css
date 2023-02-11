@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #dc544c;
+  background-color: #EB4646;
   /* overflow: hidden; */
   display: flex;
   align-items: start;
@@ -14,20 +14,23 @@
   background: url(../images/index1.gif) no-repeat center center;
   background-size: contain;
 }
-.index-bg1-wrap { 
+
+.index-bg1-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7.5rem;
+  height: 15rem;
+}
+
+.index-bg2-wrap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-.index-bg2-wrap { 
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+
 .index-bg2 {
   width: 100%;
   background: url(../images/index2.gif) no-repeat center center;
@@ -42,15 +45,559 @@
   left: 0;
   right: 0;
   margin: 0 auto;
+  z-index: 5;
   /* background-color: #fafafa; */
 }
 
 /* login */
-.index {
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.login-bg {
+  position: relative;
+  width: 6.73rem;
+  height: 5.44rem;
+  background-image: url("../images/tap_bg_login_version_2.png");
+  background-size: contain;
+}
+
+/* 写一个透明的inut css */
+.input {
+  position: absolute;
+  width: 4.5rem;
+  height: 1rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: .36rem;
+  color: #9D6C6D;
+  text-align: left;
+}
+
+.phone {
+  top: 0.9rem;
+}
+
+.code {
+  top: 2.1rem;
+}
+
+.a-login-btn {
+  position: absolute;
+  width: 3.76rem;
+  height: 1.2rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: .74rem;
+  z-index: 5;
+  /* background-color: aliceblue; */
+}
+
+.sendcode-btn {
+  position: absolute;
+  font-size: .3rem;
+  color: #4FA6FF;
+  top: 2.4rem;
+  right: .8rem;
+}
+
+.sendcode-btn-empty {
+  position: absolute;
+  font-size: .3rem;
+  color: #4FA6FF;
+  top: 2.4rem;
+  right: .8rem;
+}
+
+.manghe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background-color: #dc544c; */
+  /* overflow: hidden; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.logo {
+  position: absolute;
+  top: .1rem;
+  left: .1rem;
+  width: 2.64rem;
+  height: .77rem;
+  background-image: url("../images/p1_logo.png");
+  background-size: contain;
+}
+
+.manghe-bg1-wrap {
+  width: 100%;
+  height: 100%;
+  background: url(../images/p1_bg_v2.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.manghe-bg2-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 7.5rem;
+  height: 13.44rem;
+  background: url(../images/game1.gif) no-repeat center center;
+  background-size: contain;
+}
+
+.manghe-bg3-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 7.5rem;
+  height: 13.44rem;
+  background: url(../images/light.gif) no-repeat center center;
+  background-size: contain;
+}
+
+.item {
+  position: absolute;
+  width: 1.25rem;
+  height: 1.56rem;
+  /* background-color: #fafafa; */
+  /* background: no-repeat contain; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 2;
+}
+
+/* css画一个跟item底部的椭圆阴影 */
+.shadow {
+  display: inline-block;
+  position: absolute;
+  width: 1.21rem;
+  height: .22rem;
+  border-radius: 50%;
+  z-index: 0;
+  background: rgba(1, 1, 1, .18);
+}
+
+.item1 {
+  left: 1.55rem;
+  top: 4.18rem;
+  background-image: url(../images/p1_prize_box_1_2.png);
+}
+
+.shadow1 {
+  left: 1.58rem;
+  top: 5.4rem;
+}
+
+.item2 {
+  left: 3.05rem;
+  top: 4.18rem;
+  background-image: url(../images/p1_prize_box_2_2.png);
+}
+
+.shadow2 {
+  left: 3.08rem;
+  top: 5.4rem;
+}
+
+.item3 {
+  left: 4.55rem;
+  top: 4.18rem;
+  background-image: url(../images/p1_prize_box_3_2.png);
+}
+
+.shadow3 {
+  left: 4.58rem;
+  top: 5.4rem;
+}
+
+.item4 {
+  left: 1.55rem;
+  top: 6.48rem;
+  background-image: url(../images/p1_prize_box_4_2.png);
+}
+
+.shadow4 {
+  left: 1.58rem;
+  top: 7.7rem;
+}
+
+.item5 {
+  left: 3.05rem;
+  top: 6.48rem;
+  background-image: url(../images/p1_prize_box_5_2.png);
+}
+
+.shadow5 {
+  left: 3.08rem;
+  top: 7.7rem;
+}
+
+.item6 {
+  left: 4.55rem;
+  top: 6.48rem;
+  background-image: url(../images/p1_prize_box_6_2.png);
+}
+
+.shadow6 {
+  left: 4.58rem;
+  top: 7.7rem;
+}
+
+
+.item7 {
+  left: 1.55rem;
+  top: 8.78rem;
+  background-image: url(../images/p1_prize_box_7_2.png);
+}
+
+.shadow7 {
+  left: 1.58rem;
+  top: 10rem;
+}
+
+.item8 {
+  left: 3.05rem;
+  top: 8.78rem;
+  background-image: url(../images/p1_prize_box_8_2.png);
+}
+
+.shadow8 {
+  left: 3.08rem;
+  top: 10rem;
+}
+
+.item9 {
+  left: 4.55rem;
+  top: 8.78rem;
+  background-image: url(../images/p1_prize_box_9_2.png);
+}
+
+.shadow9 {
+  left: 4.58rem;
+  top: 10rem;
+}
+
+.award {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 4;
+  width: 7.5rem;
+  /* height: 10.75rem; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.award1 {
+  background-image: url(../images/1-1.gif);
+}
+
+.award2 {
+  background-image: url(../images/2-1.gif);
+}
+
+.award3 {
+  background-image: url(../images/3-1.gif);
+}
+
+.award4 {
+  background-image: url(../images/4-1.gif);
+}
+
+.award5 {
+  background-image: url(../images/5-1.gif);
+}
+
+.award6 {
+  background-image: url(../images/6-1.gif);
+}
+
+.award7 {
+  background-image: url(../images/7-1.gif);
+}
+
+.award8 {
+  background-image: url(../images/8-1.gif);
+}
+
+.award9 {
+  background-image: url(../images/9-1.gif);
+}
+
+.award1_2 {
+  background-image: url(../images/1-2.gif);
+}
+
+.award2_2 {
+  background-image: url(../images/2-2.gif);
+}
+
+.award3_2 {
+  background-image: url(../images/3-2.gif);
+}
+
+.award4_2 {
+  background-image: url(../images/4-2.gif);
+}
+
+.award5_2 {
+  background-image: url(../images/5-2.gif);
+}
+
+.award6_2 {
+  background-image: url(../images/6-2.gif);
+}
+
+.award7_2 {
+  background-image: url(../images/7-2.gif);
+}
+
+.award8_2 {
+  background-image: url(../images/8-2.gif);
+}
+
+.award9_2 {
+  background-image: url(../images/9-2.gif);
+}
+
+.choose-btn {
+  position: absolute;
+  top: 8.8rem;
+  left: -.1rem;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: 2rem;
+  height: .7rem;
+  /* background-color: #4FA6FF; */
+}
+
+.close-btn {
+  position: absolute;
+  top: 9.6rem;
+  left: -.1rem;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: .7rem;
+  height: .7rem;
+  border-radius: 50%;
+  /* background-color: #4FA6FF; */
+}
+
+.prize-wrap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 6;
+}
+
+.prize {
+  position: absolute;
+  top: -1.5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: 7.07rem;
+  height: 9.15rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.prize1 {
+  background-image: url("../images/prize_1_version_2.png");
+}
+
+.prize2 {
+  background-image: url("../images/prize_2_version_2.png");
+}
+
+.prize3 {
+  background-image: url("../images/prize_3_version_2.png");
+}
+
+.prize4 {
+  background-image: url("../images/prize_4_version_2.png");
+}
+
+.prize5 {
+  background-image: url("../images/prize_5_version_2.png");
+}
+
+.prize-close-btn {
+  /* top: 11.6rem; */
+  background-image: url("../images/tap_btn_close.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.buy-btn {
+  position: absolute;
+  top: 0;
+  bottom: -5.9rem;
+  left: 0;
+  right: -3.3rem;
+  margin: auto;
+  z-index: 5;
+  width: 3.46rem;
+  height: 1.2rem;
+  /* background-color: red; */
+}
+
+.buy-2-btn {
+  position: absolute;
+  top: 0;
+  bottom: -5.1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: 3.2rem;
+  height: 1rem;
+  /* background-color: red; */
+}
+
+/* info */
+.info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 11;
+}
+
+.info-bg {
+  position: relative;
+  width: 6.8rem;
+  height: 7.23rem;
+  background-image: url("../images/tap_bg_postData_version_2.png");
+  background-size: cover;
+}
+
+.info-name {
+  top: 1rem;
+}
+
+.info-phone {
+  top: 2.45rem;
+}
+
+.info-addr {
+  top: 4.1rem;
+}
+
+.info-btn {
+  position: absolute;
+  top: 0;
+  bottom: -4.6rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: 3.2rem;
+  height: 1rem;
+  /* background-color: red; */
+}
+
+.ad {
+  position: fixed;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.ad-box {
+  width: 7.5rem;
+  height: 78.1344rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../images/ad1.jpg");
+}
+
+.time, .time-close-btn {
+  position: fixed;
+  right: .2rem;
+  top: .2rem;
+  border-radius: .1rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: .2rem;
+  padding: .1rem .2rem;
+}
+
+.draw-fail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: 6.88rem;
+  height: 4.6rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../images/tap_bg_error_5.png");
+}
+
+.draw-fail-btn {
+  position: absolute;
+  top: 0;
+  bottom: -7rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  width: .7rem;
+  height: .7rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../images/tap_btn_close.png");
 }
