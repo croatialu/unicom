@@ -160,10 +160,15 @@ function drawPrize() {
             // 6号 - 兔墩墩吉祥如意徽章一个
             // 7号 - 兔墩墩盲盒一个
             const prizeId = res.data.data.prize_id;
-            $(".award").addClass("hide")
-            $(".prize-wrap").removeClass("hide")
-            $(`.prize${prizeId}`).removeClass("hide")
-            $(`.jp-prize${prizeId}`).removeClass("hide")
+
+            openBlindBox()
+
+            setTimeout(() => {
+              closeAwardMask()
+              $(".prize-wrap").removeClass("hide")
+              $(`.prize${prizeId}`).removeClass("hide")
+              $(`.jp-prize${prizeId}`).removeClass("hide")
+            }, 1000)
           } else {
             // alert(res.data?.msg || "您无抽奖资格")
           }
@@ -242,6 +247,18 @@ function closeAwardMask() {
     $(`.award-close-btn`).removeClass("show")
     $(`.award-light`).removeClass("show award-light-animate")
   }, 300)
+}
+
+// 开盲盒
+function openBlindBox() {
+  const awardMask = $(".award-mask")
+
+  const isOpened = awardMask.hasClass("opened")
+  const isAwardMaskShow = awardMask.hasClass("show")
+
+  if (!isOpened && isAwardMaskShow) {
+    awardMask.addClass("opened");
+  }
 }
 
 $(function () {
@@ -329,17 +346,12 @@ $(function () {
 
   // 拆
   $(".award-sure-btn").on("click", function () {
-    const awardMask = $(".award-mask")
 
-    const isOpened = awardMask.hasClass("opened")
+    const isOpened = $(".award-mask").hasClass("opened")
 
     if (!isOpened) {
-      awardMask.addClass("opened");
       // 调抽奖接口
       drawPrize()
-      setTimeout(() => {
-        closeAwardMask()
-      }, 1000)
     } else {
       closeAwardMask()
     }
