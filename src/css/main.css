@@ -1099,3 +1099,42 @@
   height: 13.44rem;
   background-image: url("../images/gift1.gif");
 }
+
+
+/* 错误弹窗 */
+
+.error-wrap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 4;
+}
+
+.error-wrap .staff-error {
+  width: 6.88rem;
+  height: 5.44rem;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/tap_bg_error_3.png);
+}
+
+.error-wrap .staff-wrap-close-btn {
+  margin-top: 0.6rem;
+  width: .7rem;
+  height: .7rem;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/tap_btn_close.png);
+}

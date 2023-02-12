@@ -1,6 +1,6 @@
 import $ from "jquery";
 import http from "./http";
-import { getCookie, toggleDisplay, getQueryString, showEl, hideEl } from "./utils";
+import { getCookie, toggleDisplay, getQueryString, showEl, hideEl, isSameDay } from "./utils";
 import setRem from "./setRem.js";
 import "./css/reset.css";
 import "./css/swiper-bundle.min.css";
@@ -8,15 +8,14 @@ import "./css/common.css";
 import "./css/main.css";
 
 const act_name = "0215_mh";
-const last_login_time = localStorage.getItem("last")
-const last_date = last_login_time ? last_login_time.split(" ")[0].split("-")[2] : 0
-const date = new Date().getDate()
 // 能否抽奖
 let get_prize_times = 0;
 let look_ad_times = 0;
+
 // 用户信息
 let user = {};
-let tel = last_date >= date ? localStorage.getItem("tel") : "";
+let tel = isSameDay(localStorage.getItem("last"), new Date()) ? localStorage.getItem("tel") : "";
+
 let countdown = 60
 let adCount = 2 //15
 let t_d = "2023-02-16"
@@ -58,6 +57,18 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/9-1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/9-2.gif",
 )
+
+function isLogined() {
+  return Boolean(tel)
+}
+
+function clearUserInfo(){
+  tel = ""
+  user = {}
+
+  localStorage.removeItem("tel")
+  localStorage.removeItem("last")
+}
 
 function getUserInfo() {
   if (!tel) return
@@ -128,13 +139,23 @@ function login(u_tel, vcode) {
   http
     .get(`/tel_login?act_name=${act_name}&tel=${u_tel}&vcode=${vcode}`)
     .then((res) => {
-      if (res.data && res.data.code == 0) {
-        toggleDisplay($(".manghe"));
+      if (res.data && res.data.code === 0) {
         tel = u_tel
         localStorage.setItem("tel", tel)
-        localStorage.setItem("last", res.data.data?.last_login_time)
+        localStorage.setItem("last", new Date().toISOString())
       } else {
         alert(res.data?.msg)
+        throw new Error()
+      }
+    }).then(() => {
+      return getUserInfo()
+    }).then(() => {
+      if (!isLogined()) return;
+      // 是员工
+      if (user.is_staff === 1) {
+        showStaffErrorWrap()
+      } else {
+        toggleDisplay($(".manghe"));
       }
     });
 }
@@ -261,6 +282,22 @@ function openBlindBox() {
   }
 }
 
+// 显示 员工登录错误弹窗 
+function showStaffErrorWrap() {
+  hideEl($(".login"))
+  const errorWrap = $(".error-wrap");
+  errorWrap.removeClass("hide");
+  const staffErrorNode = errorWrap.children(".staff-error");
+  staffErrorNode.removeClass("hide");
+}
+
+function hideErrorWrap() {
+  const errorWrap = $(".error-wrap");
+  errorWrap.addClass("hide");
+  errorWrap.children().not(".staff-wrap-close-btn").addClass("hide");
+}
+
+
 $(function () {
   setTimeout(() => {
     hideEl($(".loading"))
@@ -275,7 +312,13 @@ $(function () {
     if (!tel) {
       showEl($(".login"));
     } else {
-      toggleDisplay($(".manghe"))
+
+      if (isLogined() && user.is_staff === 1) {
+        // 员工无法进入活动
+        showStaffErrorWrap()
+      } else {
+        toggleDisplay($(".manghe"))
+      }
     }
   });
 
@@ -317,7 +360,6 @@ $(function () {
     console.log("index", index)
     const awardMask = $(".award-mask")
     const awardPic = awardMask.find(".award-pic")
-    console.log(awardPic, 'awardPic')
     awardMask.removeClass("hide")
 
     requestAnimationFrame(() => {
@@ -434,13 +476,15 @@ $(function () {
     // 重新获取一下用户的中奖信息
 
     showEl($(".my-prize-wrap"))
-    user.prize_log?.map(item => {
+    user.prize_log?.forEach(item => {
       const id = item.prize_id;
-      $(".c-wrap").children(`.p${id}`).removeClass("hide")
+      const temp = $(".my-prize-wrap .c-wrap-temp").find(`.p${id}`).clone(true)
+
+      $(".c-wrap").append(temp)
     })
   });
 
-  $(".p-btn").on("click", function () {
+  $(".c-wrap").delegate(".p-btn", "click", function () {
     const id = $(this).parent(".prizing").attr("data-id")
     link(id)
   });
@@ -466,6 +510,7 @@ $(function () {
 
   $(".prize-close").on("click", function () {
     hideEl($(".my-prize-wrap"))
+    $(".my-prize-wrap .c-wrap").empty()
   });
 
   // 去抽奖
@@ -530,4 +575,9 @@ $(function () {
       verifyPrize(prizeId, verifycode)
     }
   });
+
+
+  $(".error-wrap .staff-wrap-close-btn").on("click", function () {
+    hideErrorWrap()
+  })
 });
