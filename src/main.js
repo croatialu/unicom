@@ -181,7 +181,8 @@ function drawPrize() {
   } else {
     // 抽奖次数已用完
     showEl($(".draw-fail"))
-    hideEl($(".award"))
+    // hideEl($(".award"))
+    closeAwardMask()
   }
 }
 
@@ -228,7 +229,20 @@ function link(id) {
   }
 }
 
+// 关闭 抽盲盒弹窗
+function closeAwardMask() {
+  const awardMask = $(".award-mask")
+  const index = awardMask.attr("data-index")
+  awardMask.removeClass(`show`)
 
+  setTimeout(() => {
+    awardMask.removeClass(`award-${index} opened`).removeAttr("data-index")
+    hideEl(awardMask)
+    $(`.award-sure-btn`).removeClass("show")
+    $(`.award-close-btn`).removeClass("show")
+    $(`.award-light`).removeClass("show award-light-animate")
+  }, 300)
+}
 
 $(function () {
   setTimeout(() => {
@@ -270,16 +284,67 @@ $(function () {
   });
 
   // 点击奖品
+  // $(".item").on("click", function () {
+  //   const index = $(this).attr("data-index")
+  //   console.log("index", index)
+  //   $(`.award${index}`).removeClass("hide")
+  //   $(`.jp`).removeClass("hide")
+  //   setTimeout(() => {
+  //     $(`.jp_click-btn`).removeClass("hide")
+  //     $(`.jp_prize-close-btn`).removeClass("hide")
+  //   }, 1500)
+  // })
+
   $(".item").on("click", function () {
     const index = $(this).attr("data-index")
     console.log("index", index)
-    $(`.award${index}`).removeClass("hide")
-    $(`.jp`).removeClass("hide")
-    setTimeout(() => {
-      $(`.jp_click-btn`).removeClass("hide")
-      $(`.jp_prize-close-btn`).removeClass("hide")
-    }, 1500)
+    const awardMask = $(".award-mask")
+    const awardPic = awardMask.find(".award-pic")
+    console.log(awardPic, 'awardPic')
+    awardMask.removeClass("hide")
+
+    requestAnimationFrame(() => {
+      awardMask.addClass(`award-${index} show`).attr("data-index", index)
+
+      awardPic.addClass("animate__animated animate__zoomInDown")
+
+      setTimeout(() => {
+        awardPic.removeClass("animate__zoomInDown").addClass("animate__bounce")
+      }, 700)
+
+      setTimeout(() => {
+        $(`.award-sure-btn`).addClass("show")
+        $(`.award-close-btn`).addClass("show")
+        $(`.award-light`).addClass("award-light-animate")
+      }, 2000)
+    })
   })
+
+
+
+  // 盲盒的关闭按钮
+  $(".award-close-btn").on("click", function () {
+    closeAwardMask()
+  });
+
+  // 拆
+  $(".award-sure-btn").on("click", function () {
+    const awardMask = $(".award-mask")
+
+    const isOpened = awardMask.hasClass("opened")
+
+    if (!isOpened) {
+      awardMask.addClass("opened");
+      // 调抽奖接口
+      drawPrize()
+      setTimeout(() => {
+        closeAwardMask()
+      }, 1000)
+    } else {
+      closeAwardMask()
+    }
+  });
+
 
   // 弹窗的关闭按钮
   $(".close-btn").on("click", function () {

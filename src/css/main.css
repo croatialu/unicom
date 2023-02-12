@@ -36,6 +36,7 @@
     /* opacity: 0.1; */
     transform: rotate(0);
   }
+
   to {
     /* opacity: 1; */
     transform: rotate(360deg);
@@ -230,19 +231,6 @@
   background-size: contain;
 }
 
-.manghe-bg3-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 7.5rem;
-  height: 13.44rem;
-  background: url(../images/light.gif) no-repeat center center;
-  background-size: contain;
-}
-
 .item {
   position: absolute;
   width: 1.25rem;
@@ -382,6 +370,187 @@
   background-repeat: no-repeat;
 }
 
+.award-mask.show {
+  opacity: 1;
+}
+
+.award-mask {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+
+.award-mask .award-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.award-mask .award-content .award-pic {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@keyframes awardLightScale {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(2) rotate(0);
+  }
+}
+
+@keyframes awardLightRotate {
+  from {
+    transform: scale(2) rotate(0);
+  }
+
+  to {
+    transform: scale(2) rotate(360deg);
+  }
+}
+
+.award-light-animate {
+  animation: awardLightScale 0.3s ease-in, awardLightRotate 20s infinite;
+}
+
+.award-mask .award-content .award-light {
+  position: absolute;
+  z-index: -1;
+  width: 3.5rem;
+  height: 3.5rem;
+  transform: scale(0);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/dazzling_light.png);
+}
+/* .award-mask .award-content .award-light.show {
+  transform: scale(2);
+  transition: transform 0.3s;
+} */
+
+.award-mask .award-content .award-sure-btn {
+  width: 2rem;
+  height: .7rem;
+  margin: 0 auto;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/tap_btn_ok.png);
+
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.award-mask .award-content .award-close-btn {
+  width: .7rem;
+  height: .7rem;
+  margin: 0.3rem auto 0;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/tap_btn_close.png);
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.award-mask .award-content .award-sure-btn.show,
+.award-mask .award-content .award-close-btn.show {
+  opacity: 1;
+}
+
+
+/* 拆盲盒前的盲盒图 */
+.award-1 .award-pic {
+  background-image: url(../images/p1_prize_box_1_2.png);
+}
+
+.award-2 .award-pic {
+  background-image: url(../images/p1_prize_box_2_2.png);
+}
+
+.award-3 .award-pic {
+  background-image: url(../images/p1_prize_box_3_2.png);
+}
+
+.award-4 .award-pic {
+  background-image: url(../images/p1_prize_box_4_2.png);
+}
+
+.award-5 .award-pic {
+  background-image: url(../images/p1_prize_box_5_2.png);
+}
+
+.award-6 .award-pic {
+  background-image: url(../images/p1_prize_box_6_2.png);
+}
+
+.award-7 .award-pic {
+  background-image: url(../images/p1_prize_box_7_2.png);
+}
+
+.award-8 .award-pic {
+  background-image: url(../images/p1_prize_box_8_2.png);
+}
+
+.award-9 .award-pic {
+  background-image: url(../images/p1_prize_box_9_2.png);
+}
+
+/* 开盲盒图 */
+.award-1-2 .award-pic {
+  background-image: url(../images/gift1.gif);
+}
+
+.award-2.opened .award-pic {
+  background-image: url(../images/gift2.gif);
+}
+
+.award-3.opened .award-pic {
+  background-image: url(../images/gift3.gif);
+}
+
+.award-4.opened .award-pic {
+  background-image: url(../images/gift4.gif);
+}
+
+.award-5.opened .award-pic {
+  background-image: url(../images/gift5.gif);
+}
+
+.award-6.opened .award-pic {
+  background-image: url(../images/gift6.gif);
+}
+
+.award-7.opened .award-pic {
+  background-image: url(../images/gift7.gif);
+}
+
+.award-8.opened .award-pic {
+  background-image: url(../images/gift8.gif);
+}
+
+.award-9.opened .award-pic {
+  background-image: url(../images/gift9.gif);
+}
+
+/* 
 .award1 {
   background-image: url(../images/1-1.gif);
 }
@@ -452,7 +621,7 @@
 
 .award9_2 {
   background-image: url(../images/9-2.gif);
-}
+} */
 
 .choose-btn {
   position: absolute;
@@ -531,6 +700,7 @@
 .prize-close-btn {
   top: 105%;
 }
+
 .prize-close-btn,
 .jp_prize-close-btn {
   /* top: 11.6rem; */
@@ -721,7 +891,9 @@
   padding: .1rem .2rem;
 }
 
-.draw-fail, .draw-finish, .rule-wrap {
+.draw-fail,
+.draw-finish,
+.rule-wrap {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -734,7 +906,9 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.draw-fail-bg, .draw-finish-bg, .rule-wrap-bg {
+.draw-fail-bg,
+.draw-finish-bg,
+.rule-wrap-bg {
   position: absolute;
   top: 0;
   bottom: 0;
