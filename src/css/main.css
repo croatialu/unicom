@@ -446,6 +446,7 @@
   height: 3.5rem;
   left: 0;
   margin-left: 0.7rem;
+  transform: scale(0);
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -939,7 +940,20 @@
 }
 
 .rule-wrap-bg2 {
-  background-image: url("../images/tap_bg_rule.png");
+  padding: 1.2rem 1.7rem .3rem;
+  box-sizing: border-box;
+  background-image: url("../images/tap_rule_bg.png");
+}
+
+.rule-content-scroll-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.rule-wrap-content {
+  background-color: red;
+  background-image: url("../images/tap_rule_content.jpg");
 }
 
 .draw-fail-btn {
