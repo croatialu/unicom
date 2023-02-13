@@ -396,12 +396,22 @@
 }
 
 .award-mask .award-content .award-pic {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4.5rem;
+  height: 2.78rem;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
+.award-mask.opened .award-content .award-pic {
+  margin-top: -3rem;
+  width: 5.8rem;
+  height: 5.8rem;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 0.2rem;
+}
+
 
 @keyframes awardLightScale {
   from {
@@ -434,25 +444,25 @@
   z-index: -1;
   width: 3.5rem;
   height: 3.5rem;
-  transform: scale(0);
+  left: 0;
+  margin-left: 0.7rem;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(../images/dazzling_light.png);
 }
-/* .award-mask .award-content .award-light.show {
-  transform: scale(2);
-  transition: transform 0.3s;
-} */
+.award-mask.opened .award-content .award-light {
+  margin-left: 1.2rem;
+}
 
 .award-mask .award-content .award-sure-btn {
   width: 2rem;
   height: .7rem;
-  margin: 0 auto;
+  margin: 0.3rem auto 0;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../images/tap_btn_ok.png);
+  background-image: url(../images/tap_btn_chai.png);
 
   transition: opacity 0.3s;
   opacity: 0;
@@ -461,7 +471,7 @@
 .award-mask .award-content .award-close-btn {
   width: .7rem;
   height: .7rem;
-  margin: 0.3rem auto 0;
+  margin: 0.5rem auto 0;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -478,39 +488,39 @@
 
 /* 拆盲盒前的盲盒图 */
 .award-1 .award-pic {
-  background-image: url(../images/p1_prize_box_1_2.png);
+  background-image: url(../images/p1_prize_box_1.png);
 }
 
 .award-2 .award-pic {
-  background-image: url(../images/p1_prize_box_2_2.png);
+  background-image: url(../images/p1_prize_box_2.png);
 }
 
 .award-3 .award-pic {
-  background-image: url(../images/p1_prize_box_3_2.png);
+  background-image: url(../images/p1_prize_box_3.png);
 }
 
 .award-4 .award-pic {
-  background-image: url(../images/p1_prize_box_4_2.png);
+  background-image: url(../images/p1_prize_box_4.png);
 }
 
 .award-5 .award-pic {
-  background-image: url(../images/p1_prize_box_5_2.png);
+  background-image: url(../images/p1_prize_box_5.png);
 }
 
 .award-6 .award-pic {
-  background-image: url(../images/p1_prize_box_6_2.png);
+  background-image: url(../images/p1_prize_box_6.png);
 }
 
 .award-7 .award-pic {
-  background-image: url(../images/p1_prize_box_7_2.png);
+  background-image: url(../images/p1_prize_box_7.png);
 }
 
 .award-8 .award-pic {
-  background-image: url(../images/p1_prize_box_8_2.png);
+  background-image: url(../images/p1_prize_box_8.png);
 }
 
 .award-9 .award-pic {
-  background-image: url(../images/p1_prize_box_9_2.png);
+  background-image: url(../images/p1_prize_box_9.png);
 }
 
 /* 开盲盒图 */
