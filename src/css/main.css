@@ -939,8 +939,13 @@
   background-image: url("../images/tap_bg_error_4.png");
 }
 
+.rule-wrap-bg {
+  width: 6rem;
+  height: 7.1rem;
+}
+
 .rule-wrap-bg2 {
-  padding: 1.2rem 1.7rem .3rem;
+  padding: 1.7rem 0.3rem .3rem;
   box-sizing: border-box;
   background-image: url("../images/tap_rule_bg.png");
 }
@@ -952,8 +957,13 @@
 }
 
 .rule-wrap-content {
+  width: 100%;
   background-color: red;
   background-image: url("../images/tap_rule_content.jpg");
+}
+
+.rule-wrap .draw-fail-btn {
+  bottom: -9rem;
 }
 
 .draw-fail-btn {
