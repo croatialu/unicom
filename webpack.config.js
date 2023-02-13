@@ -7,7 +7,7 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
   entry: path.join(__dirname, "src/main.js"),
   output: {
-    // publicPath: "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/",
+    publicPath: "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/",
     path: path.join(__dirname, "dist"),
     filename: "[name].[contenthash:8].js",
   },
