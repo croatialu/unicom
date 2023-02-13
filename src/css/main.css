@@ -792,7 +792,7 @@
 
 .prizing {
   position: relative;
-  width: 5.8rem;
+  width: 5.84rem;
   height: 2.24rem;
   margin: auto;
   margin-top: .25rem;
@@ -819,12 +819,12 @@
 }
 
 .p1 {
+  background-image: url("../images/tap_bg_prize_2.png");
   /* margin-top: 2.4rem; */
-  background-image: url("../images/tap_bg_prize_1.png");
 }
 
 .p2 {
-  background-image: url("../images/tap_bg_prize_2.png");
+  background-image: url("../images/tap_bg_prize_1.png");
 }
 
 .p3 {

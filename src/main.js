@@ -32,11 +32,11 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/ad1.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/ad2.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/ad3.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/ad4.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/ad5.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad1.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad2.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad3.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad4.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad5.jpg",
 )
 
 function isLogined() {
@@ -181,7 +181,7 @@ function drawPrize() {
     // 放广告
     adTimer()
     const num = Math.floor(Math.random() * 5) + 1;
-    $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/ad${num}.jpg" width="100%"" />`)
+    $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad${num}.jpg" width="100%"" />`)
     showEl($(".ad"))
     // "look_ad_times":0,	//今天观看的广告次数
     // "get_prize_times":0,	//今天抽奖次数
@@ -283,7 +283,7 @@ $(function () {
   setTimeout(() => {
     hideEl($(".loading"))
     showEl($(".index"))
-  }, 2000)
+  }, 4000)
   setRem(750, 750, 325);
   getUserInfo();
 
