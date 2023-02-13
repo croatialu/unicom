@@ -5,7 +5,6 @@ const miniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 // 判断当前是什么环境
-
 module.exports = (env) => {
 return {
     entry: path.join(__dirname, "src/main.js"),
@@ -50,8 +49,8 @@ return {
             // 小于该值的图片会使用base64编码
             limit: 1024,
             // 打包后的图片名称 [ext]指图片格式
-            // name: "images/[name].[hash:8].[ext]",
-            name: "images/[name].[ext]",
+            name: "images/[name].[hash:8].[ext]",
+            // name: "images/[name].[ext]",
             // publicPath: "./"
           },
         },
