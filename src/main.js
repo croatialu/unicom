@@ -37,13 +37,103 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad3.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad4.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad5.jpg",
+
+  // 盲盒页面背景
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_bg_v2.jpg",
+
+
+  // 盲盒摆放图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_1_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_2_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_3_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_4_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_5_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_6_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_7_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_8_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_9_2.png",
+
+  // 开盲盒前图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_1.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_5.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_6.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_7.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_8.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_9.png",
+
+  // 开盲盒gif
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift3.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift4.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift5.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift6.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift7.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift8.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift9.gif",
+
+  // 我的盲盒背景图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_myBox.png",
+
+  // 抽到盲盒提示图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_2.png",
+
+
+  // 我的盲盒列表七个奖品
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7.png",
+
+  // 炫光图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/dazzling_light.png",
+  // 拆盲盒按钮图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_chai.png",
+
+  // 活动规则wrap图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg.png",
+  // 活动规则内容图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content.jpg",
+
+
+  // 错误提示框
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_1.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_5.png",
+
+  // 登录相关图片
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_login_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_postData_version_2.png",
+
+  // 按钮相关
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_close.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_happyGet.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_login.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_ok.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_postData.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_soonBuy.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_soonGet.png",
 )
 
 function isLogined() {
   return Boolean(tel)
 }
 
-function clearUserInfo(){
+function clearUserInfo() {
   tel = ""
   user = {}
 
