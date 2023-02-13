@@ -16,8 +16,8 @@ let user = {};
 let tel = isSameDay(localStorage.getItem("last"), new Date()) ? localStorage.getItem("tel") : "";
 
 let countdown = 60
-let adCount = 2 //15
-let t_d = "2023-02-16"
+let adCount = 15 //15
+let t_d = "2023-02-18"
 
 // Image对象来预加载图片
 var images = new Array()
