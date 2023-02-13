@@ -3,7 +3,6 @@ import http from "./http";
 import { getCookie, toggleDisplay, getQueryString, showEl, hideEl, isSameDay } from "./utils";
 import setRem from "./setRem.js";
 import "./css/reset.css";
-import "./css/swiper-bundle.min.css";
 import "./css/common.css";
 import "./css/main.css";
 
@@ -38,24 +37,6 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad3.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad4.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/ad5.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/1-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/1-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/3-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/3-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/4-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/4-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/5-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/5-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/6-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/6-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/7-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/7-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/8-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/8-2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/9-1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/9-2.gif",
 )
 
 function isLogined() {
