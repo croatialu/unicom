@@ -525,7 +525,7 @@
 }
 
 /* 开盲盒图 */
-.award-1-2 .award-pic {
+.award-1.opened .award-pic {
   background-image: url(../images/gift1.gif);
 }
 
