@@ -431,7 +431,7 @@ $(function () {
     showEl($(".index"))
     hideEl($(".loading"))
     localStorage.setItem("isNotFirst", true)
-    if (showActivityEndedWrap()) return
+    showActivityWrapIfNeed()
 
   }, loadingSec)
 
