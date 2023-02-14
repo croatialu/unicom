@@ -101,13 +101,13 @@ preload(
 
 
   // 我的盲盒列表七个奖品
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7_2.png",
 
   // 炫光图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/dazzling_light.png",
@@ -117,7 +117,7 @@ preload(
   // 活动规则wrap图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg_1.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_1.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_2.png",
 
 
   // 错误提示框
@@ -643,6 +643,7 @@ $(function () {
     if (!user.prize_log || !user.prize_log.length) {
       $(".my-prize-wrap").addClass("empty")
     } else {
+      $(".c-wrap").empty();
       user.prize_log?.forEach(item => {
         const id = item.prize_id;
         const temp = $(".my-prize-wrap .c-wrap-temp").find(`.p${id}`).clone(true)
