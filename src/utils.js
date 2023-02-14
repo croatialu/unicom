@@ -68,3 +68,26 @@ export function isSameDay(date1, date2) {
 
   return new Date(date1).toDateString() === new Date(date2).toDateString()
 }
+
+export function getTimeOffset(currentTime, targetTime) {
+  const localCurrentTime = new Date(currentTime).getTime()
+  const localTargetTime = new Date(targetTime).getTime()
+
+  return localTargetTime - localCurrentTime
+}
+
+export function getTimeRangeStatus(time, timeRange) {
+  const { startTime, endTime } = timeRange
+  const localTime = new Date(time).getTime()
+  const localStartTime = new Date(startTime).getTime()
+  const localEndTime = new Date(endTime).getTime()
+
+  if (localTime >= localStartTime && localTime <= localEndTime) {
+    return 0
+  } else if (localTime < localStartTime) {
+    return localTime - localStartTime
+  }else {
+    return localTime - localEndTime
+  }
+
+}

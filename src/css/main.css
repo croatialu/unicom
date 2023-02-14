@@ -1148,7 +1148,7 @@
 
 /* 错误弹窗 */
 
-.error-wrap {
+.error-wrap, .activity-date-wrap {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -1174,7 +1174,9 @@
   background-image: url(../images/tap_bg_error_3.png);
 }
 
-.error-wrap .staff-wrap-close-btn {
+.error-wrap .staff-wrap-close-btn,
+.activity-date-wrap .activity-date-close-btn
+{
   margin-top: 0.6rem;
   width: .7rem;
   height: .7rem;
@@ -1182,4 +1184,20 @@
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(../images/tap_btn_close.png);
+}
+
+.activity-date-wrap .activity-date-error {
+  width: 6.88rem;
+  height: 5.44rem;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.activity-date-wrap.activity-not-started .activity-date-error {
+  background-image: url(../images/tap_bg_error_1.png);
+}
+
+.activity-date-wrap.activity-ended .activity-date-error{
+  background-image: url(../images/tap_bg_error_2.png);
 }

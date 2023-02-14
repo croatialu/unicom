@@ -1,6 +1,6 @@
 import $ from "jquery";
 import http from "./http";
-import { getCookie, toggleDisplay, getQueryString, showEl, hideEl, isSameDay } from "./utils";
+import { getCookie, toggleDisplay, getTimeRangeStatus, showEl, hideEl, isSameDay } from "./utils";
 import setRem from "./setRem.js";
 import "./css/reset.css";
 import "./css/common.css";
@@ -14,13 +14,15 @@ let look_ad_times = 0;
 // 用户信息
 let user = {};
 let tel = isSameDay(localStorage.getItem("last"), new Date()) ? localStorage.getItem("tel") : "";
-
+console.log(tel, 'tel')
 // loading时间
 let loadingSec = localStorage.getItem("isNotFirst") ? 3000 : 6000;
 
 let countdown = 60
 let adCount = 15 //15
-let t_d = "2023-02-18"
+let t_d = "2023-02-18 10:00:00"
+
+const activity_date = ["2023-02-15 10:00:00", "2023-03-31 23:59:59"];
 
 // Image对象来预加载图片
 var images = new Array()
@@ -240,7 +242,7 @@ function login(u_tel, vcode) {
 // 控制柜子2秒后切换动画gif
 function controlBoxAnimation() {
   setTimeout(() => {
-    $(".manghe-bg2").css( "background-image" ,"url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif)");
+    $(".manghe-bg2").css("background-image", "url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif)");
   }, 2000);
 }
 
@@ -366,6 +368,28 @@ function openBlindBox() {
   }
 }
 
+// 显示活动未开始弹窗
+function showActivityNotStartedWrap() {
+  const activityDateWrap = $(".activity-date-wrap");
+  activityDateWrap.addClass("activity-not-started")
+  activityDateWrap.removeClass("hide");
+}
+
+// 显示活动已结束弹窗
+function showActivityEndedWrap() {
+  const activityDateWrap = $(".activity-date-wrap");
+  activityDateWrap.addClass("activity-ended")
+  activityDateWrap.removeClass("hide");
+}
+
+
+// 隐藏 活动状态弹窗
+function hideActivityWrap() {
+  const activityDateWrap = $(".activity-date-wrap");
+  activityDateWrap.removeClass("activity-not-started activity-ended").addClass("hide");
+}
+
+
 // 显示 员工登录错误弹窗 
 function showStaffErrorWrap() {
   hideEl($(".login"))
@@ -382,11 +406,33 @@ function hideErrorWrap() {
 }
 
 
+function showActivityWrapIfNeed() {
+  const activityStatus = getTimeRangeStatus(t_d || new Date(), {
+    startTime: activity_date[0],
+    endTime: activity_date[1]
+  })
+  if (activityStatus < 0) {
+    showActivityNotStartedWrap()
+    return true
+  }
+
+  if (activityStatus > 0) {
+    showActivityEndedWrap()
+    return true
+  }
+
+  return false
+
+}
+
+
 $(function () {
   setTimeout(() => {
     showEl($(".index"))
     hideEl($(".loading"))
     localStorage.setItem("isNotFirst", true)
+    if (showActivityEndedWrap()) return
+
   }, loadingSec)
 
   setTimeout(() => {
@@ -396,13 +442,17 @@ $(function () {
   setTimeout(() => {
     hideEl($(".index-bg2"))
   }, loadingSec + 3000)
-  
+
   setRem(750, 750, 325);
+
   getUserInfo();
 
   // 打开登陆弹窗
   $(".a-login").on("click", function () {
     console.log("login", tel)
+
+    if (showActivityWrapIfNeed()) return
+
     if (!tel) {
       showEl($(".login"));
     } else {
@@ -674,5 +724,10 @@ $(function () {
 
   $(".error-wrap .staff-wrap-close-btn").on("click", function () {
     hideErrorWrap()
+  })
+
+
+  $(".activity-date-wrap .activity-date-close-btn").on("click", function () {
+    hideActivityWrap()
   })
 });
