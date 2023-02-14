@@ -40,8 +40,8 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3_1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3_1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad1.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad2.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad3.jpg",
@@ -247,7 +247,7 @@ function login(u_tel, vcode) {
 // 控制柜子2秒后切换动画gif
 function controlBoxAnimation() {
   setTimeout(() => {
-    $(".manghe-bg2").css("background-image", "url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif)");
+    $(".manghe-bg2").css("background-image", "url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2_1.gif)");
   }, 2000);
 }
 
