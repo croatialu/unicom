@@ -91,3 +91,27 @@ export function getTimeRangeStatus(time, timeRange) {
   }
 
 }
+
+export function debounce(func, wait = 300, immediate = false) {
+  var timeout, result;
+
+  var debounced = function () {
+    var context = this;
+    var args = arguments;
+    if (timeout) clearTimeout(timeout);
+
+    if (immediate) {
+      var callNow = !timeout;
+      timeout = setTimeout(function () {
+        timeout = null;
+      }, wait);
+      if (callNow) result = func.apply(this, args);
+    } else {
+      timeout = setTimeout(function () {
+        result = func.apply(context, args);
+      }, wait);
+    }
+    return result;
+  };
+  return debounced;
+}

@@ -1,6 +1,6 @@
 import $ from "jquery";
 import http from "./http";
-import { getCookie, toggleDisplay, getTimeRangeStatus, showEl, hideEl, isSameDay } from "./utils";
+import { getCookie, toggleDisplay, getTimeRangeStatus, showEl, hideEl, isSameDay, debounce } from "./utils";
 import setRem from "./setRem.js";
 import "./css/reset.css";
 import "./css/common.css";
@@ -23,7 +23,10 @@ let currentBoxIndex = 0;
 
 let countdown = 60
 let adCount = 15 //15
-let t_d = "2023-02-16"
+let t_d = "2023-02-17"
+
+// 留资提交按钮限流
+let checkinFlag = true
 
 const activity_date = ["2023-02-15 10:00:00", "2023-03-31 23:59:59"];
 
@@ -117,7 +120,7 @@ preload(
   // 活动规则wrap图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg_1.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_3.png",
 
 
   // 错误提示框
@@ -314,6 +317,7 @@ function checkin(address, true_tel, username) {
         if (res.data.code == 0) {
           alert("登记成功")
           $(".info").addClass("hide")
+          $(".prize-wrap").addClass("hide")
           getUserInfo()
         } else {
           alert(res.data?.msg || "登记失败")
@@ -617,7 +621,7 @@ $(function () {
     const name = $("#info-name").val();
     const tel = $("#info-tel").val();
     const addr = $("#info-addr").val();
-    checkin(addr, tel, name)
+    debounce(checkin, 1000, true)(addr, tel, name);
   })
 
   $(".draw-fail-btn").on("click", function () {
