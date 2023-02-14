@@ -15,6 +15,9 @@ let look_ad_times = 0;
 let user = {};
 let tel = isSameDay(localStorage.getItem("last"), new Date()) ? localStorage.getItem("tel") : "";
 
+// loading时间
+let loadingSec = localStorage.getItem("isNotFirst") ? 3000 : 6000;
+
 let countdown = 60
 let adCount = 15 //15
 let t_d = "2023-02-18"
@@ -31,38 +34,40 @@ function preload() {
 preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad1.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad2.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad3.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad4.jpg",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad5.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad1.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad2.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad3.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad4.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad5.jpg",
 
   // 盲盒页面背景
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_bg_v2.jpg",
 
 
   // 盲盒摆放图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_1_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_2_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_3_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_4_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_5_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_6_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_7_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_8_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_9_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_1_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_2_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_3_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_4_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_5_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_6_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_7_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_8_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_9_2.png",
 
   // 开盲盒前图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_1.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_4.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_5.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_6.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_7.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_8.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_9.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_1.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_5.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_6.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_7.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_8.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_9.png",
 
   // 开盲盒gif
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift1.gif",
@@ -84,8 +89,8 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_2.png",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_2.png",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_2.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_2.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_2.png",
 
 
   // 我的盲盒列表七个奖品
@@ -105,12 +110,12 @@ preload(
   // 活动规则wrap图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/rule_content.jpg",
 
 
   // 错误提示框
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_1.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_2.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_1.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_2.png",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_3.png",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_4.png",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_error_5.png",
@@ -120,13 +125,13 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_postData_version_2.png",
 
   // 按钮相关
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_close.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_happyGet.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_login.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_ok.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_postData.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_soonBuy.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_soonGet.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_close.png",
+  // // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_happyGet.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_login.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_ok.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_postData.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_soonBuy.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_soonGet.png",
 )
 
 function isLogined() {
@@ -227,8 +232,16 @@ function login(u_tel, vcode) {
         showStaffErrorWrap()
       } else {
         toggleDisplay($(".manghe"));
+        controlBoxAnimation()
       }
     });
+}
+
+// 控制柜子2秒后切换动画gif
+function controlBoxAnimation() {
+  setTimeout(() => {
+    $(".manghe-bg2").css( "background-image" ,"url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif)");
+  }, 2000);
 }
 
 // 抽奖
@@ -271,7 +284,7 @@ function drawPrize() {
     // 放广告
     adTimer()
     const num = Math.floor(Math.random() * 5) + 1;
-    $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/2ad${num}.jpg" width="100%"" />`)
+    $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad${num}.jpg" width="100%"" />`)
     showEl($(".ad"))
     // "look_ad_times":0,	//今天观看的广告次数
     // "get_prize_times":0,	//今天抽奖次数
@@ -371,9 +384,19 @@ function hideErrorWrap() {
 
 $(function () {
   setTimeout(() => {
-    hideEl($(".loading"))
     showEl($(".index"))
-  }, 4000)
+    hideEl($(".loading"))
+    localStorage.setItem("isNotFirst", true)
+  }, loadingSec)
+
+  setTimeout(() => {
+    showEl($(".index-bg3"))
+  }, loadingSec + 2500)
+
+  setTimeout(() => {
+    hideEl($(".index-bg2"))
+  }, loadingSec + 3000)
+  
   setRem(750, 750, 325);
   getUserInfo();
 
@@ -389,6 +412,7 @@ $(function () {
         showStaffErrorWrap()
       } else {
         toggleDisplay($(".manghe"))
+        controlBoxAnimation()
       }
     }
   });
