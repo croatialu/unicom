@@ -337,10 +337,10 @@ function set_ad_info() {
 
 function link(id) {
   const map = {
-    1: "https://wo.zj186.com/v/6jiaqm", // 15G
-    2: "https://wo.zj186.com/v/eaUJ7b", // 多视频
-    3: "https://wo.zj186.com/v/JRjQni", // 5G
-    4: "https://wo.zj186.com/v/qyENbe", // 25G
+    1: "https://wo.zj186.com/v/EvIRvi", // 15G
+    2: "https://wo.zj186.com/v/nyA3e2", // 多视频
+    3: "https://wo.zj186.com/v/uYFRbq", // 5G
+    4: "https://wo.zj186.com/v/ryaArq", // 25G
   }
   if (map[id]) {
     window.location.href = map[id];
