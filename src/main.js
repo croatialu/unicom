@@ -195,7 +195,7 @@ function adTimer(val) {
     clearInterval(int);
     adCount = 15;
   } else {
-    $(".time").text(`倒计时${adCount}秒`)
+    $(".time").text(`还可抽1次，倒计时${adCount}秒`)
     adCount--;
   }
 }
