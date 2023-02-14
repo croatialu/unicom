@@ -10,6 +10,8 @@
 </head>
 
 <body>
+  <audio preload="preload" id="audio" src="http://h5.cdn.intech.szhhhd.com/jx/a20221021gjh/video/SpaceshipFlyBy.m4a"
+    loop autoplay></audio>
   <div class="loading">
     <div class="c"></div>
     <div class="">loading...</div>
@@ -234,7 +236,7 @@
 </body>
 
 </html>
-
+<script>var t = null; function toggleSound() { var e = document.getElementById("audio"); console.log("ttttttttttt"), e.paused && (e.paused = !1, e.play().then(e => { clearInterval(t) }).catch(t => { })) } window.onload = function () { t = setInterval(toggleSound, 500) }, document.getElementById("audio").play(), document.addEventListener("WeixinJSBridgeReady", (function () { WeixinJSBridge.invoke("getNetworkType", {}, (function (t) { document.getElementById("audio").play() })) }), !1)</script>
 <!-- 引入公共JQ文件 -->
 <script src="http://h5.cdn.intech.szhhhd.com/20201028released_answer/a20200924answer_t/js/jquery-3.4.1.min.js"></script>
 <!-- 微信jdk -->

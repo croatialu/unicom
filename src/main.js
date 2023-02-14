@@ -18,9 +18,12 @@ console.log(tel, 'tel')
 // loading时间
 let loadingSec = localStorage.getItem("isNotFirst") ? 3000 : 6000;
 
+// 当前点击的盲盒标识
+let currentBoxIndex = 0;
+
 let countdown = 60
 let adCount = 15 //15
-let t_d = "2023-02-18 10:00:00"
+let t_d = "2023-02-16"
 
 const activity_date = ["2023-02-15 10:00:00", "2023-03-31 23:59:59"];
 
@@ -36,7 +39,7 @@ function preload() {
 preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad1.jpg",
@@ -246,6 +249,14 @@ function controlBoxAnimation() {
   }, 2000);
 }
 
+function showAd() {
+  // 放广告
+  adTimer()
+  const num = Math.floor(Math.random() * 5) + 1;
+  $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad${num}.jpg" width="100%"" />`)
+  showEl($(".ad"))
+}
+
 // 抽奖
 function drawPrize() {
   console.log("darpriz", get_prize_times, look_ad_times)
@@ -282,14 +293,6 @@ function drawPrize() {
           getUserInfo()
         }
       });
-  } else if (look_ad_times == 0) {
-    // 放广告
-    adTimer()
-    const num = Math.floor(Math.random() * 5) + 1;
-    $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad${num}.jpg" width="100%"" />`)
-    showEl($(".ad"))
-    // "look_ad_times":0,	//今天观看的广告次数
-    // "get_prize_times":0,	//今天抽奖次数
   } else {
     // 抽奖次数已用完
     showEl($(".draw-fail"))
@@ -309,6 +312,7 @@ function checkin(address, true_tel, username) {
         if (res.data.code == 0) {
           alert("登记成功")
           $(".info").addClass("hide")
+          getUserInfo()
         } else {
           alert(res.data?.msg || "登记失败")
         }
@@ -322,9 +326,11 @@ function checkin(address, true_tel, username) {
 function set_ad_info() {
   console.log("set_ad_info");
   let url = `/set_ad_info?act_name=${act_name}&tel=${tel}&t_d=${t_d}`
+
   http
     .get(url)
     .then((res) => {
+      showAwardMask(currentBoxIndex)
       getUserInfo()
     });
 }
@@ -339,6 +345,29 @@ function link(id) {
   if (map[id]) {
     window.location.href = map[id];
   }
+}
+
+function showAwardMask(index) {
+  console.log("index", index)
+  const awardMask = $(".award-mask")
+  const awardPic = awardMask.find(".award-pic")
+  awardMask.removeClass("hide")
+
+  requestAnimationFrame(() => {
+    awardMask.addClass(`award-${index} show`).attr("data-index", index)
+
+    awardPic.addClass("animate__animated animate__zoomInDown")
+
+    setTimeout(() => {
+      awardPic.removeClass("animate__zoomInDown").addClass("animate__bounce")
+    }, 700)
+
+    setTimeout(() => {
+      $(`.award-sure-btn`).addClass("show")
+      $(`.award-close-btn`).addClass("show")
+      $(`.award-light`).addClass("award-light-animate")
+    }, 2000)
+  })
 }
 
 // 关闭 抽盲盒弹窗
@@ -502,26 +531,13 @@ $(function () {
 
   $(".item").on("click", function () {
     const index = $(this).attr("data-index")
-    console.log("index", index)
-    const awardMask = $(".award-mask")
-    const awardPic = awardMask.find(".award-pic")
-    awardMask.removeClass("hide")
 
-    requestAnimationFrame(() => {
-      awardMask.addClass(`award-${index} show`).attr("data-index", index)
-
-      awardPic.addClass("animate__animated animate__zoomInDown")
-
-      setTimeout(() => {
-        awardPic.removeClass("animate__zoomInDown").addClass("animate__bounce")
-      }, 700)
-
-      setTimeout(() => {
-        $(`.award-sure-btn`).addClass("show")
-        $(`.award-close-btn`).addClass("show")
-        $(`.award-light`).addClass("award-light-animate")
-      }, 2000)
-    })
+    if (get_prize_times > 0 && look_ad_times == 0) {
+      currentBoxIndex = Number(index)
+      showAd()
+    } else {
+      showAwardMask(index)
+    }
   })
 
 
@@ -635,11 +651,11 @@ $(function () {
   });
 
   $(".p-btn-2").on("click", function () {
-    // if(!user.address) {
-    //   $(".info").removeClass("hide")
-    // } else {
-    $(".draw-finish").removeClass("hide")
-    // }
+    if (!user.address) {
+      $(".info").removeClass("hide")
+    } else {
+      $(".draw-finish").removeClass("hide")
+    }
     hideEl($(".my-prize-wrap"))
   });
 
