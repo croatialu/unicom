@@ -48,26 +48,26 @@ preload(
 
 
   // 盲盒摆放图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_1_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_2_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_3_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_4_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_5_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_6_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_7_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_8_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_9_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_1_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_2_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_3_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_4_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_5_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_6_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_7_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_8_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_9_2.png",
 
   // 开盲盒前图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_1.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_4.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_5.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_6.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_7.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_8.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/p1_prize_box_9.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_1.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_5.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_6.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_7.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_8.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/box_9.png",
 
   // 开盲盒gif
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/gift1.gif",
@@ -110,7 +110,7 @@ preload(
   // 活动规则wrap图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/rule_content.jpg",
 
 
   // 错误提示框

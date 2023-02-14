@@ -268,7 +268,7 @@
 .item1 {
   left: 1.55rem;
   top: 4.18rem;
-  background-image: url(../images/p1_prize_box_1_2.png);
+  background-image: url(../images/box_1_2.png);
 }
 
 .shadow1 {
@@ -279,7 +279,7 @@
 .item2 {
   left: 3.05rem;
   top: 4.18rem;
-  background-image: url(../images/p1_prize_box_2_2.png);
+  background-image: url(../images/box_2_2.png);
 }
 
 .shadow2 {
@@ -290,7 +290,7 @@
 .item3 {
   left: 4.55rem;
   top: 4.18rem;
-  background-image: url(../images/p1_prize_box_3_2.png);
+  background-image: url(../images/box_3_2.png);
 }
 
 .shadow3 {
@@ -301,7 +301,7 @@
 .item4 {
   left: 1.55rem;
   top: 6.48rem;
-  background-image: url(../images/p1_prize_box_4_2.png);
+  background-image: url(../images/box_4_2.png);
 }
 
 .shadow4 {
@@ -312,7 +312,7 @@
 .item5 {
   left: 3.05rem;
   top: 6.48rem;
-  background-image: url(../images/p1_prize_box_5_2.png);
+  background-image: url(../images/box_5_2.png);
 }
 
 .shadow5 {
@@ -323,7 +323,7 @@
 .item6 {
   left: 4.55rem;
   top: 6.48rem;
-  background-image: url(../images/p1_prize_box_6_2.png);
+  background-image: url(../images/box_6_2.png);
 }
 
 .shadow6 {
@@ -335,7 +335,7 @@
 .item7 {
   left: 1.55rem;
   top: 8.78rem;
-  background-image: url(../images/p1_prize_box_7_2.png);
+  background-image: url(../images/box_7_2.png);
 }
 
 .shadow7 {
@@ -346,7 +346,7 @@
 .item8 {
   left: 3.05rem;
   top: 8.78rem;
-  background-image: url(../images/p1_prize_box_8_2.png);
+  background-image: url(../images/box_8_2.png);
 }
 
 .shadow8 {
@@ -357,7 +357,7 @@
 .item9 {
   left: 4.55rem;
   top: 8.78rem;
-  background-image: url(../images/p1_prize_box_9_2.png);
+  background-image: url(../images/box_9_2.png);
 }
 
 .shadow9 {
@@ -500,39 +500,39 @@
 
 /* 拆盲盒前的盲盒图 */
 .award-1 .award-pic {
-  background-image: url(../images/p1_prize_box_1.png);
+  background-image: url(../images/box_1.png);
 }
 
 .award-2 .award-pic {
-  background-image: url(../images/p1_prize_box_2.png);
+  background-image: url(../images/box_2.png);
 }
 
 .award-3 .award-pic {
-  background-image: url(../images/p1_prize_box_3.png);
+  background-image: url(../images/box_3.png);
 }
 
 .award-4 .award-pic {
-  background-image: url(../images/p1_prize_box_4.png);
+  background-image: url(../images/box_4.png);
 }
 
 .award-5 .award-pic {
-  background-image: url(../images/p1_prize_box_5.png);
+  background-image: url(../images/box_5.png);
 }
 
 .award-6 .award-pic {
-  background-image: url(../images/p1_prize_box_6.png);
+  background-image: url(../images/box_6.png);
 }
 
 .award-7 .award-pic {
-  background-image: url(../images/p1_prize_box_7.png);
+  background-image: url(../images/box_7.png);
 }
 
 .award-8 .award-pic {
-  background-image: url(../images/p1_prize_box_8.png);
+  background-image: url(../images/box_8.png);
 }
 
 .award-9 .award-pic {
-  background-image: url(../images/p1_prize_box_9.png);
+  background-image: url(../images/box_9.png);
 }
 
 /* 开盲盒图 */
@@ -969,8 +969,8 @@
 
 .rule-wrap-content {
   width: 100%;
-  background-color: red;
-  background-image: url("../images/tap_rule_content.jpg");
+  /* background-color: red; */
+  /* background-image: url("../images/tap_rule_content.jpg"); */
 }
 
 .rule-wrap .draw-fail-btn {
@@ -1041,7 +1041,7 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("../images/p1_prize_box_1_2.png");
+  background-image: url("../images/box_1_2.png");
   animation-name: container;
   /*动画的名称*/
   transform-origin: center bottom;
