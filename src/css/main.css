@@ -84,6 +84,15 @@
   background-size: contain;
 }
 
+.index-bg3 {
+  width: 7.5rem;
+  height: 15rem;
+  /* 	750 × 1500 px */
+  background: url(../images/index3.gif) no-repeat center center;
+  background-size: contain;
+  /* display: none; */
+}
+
 .a-login {
   position: absolute;
   width: 4rem;
@@ -207,7 +216,9 @@
   margin: auto;
   width: 7.5rem;
   height: 13.44rem;
-  background: url(../images/game1.gif) no-repeat center center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(../images/game3.gif);
   background-size: cover;
 }
 
