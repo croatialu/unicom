@@ -40,8 +40,8 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3_1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3_1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad1.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad2.jpg",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad3.jpg",
@@ -87,15 +87,17 @@ preload(
 
   // 我的盲盒背景图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_myBox.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_myBox_empty.png",
+
 
   // 抽到盲盒提示图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_2.png",
-  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_2.png",
-  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_2.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_3.png",
 
 
   // 我的盲盒列表七个奖品
@@ -110,12 +112,12 @@ preload(
   // 炫光图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/dazzling_light.png",
   // 拆盲盒按钮图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_chai.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_chai_1.png",
 
   // 活动规则wrap图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg_1.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/rule_content.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_1.jpg",
 
 
   // 错误提示框
@@ -130,7 +132,7 @@ preload(
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_postData_version_2.png",
 
   // 按钮相关
-  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_close.png",
+  // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_close_1.png",
   // // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_happyGet.png",
   // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_login.png",
   // "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_btn_ok.png",
@@ -245,7 +247,7 @@ function login(u_tel, vcode) {
 // 控制柜子2秒后切换动画gif
 function controlBoxAnimation() {
   setTimeout(() => {
-    $(".manghe-bg2").css("background-image", "url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2.gif)");
+    $(".manghe-bg2").css("background-image", "url(http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2_1.gif)");
   }, 2000);
 }
 
@@ -337,10 +339,10 @@ function set_ad_info() {
 
 function link(id) {
   const map = {
-    1: "https://wo.zj186.com/v/6jiaqm", // 15G
-    2: "https://wo.zj186.com/v/eaUJ7b", // 多视频
-    3: "https://wo.zj186.com/v/JRjQni", // 5G
-    4: "https://wo.zj186.com/v/qyENbe", // 25G
+    1: "https://wo.zj186.com/v/EvIRvi", // 15G
+    2: "https://wo.zj186.com/v/nyA3e2", // 多视频
+    3: "https://wo.zj186.com/v/uYFRbq", // 5G
+    4: "https://wo.zj186.com/v/ryaArq", // 25G
   }
   if (map[id]) {
     window.location.href = map[id];
@@ -635,14 +637,21 @@ $(function () {
   // 我的奖品按钮
   $(".box-btn ").on("click", function () {
     // 重新获取一下用户的中奖信息
-
+    $(".my-prize-wrap").removeClass("empty")
     showEl($(".my-prize-wrap"))
-    user.prize_log?.forEach(item => {
-      const id = item.prize_id;
-      const temp = $(".my-prize-wrap .c-wrap-temp").find(`.p${id}`).clone(true)
 
-      $(".c-wrap").append(temp)
-    })
+    if (!user.prize_log || !user.prize_log.length) {
+      $(".my-prize-wrap").addClass("empty")
+    } else {
+      user.prize_log?.forEach(item => {
+        const id = item.prize_id;
+        const temp = $(".my-prize-wrap .c-wrap-temp").find(`.p${id}`).clone(true)
+
+        $(".c-wrap").append(temp)
+      })
+    }
+
+
   });
 
   $(".c-wrap").delegate(".p-btn", "click", function () {
