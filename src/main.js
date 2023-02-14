@@ -104,13 +104,13 @@ preload(
 
 
   // 我的盲盒列表七个奖品
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7_4.png",
 
   // 炫光图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/dazzling_light.png",
@@ -120,7 +120,7 @@ preload(
   // 活动规则wrap图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg_1.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_4.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_5.jpg",
 
 
   // 错误提示框
