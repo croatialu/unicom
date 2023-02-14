@@ -23,7 +23,7 @@ let currentBoxIndex = 0;
 
 let countdown = 60
 let adCount = 15 //15
-let t_d = "2023-02-17"
+let t_d = "2023-02-18"
 
 // 留资提交按钮限流
 let checkinFlag = true
@@ -289,7 +289,8 @@ function drawPrize() {
             setTimeout(() => {
               closeAwardMask()
               $(".prize-wrap").removeClass("hide")
-              $(`.prize${prizeId}`).removeClass("hide")
+              // $(`.prize${prizeId}`).removeClass("hide")
+              $(`.prize${prizeId}`).removeClass("hide").siblings().addClass("hide");
               $(`.jp-prize${prizeId}`).removeClass("hide")
             }, 1000)
           } else {
@@ -481,6 +482,10 @@ $(function () {
   setRem(750, 750, 325);
 
   getUserInfo();
+
+  $("#cache").on("click", function() {
+    clearUserInfo()
+  })
 
   // 打开登陆弹窗
   $(".a-login").on("click", function () {
