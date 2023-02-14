@@ -474,7 +474,7 @@
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../images/tap_btn_chai.png);
+  background-image: url(../images/tap_btn_chai_1.png);
 
   transition: opacity 0.3s;
   opacity: 0;
@@ -487,7 +487,7 @@
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../images/tap_btn_close.png);
+  background-image: url(../images/tap_btn_close_1.png);
   transition: opacity 0.3s;
   opacity: 0;
 }
@@ -700,23 +700,30 @@
 }
 
 .prize1 {
-  background-image: url("../images/prize_1_version_2.png");
+  background-image: url("../images/prize_1_version_3.png");
 }
 
 .prize2 {
-  background-image: url("../images/prize_2_version_2.png");
+  background-image: url("../images/prize_2_version_3.png");
 }
 
 .prize3 {
-  background-image: url("../images/prize_3_version_2.png");
+  background-image: url("../images/prize_3_version_3.png");
 }
 
 .prize4 {
-  background-image: url("../images/prize_4_version_2.png");
+  background-image: url("../images/prize_4_version_3.png");
 }
 
 .prize5 {
-  background-image: url("../images/prize_5_version_2.png");
+  background-image: url("../images/prize_5_version_3.png");
+}
+.prize6 {
+  background-image: url("../images/prize_6_version_3.png");
+}
+
+.prize7 {
+  background-image: url("../images/prize_7_version_3.png");
 }
 
 .prize-close-btn {
@@ -726,7 +733,7 @@
 .prize-close-btn,
 .jp_prize-close-btn {
   /* top: 11.6rem; */
-  background-image: url("../images/tap_btn_close.png");
+  background-image: url("../images/tap_btn_close_1.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -783,7 +790,7 @@
   background-size: cover;
 }
 
-.box-wrap {
+.my-prize-wrap .box-wrap {
   width: 6.8rem;
   height: 10.3rem;
   background-image: url("../images/tap_bg_myBox.png");
@@ -793,6 +800,13 @@
   padding-top: 2rem;
   padding-bottom: 1rem;
   margin-top: -1.2rem;
+}
+.my-prize-wrap.empty .box-wrap {
+  height: 8.05rem;
+  background-image: url("../images/tap_bg_myBox_empty.png");
+}
+.my-prize-wrap.empty .prize-close {
+  bottom: -8.5rem;
 }
 
 .c-wrap {
@@ -937,6 +951,7 @@
   left: 0;
   right: 0;
   margin: auto;
+  transform: translateY(-0.3rem);
   z-index: 5;
   width: 6.88rem;
   height: 4.6rem;
@@ -951,14 +966,15 @@
 }
 
 .rule-wrap-bg {
-  width: 6rem;
-  height: 7.1rem;
+  width: 7.5rem;
+  height: 8.9rem;
 }
 
 .rule-wrap-bg2 {
-  padding: 1.7rem 0.3rem .3rem;
+  padding: 2.3rem .3rem .5rem;
   box-sizing: border-box;
-  background-image: url("../images/tap_rule_bg.png");
+  transform: translateY(-1rem);
+  background-image: url("../images/tap_rule_bg_1.png");
 }
 
 .rule-content-scroll-wrap {
@@ -974,7 +990,7 @@
 }
 
 .rule-wrap .draw-fail-btn {
-  bottom: -9rem;
+  bottom: -10.5rem;
 }
 
 .draw-fail-btn {
@@ -990,7 +1006,7 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("../images/tap_btn_close.png");
+  background-image: url("../images/tap_btn_close_1.png");
 }
 
 .prize-close {
@@ -1183,7 +1199,7 @@
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../images/tap_btn_close.png);
+  background-image: url(../images/tap_btn_close_1.png);
 }
 
 .activity-date-wrap .activity-date-error {
