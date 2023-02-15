@@ -23,7 +23,7 @@ let currentBoxIndex = 0;
 
 let countdown = 60
 let adCount = 15 //15
-let t_d = "2023-02-18"
+// let t_d = "2023-02-18"
 
 // 留资提交按钮限流
 // let checkinFlag = true
@@ -159,7 +159,7 @@ function clearUserInfo() {
 function getUserInfo() {
   if (!tel) return
   return http
-    .get(`/get_userinfo?tel=${tel}&act_name=${act_name}&t_d=${t_d}`)
+    .get(`/get_userinfo?tel=${tel}&act_name=${act_name}`)
     .then((res) => {
       if (res.data) {
         user = res.data.data;
@@ -267,7 +267,7 @@ function drawPrize() {
   console.log("darpriz", get_prize_times, look_ad_times)
   if (get_prize_times == 0 || (get_prize_times == 1 && look_ad_times == 1)) {
     http
-      .get(`/get_prize?act_name=${act_name}&tel=${tel}&t_d=${t_d}`) // t_d
+      .get(`/get_prize?act_name=${act_name}&tel=${tel}`) // t_d
       .then((res) => {
         if (res.data) {
           // 当天抽奖次数已达上限
@@ -332,7 +332,7 @@ function checkin(address, true_tel, username) {
 // 看广告
 function set_ad_info() {
   console.log("set_ad_info");
-  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}&t_d=${t_d}`
+  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}`
 
   http
     .get(url)
@@ -443,7 +443,7 @@ function hideErrorWrap() {
 
 
 function showActivityWrapIfNeed() {
-  const activityStatus = getTimeRangeStatus(t_d || new Date(), {
+  const activityStatus = getTimeRangeStatus(new Date(), {
     startTime: activity_date[0],
     endTime: activity_date[1]
   })
