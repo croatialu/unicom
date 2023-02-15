@@ -94,13 +94,13 @@ preload(
 
 
   // 抽到盲盒提示图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_4.png",
 
 
   // 我的盲盒列表七个奖品
