@@ -350,7 +350,21 @@ function link(id) {
     4: "https://wo.zj186.com/v/ryaArq", // 25G
   }
   if (map[id]) {
-    window.location.href = map[id];
+    // const parm = '\u003cscript\u003elocation.href("' + map[id] + '")\u003c/script\u003e';
+    // const str = 'javascript:window.name;'
+    // window.open(str, parm);
+    // window.location.href = map[id];
+
+    var a = document.createElement('a');
+    a.setAttribute('href', map[id]);
+    a.setAttribute('rel', "noreferrer noopener nofollow");
+    a.setAttribute('id', 'startTelMedicine');
+    // 防止反复添加
+    if (document.getElementById('startTelMedicine')) {
+      document.body.removeChild(document.getElementById('startTelMedicine'));
+    }
+    document.body.appendChild(a);
+    a.click();
   }
 }
 
@@ -583,14 +597,6 @@ $(function () {
 
   $(".item").on("click", function () {
     const index = $(this).attr("data-index")
-
-    if (get_prize_times > 0 && look_ad_times == 0) {
-      currentBoxIndex = Number(index)
-      showAd()
-    } else {
-      showAwardMask(index)
-    }
-
     const baiduHtm = [
       act_name,
       "click",
@@ -604,17 +610,50 @@ $(function () {
       baiduHtm[2],
       baiduHtm[3],
     ]);
+
+    if (get_prize_times > 0 && look_ad_times == 0) {
+      currentBoxIndex = Number(index)
+      showAd()
+    } else {
+      showAwardMask(index)
+    }
   })
 
 
 
   // 盲盒的关闭按钮
   $(".award-close-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button10`,
+      `内页-盲盒关闭按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     closeAwardMask()
   });
 
   // 拆
   $(".award-sure-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button11`,
+      `内页-拆盲盒按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
 
     const isOpened = $(".award-mask").hasClass("opened")
 
@@ -634,6 +673,19 @@ $(function () {
   });
 
   $(".prize-close-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button11`,
+      `内页-奖品关闭按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     const popup = $(this).parent(".prize").parent(".prize-wrap")
     hideEl(popup)
   });
@@ -667,6 +719,20 @@ $(function () {
   /** 点击跳转到外部链接 */
   $(".buy-btn").on("click", function () {
     const id = $(this).attr("data-id")
+    const prize = $(this).attr("data-prize")
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button2${id}`,
+      `内页-虚拟奖品-${prize}`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     link(id)
   })
 
@@ -674,6 +740,20 @@ $(function () {
   $(".buy-2-btn").on("click", function () {
     // const id = $(this).attr("data-id")
     // 打开留资弹窗
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button31`,
+      `内页-留资按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
+
     $(".info").removeClass("hide")
   })
 
@@ -681,6 +761,19 @@ $(function () {
     const name = $("#info-name").val();
     const tel = $("#info-tel").val();
     const addr = $("#info-addr").val();
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button32`,
+      `内页-留资提交按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     debounce(checkin, 1000, true)(addr, tel, name);
   })
 
@@ -700,6 +793,19 @@ $(function () {
 
   // 我的奖品按钮
   $(".box-btn ").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button33`,
+      `内页-我的奖品按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     // 重新获取一下用户的中奖信息
     $(".my-prize-wrap").removeClass("empty")
     showEl($(".my-prize-wrap"))
@@ -721,6 +827,19 @@ $(function () {
 
   $(".c-wrap").delegate(".p-btn", "click", function () {
     const id = $(this).parent(".prizing").attr("data-id")
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button4${id}`,
+      `内页-我的奖品-奖品${id}`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     link(id)
   });
 
@@ -735,6 +854,19 @@ $(function () {
 
   // 打开规则也
   $(".rule-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button50`,
+      `内页-规则按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     showEl($(".rule-wrap"))
   });
 
@@ -746,69 +878,6 @@ $(function () {
   $(".prize-close").on("click", function () {
     hideEl($(".my-prize-wrap"))
     $(".my-prize-wrap .c-wrap").empty()
-  });
-
-  // 去抽奖
-  $(".checkin-sussess-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "popup_button3",
-      "弹窗-登记成功-去抽奖",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    getPrizing();
-    makePrizes();
-    toggleDisplay($(".prize-page"))
-  });
-
-  // 核销
-  $(".has-prize").on("click", ".prize-checkin-btn", function (ev) {
-    prizeId = $(this).attr("id");
-    // 获取元素id(选择的值)
-    console.log("answer", prizeId);
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "popup_button17",
-      "弹窗-我的奖品-去核销按钮",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    showEl($(".verify-wrap"))
-    hideEl($(".my-prize-wrap"))
-  });
-
-  //  确认核销
-  $(".verify-btn").on("click", function () {
-    const verifycode = $("#averify").val()
-    if (verifycode && prizeId) {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button9",
-        "弹窗-核销-确认核销",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-      verifyPrize(prizeId, verifycode)
-    }
   });
 
 
