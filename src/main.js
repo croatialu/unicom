@@ -26,7 +26,7 @@ let adCount = 15 //15
 let t_d = "2023-02-18"
 
 // 留资提交按钮限流
-let checkinFlag = true
+// let checkinFlag = true
 
 const activity_date = ["2023-02-15 10:00:00", "2023-03-31 23:59:59"];
 
@@ -207,12 +207,12 @@ function adTimer(val) {
 function getVcode(tel) {
   console.log("getVcode");
   http
-    .get(`/get_vcode?&act_name=${act_name}&tel=${tel}&type=test`) //&type=test
+    .get(`/get_vcode?&act_name=${act_name}&tel=${tel}`) //&type=test
     .then((res) => {
       if (res.data && res?.data?.code == 0) {
         // 正常逻辑不需要处理什么
-        const code = res.data.msg
-        $("#vcode").val(code)
+        // const code = res.data.msg
+        // $("#vcode").val(code)
       } else {
         alert(res.data?.msg)
       }
