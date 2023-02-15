@@ -483,9 +483,9 @@ $(function () {
 
   getUserInfo();
 
-  $("#cache").on("click", function() {
-    clearUserInfo()
-  })
+  // $("#cache").on("click", function() {
+  //   clearUserInfo()
+  // })
 
   // 打开登陆弹窗
   $(".a-login").on("click", function () {
@@ -505,6 +505,20 @@ $(function () {
         controlBoxAnimation()
       }
     }
+
+    const baiduHtm = [
+      act_name,
+      "click",
+      "page1_button1",
+      "首页-开启惊喜按钮",
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   });
 
   //点击登录
@@ -515,6 +529,20 @@ $(function () {
     if (tel && vcode) {
       login(tel, vcode);
     }
+
+    const baiduHtm = [
+      act_name,
+      "click",
+      "page1_button2",
+      "首页-登陆",
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   });
 
   // 发送验证码
@@ -526,6 +554,19 @@ $(function () {
       settime($(".sendcode-btn-empty"))
       getVcode(tel)
     }
+    const baiduHtm = [
+      act_name,
+      "click",
+      "page1_button3",
+      "首页-发送验证码",
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   });
 
   // 点击奖品
@@ -549,6 +590,20 @@ $(function () {
     } else {
       showAwardMask(index)
     }
+
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button${index}`,
+      `内页-奖品盒${index}`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   })
 
 
