@@ -257,7 +257,25 @@ function controlBoxAnimation() {
 function showAd() {
   // 放广告
   adTimer()
-  const num = Math.floor(Math.random() * 5) + 1;
+  let adAlreadyRead = localStorage.getItem("adAlreadyRead") ? localStorage.getItem("adAlreadyRead") : "";
+  let num = 1;
+  //   每天塞入一个1-5不重复的数字；
+  // 塞满之后，清空数组；这么一个缓存
+  const arr = adAlreadyRead ? adAlreadyRead.split(",") : []
+  if (arr.length >= 5) {
+    num = Math.floor(Math.random() * 5) + 1;
+    localStorage.setItem("adAlreadyRead", num)
+  } else {
+    // 生成一个1～5但不在arr里的数字
+    const restArr = [1, 2, 3, 4, 5].filter((item) => !arr.includes(item.toString()))
+    // 生成一个在restArr里的随机数
+    num = restArr[Math.floor(Math.random() * restArr.length)]
+    arr.push(num)
+    let arrStr = arr.join(",")
+    localStorage.setItem("adAlreadyRead", arrStr)
+  }
+  // console.log("num", num, localStorage.getItem("adAlreadyRead"));
+  // const num = day % 5 + 1;
   $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad${num}.jpg" width="100%"" />`)
   showEl($(".ad"))
 }
