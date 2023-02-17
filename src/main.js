@@ -40,7 +40,8 @@ function preload() {
 }
 
 preload(
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index_2_1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index_2_2.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3_1.gif",
