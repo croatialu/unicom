@@ -56,7 +56,13 @@
 
 .index-bg1 {
   width: 100%;
-  background: url(../images/index1.gif) no-repeat center center;
+  background: url(../images/index_2_1.gif) no-repeat center center;
+  background-size: contain;
+}
+
+.index-bg4 {
+  width: 15rem;
+  background: url(../images/index_2_2.gif) no-repeat center center;
   background-size: contain;
 }
 
@@ -80,7 +86,7 @@
   width: 7.5rem;
   height: 15rem;
   /* 	750 × 1500 px */
-  background: url(../images/index2.gif) no-repeat center center;
+  background: url(../images/index2_1.gif) no-repeat center center;
   background-size: contain;
 }
 
@@ -700,30 +706,30 @@
 }
 
 .prize1 {
-  background-image: url("../images/prize_1_version_3.png");
+  background-image: url("../images/prize_1_version_4.png");
 }
 
 .prize2 {
-  background-image: url("../images/prize_2_version_3.png");
+  background-image: url("../images/prize_2_version_4.png");
 }
 
 .prize3 {
-  background-image: url("../images/prize_3_version_3.png");
+  background-image: url("../images/prize_3_version_4.png");
 }
 
 .prize4 {
-  background-image: url("../images/prize_4_version_3.png");
+  background-image: url("../images/prize_4_version_4.png");
 }
 
 .prize5 {
-  background-image: url("../images/prize_5_version_3.png");
+  background-image: url("../images/prize_5_version_4.png");
 }
 .prize6 {
-  background-image: url("../images/prize_6_version_3.png");
+  background-image: url("../images/prize_6_version_4.png");
 }
 
 .prize7 {
-  background-image: url("../images/prize_7_version_3.png");
+  background-image: url("../images/prize_7_version_4.png");
 }
 
 .prize-close-btn {
@@ -844,32 +850,32 @@
 }
 
 .p1 {
-  background-image: url("../images/tap_bg_prize_2_1.png");
+  background-image: url("../images/tap_bg_prize_1_4.png");
   /* margin-top: 2.4rem; */
 }
 
 .p2 {
-  background-image: url("../images/tap_bg_prize_1_1.png");
+  background-image: url("../images/tap_bg_prize_2_4.png");
 }
 
 .p3 {
-  background-image: url("../images/tap_bg_prize_3_1.png");
+  background-image: url("../images/tap_bg_prize_3_4.png");
 }
 
 .p4 {
-  background-image: url("../images/tap_bg_prize_4_1.png");
+  background-image: url("../images/tap_bg_prize_4_4.png");
 }
 
 .p5 {
-  background-image: url("../images/tap_bg_prize_5_1.png");
+  background-image: url("../images/tap_bg_prize_5_4.png");
 }
 
 .p6 {
-  background-image: url("../images/tap_bg_prize_6_1.png");
+  background-image: url("../images/tap_bg_prize_6_4.png");
 }
 
 .p7 {
-  background-image: url("../images/tap_bg_prize_7_1.png");
+  background-image: url("../images/tap_bg_prize_7_4.png");
 }
 
 

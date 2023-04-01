@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="referrer" content="never">
+  <!-- <meta name="referrer" content="never"> -->
   <title>兔个福利 盲盒有礼</title>
 </head>
 
 <body>
-  <audio preload="preload" id="audio" src="http://h5.cdn.intech.szhhhd.com/jx/a20221021gjh/video/SpaceshipFlyBy.m4a"
+  <!-- <span id="cache" style="position: fixed; bottom: 10px; left: 10px; display: inline-block; border: 1px solid; padding: 2px 10px; font-size: 16px; z-index: 99;">清缓存</span> -->
+  <audio preload="preload" id="audio" src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/video/music.mp3"
     loop autoplay></audio>
   <div class="loading">
     <div class="c"></div>
@@ -21,6 +22,7 @@
     <div class="index-bg1-wrap index-bg1">
       <div class="a-login"></div>
     </div>
+    <div class="index-bg1-wrap index-bg4"></div>
     <div class="index-bg2-wrap index-bg2"></div>
     <div class="index-bg2-wrap index-bg3 hide"></div>
   </div>
@@ -112,19 +114,19 @@
     <!-- 奖品 -->
     <div class="prize-wrap hide">
       <div class="prize prize1 hide">
-        <div class="buy-btn" data-id="1"></div>
+        <div class="buy-btn" data-prize="15G" data-id="1"></div>
         <div class="close-btn prize-close-btn"></div>
       </div>
       <div class="prize prize2 hide">
-        <div class="buy-btn" data-id="2"></div>
+        <div class="buy-btn" data-prize="多视频" data-id="2"></div>
         <div class="close-btn prize-close-btn"></div>
       </div>
       <div class="prize prize3 hide">
-        <div class="buy-btn" data-id="3"></div>
+        <div class="buy-btn" data-prize="5G" data-id="3"></div>
         <div class="close-btn prize-close-btn"></div>
       </div>
       <div class="prize prize4 hide">
-        <div class="buy-btn" data-id="4"></div>
+        <div class="buy-btn" data-prize="25G" data-id="4"></div>
         <div class="close-btn prize-close-btn"></div>
       </div>
       <div class="prize prize5 hide">
@@ -162,7 +164,7 @@
   </div>
   <!-- 观看15s广告 -->
   <div class="ad hide">
-    <div class=" time"> 倒计时15秒</div>
+    <div class=" time"> 看完还可抽1次，倒计时15秒</div>
     <div class="time-close-btn hide">关闭</div>
   </div>
   <!-- 抽奖次数用完 -->
@@ -219,7 +221,7 @@
     <div class="rule-wrap-bg rule-wrap-bg2">
       <div class="rule-content-scroll-wrap">
         <img class="rule-wrap-content"
-          src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_1.jpg"></img>
+          src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_5.jpg"></img>
       </div>
       <div class="draw-fail-btn"></div>
     </div>
@@ -254,11 +256,11 @@
 <script src="http://h5.szhhhd.com/wx/share.js?v"></script>
 <!-- 百度统计 -->
 <script>
-  // var _hmt = _hmt || [];
-  // (function () {
-  //   var hm = document.createElement("script");
-  //   hm.src = "https://hm.baidu.com/hm.js?c8471e072575f6cb3a288f75851abe7e";
-  //   var s = document.getElementsByTagName("script")[0];
-  //   s.parentNode.insertBefore(hm, s);
-  // })();
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c8471e072575f6cb3a288f75851abe7e";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
 </script>

@@ -1,6 +1,6 @@
 import $ from "jquery";
 import http from "./http";
-import { getCookie, toggleDisplay, getTimeRangeStatus, showEl, hideEl, isSameDay } from "./utils";
+import { getCookie, toggleDisplay, getTimeRangeStatus, showEl, hideEl, isSameDay, debounce } from "./utils";
 import setRem from "./setRem.js";
 import "./css/reset.css";
 import "./css/common.css";
@@ -23,7 +23,10 @@ let currentBoxIndex = 0;
 
 let countdown = 60
 let adCount = 15 //15
-let t_d = "2023-02-16"
+// let t_d = "2023-02-18"
+
+// 留资提交按钮限流
+// let checkinFlag = true
 
 const activity_date = ["2023-02-15 10:00:00", "2023-03-31 23:59:59"];
 
@@ -37,8 +40,9 @@ function preload() {
 }
 
 preload(
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index1.gif",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index_2_1.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index_2_2.gif",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index2_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/index3_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game3_1.gif",
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/game2_1.gif",
@@ -91,23 +95,23 @@ preload(
 
 
   // 抽到盲盒提示图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_3.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_1_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_2_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_3_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_4_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_5_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_6_version_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/prize_7_version_4.png",
 
 
   // 我的盲盒列表七个奖品
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6.png",
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_1_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_2_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_3_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_4_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_5_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_6_4.png",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_bg_prize_7_4.png",
 
   // 炫光图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/dazzling_light.png",
@@ -117,7 +121,7 @@ preload(
   // 活动规则wrap图片
   "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_bg_1.png",
   // 活动规则内容图片
-  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_1.jpg",
+  "http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/tap_rule_content_5.jpg",
 
 
   // 错误提示框
@@ -156,7 +160,7 @@ function clearUserInfo() {
 function getUserInfo() {
   if (!tel) return
   return http
-    .get(`/get_userinfo?tel=${tel}&act_name=${act_name}&t_d=${t_d}`)
+    .get(`/get_userinfo?tel=${tel}&act_name=${act_name}`)
     .then((res) => {
       if (res.data) {
         user = res.data.data;
@@ -195,7 +199,7 @@ function adTimer(val) {
     clearInterval(int);
     adCount = 15;
   } else {
-    $(".time").text(`倒计时${adCount}秒`)
+    $(".time").text(`看完还可抽1次，倒计时${adCount}秒`)
     adCount--;
   }
 }
@@ -204,12 +208,12 @@ function adTimer(val) {
 function getVcode(tel) {
   console.log("getVcode");
   http
-    .get(`/get_vcode?&act_name=${act_name}&tel=${tel}&type=test`) //&type=test
+    .get(`/get_vcode?&act_name=${act_name}&tel=${tel}`) //&type=test
     .then((res) => {
       if (res.data && res?.data?.code == 0) {
         // 正常逻辑不需要处理什么
-        const code = res.data.msg
-        $("#vcode").val(code)
+        // const code = res.data.msg
+        // $("#vcode").val(code)
       } else {
         alert(res.data?.msg)
       }
@@ -254,7 +258,25 @@ function controlBoxAnimation() {
 function showAd() {
   // 放广告
   adTimer()
-  const num = Math.floor(Math.random() * 5) + 1;
+  let adAlreadyRead = localStorage.getItem("adAlreadyRead") ? localStorage.getItem("adAlreadyRead") : "";
+  let num = 1;
+  //   每天塞入一个1-5不重复的数字；
+  // 塞满之后，清空数组；这么一个缓存
+  const arr = adAlreadyRead ? adAlreadyRead.split(",") : []
+  if (arr.length >= 5) {
+    num = Math.floor(Math.random() * 5) + 1;
+    localStorage.setItem("adAlreadyRead", num)
+  } else {
+    // 生成一个1～5但不在arr里的数字
+    const restArr = [1, 2, 3, 4, 5].filter((item) => !arr.includes(item.toString()))
+    // 生成一个在restArr里的随机数
+    num = restArr[Math.floor(Math.random() * restArr.length)]
+    arr.push(num)
+    let arrStr = arr.join(",")
+    localStorage.setItem("adAlreadyRead", arrStr)
+  }
+  // console.log("num", num, localStorage.getItem("adAlreadyRead"));
+  // const num = day % 5 + 1;
   $(".ad").prepend(`<img src="http://h5.cdn.intech.szhhhd.com/jx/a20230215_mh/images/2ad${num}.jpg" width="100%"" />`)
   showEl($(".ad"))
 }
@@ -264,7 +286,7 @@ function drawPrize() {
   console.log("darpriz", get_prize_times, look_ad_times)
   if (get_prize_times == 0 || (get_prize_times == 1 && look_ad_times == 1)) {
     http
-      .get(`/get_prize?act_name=${act_name}&tel=${tel}&t_d=${t_d}`) // t_d
+      .get(`/get_prize?act_name=${act_name}&tel=${tel}`) // t_d
       .then((res) => {
         if (res.data) {
           // 当天抽奖次数已达上限
@@ -286,7 +308,8 @@ function drawPrize() {
             setTimeout(() => {
               closeAwardMask()
               $(".prize-wrap").removeClass("hide")
-              $(`.prize${prizeId}`).removeClass("hide")
+              // $(`.prize${prizeId}`).removeClass("hide")
+              $(`.prize${prizeId}`).removeClass("hide").siblings().addClass("hide");
               $(`.jp-prize${prizeId}`).removeClass("hide")
             }, 1000)
           } else {
@@ -314,6 +337,7 @@ function checkin(address, true_tel, username) {
         if (res.data.code == 0) {
           alert("登记成功")
           $(".info").addClass("hide")
+          $(".prize-wrap").addClass("hide")
           getUserInfo()
         } else {
           alert(res.data?.msg || "登记失败")
@@ -327,7 +351,7 @@ function checkin(address, true_tel, username) {
 // 看广告
 function set_ad_info() {
   console.log("set_ad_info");
-  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}&t_d=${t_d}`
+  let url = `/set_ad_info?act_name=${act_name}&tel=${tel}`
 
   http
     .get(url)
@@ -345,7 +369,21 @@ function link(id) {
     4: "https://wo.zj186.com/v/ryaArq", // 25G
   }
   if (map[id]) {
-    window.location.href = map[id];
+    // const parm = '\u003cscript\u003elocation.href("' + map[id] + '")\u003c/script\u003e';
+    // const str = 'javascript:window.name;'
+    // window.open(str, parm);
+    // window.location.href = map[id];
+
+    var a = document.createElement('a');
+    a.setAttribute('href', map[id]);
+    a.setAttribute('rel', "noreferrer noopener nofollow");
+    a.setAttribute('id', 'startTelMedicine');
+    // 防止反复添加
+    if (document.getElementById('startTelMedicine')) {
+      document.body.removeChild(document.getElementById('startTelMedicine'));
+    }
+    document.body.appendChild(a);
+    a.click();
   }
 }
 
@@ -438,7 +476,7 @@ function hideErrorWrap() {
 
 
 function showActivityWrapIfNeed() {
-  const activityStatus = getTimeRangeStatus(t_d || new Date(), {
+  const activityStatus = getTimeRangeStatus(new Date(), {
     startTime: activity_date[0],
     endTime: activity_date[1]
   })
@@ -478,6 +516,10 @@ $(function () {
 
   getUserInfo();
 
+  // $("#cache").on("click", function() {
+  //   clearUserInfo()
+  // })
+
   // 打开登陆弹窗
   $(".a-login").on("click", function () {
     console.log("login", tel)
@@ -496,6 +538,20 @@ $(function () {
         controlBoxAnimation()
       }
     }
+
+    const baiduHtm = [
+      act_name,
+      "click",
+      "page1_button1",
+      "首页-开启惊喜按钮",
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   });
 
   //点击登录
@@ -506,6 +562,20 @@ $(function () {
     if (tel && vcode) {
       login(tel, vcode);
     }
+
+    const baiduHtm = [
+      act_name,
+      "click",
+      "page1_button2",
+      "首页-登陆",
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   });
 
   // 发送验证码
@@ -517,6 +587,19 @@ $(function () {
       settime($(".sendcode-btn-empty"))
       getVcode(tel)
     }
+    const baiduHtm = [
+      act_name,
+      "click",
+      "page1_button3",
+      "首页-发送验证码",
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
   });
 
   // 点击奖品
@@ -533,6 +616,19 @@ $(function () {
 
   $(".item").on("click", function () {
     const index = $(this).attr("data-index")
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button${index}`,
+      `内页-奖品盒${index}`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
 
     if (get_prize_times > 0 && look_ad_times == 0) {
       currentBoxIndex = Number(index)
@@ -546,11 +642,37 @@ $(function () {
 
   // 盲盒的关闭按钮
   $(".award-close-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button10`,
+      `内页-盲盒关闭按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     closeAwardMask()
   });
 
   // 拆
   $(".award-sure-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button11`,
+      `内页-拆盲盒按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
 
     const isOpened = $(".award-mask").hasClass("opened")
 
@@ -570,6 +692,19 @@ $(function () {
   });
 
   $(".prize-close-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button11`,
+      `内页-奖品关闭按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     const popup = $(this).parent(".prize").parent(".prize-wrap")
     hideEl(popup)
   });
@@ -603,6 +738,20 @@ $(function () {
   /** 点击跳转到外部链接 */
   $(".buy-btn").on("click", function () {
     const id = $(this).attr("data-id")
+    const prize = $(this).attr("data-prize")
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button2${id}`,
+      `内页-虚拟奖品-${prize}`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     link(id)
   })
 
@@ -610,6 +759,20 @@ $(function () {
   $(".buy-2-btn").on("click", function () {
     // const id = $(this).attr("data-id")
     // 打开留资弹窗
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button31`,
+      `内页-留资按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
+
     $(".info").removeClass("hide")
   })
 
@@ -617,7 +780,20 @@ $(function () {
     const name = $("#info-name").val();
     const tel = $("#info-tel").val();
     const addr = $("#info-addr").val();
-    checkin(addr, tel, name)
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button32`,
+      `内页-留资提交按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
+    debounce(checkin, 1000, true)(addr, tel, name);
   })
 
   $(".draw-fail-btn").on("click", function () {
@@ -636,6 +812,19 @@ $(function () {
 
   // 我的奖品按钮
   $(".box-btn ").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button33`,
+      `内页-我的奖品按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     // 重新获取一下用户的中奖信息
     $(".my-prize-wrap").removeClass("empty")
     showEl($(".my-prize-wrap"))
@@ -643,6 +832,7 @@ $(function () {
     if (!user.prize_log || !user.prize_log.length) {
       $(".my-prize-wrap").addClass("empty")
     } else {
+      $(".c-wrap").empty();
       user.prize_log?.forEach(item => {
         const id = item.prize_id;
         const temp = $(".my-prize-wrap .c-wrap-temp").find(`.p${id}`).clone(true)
@@ -656,6 +846,19 @@ $(function () {
 
   $(".c-wrap").delegate(".p-btn", "click", function () {
     const id = $(this).parent(".prizing").attr("data-id")
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button4${id}`,
+      `内页-我的奖品-奖品${id}`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     link(id)
   });
 
@@ -670,6 +873,19 @@ $(function () {
 
   // 打开规则也
   $(".rule-btn").on("click", function () {
+    const baiduHtm = [
+      act_name,
+      "click",
+      `page2_button50`,
+      `内页-规则按钮`,
+    ];
+    _hmt.push([
+      "_trackEvent",
+      baiduHtm[0],
+      baiduHtm[1],
+      baiduHtm[2],
+      baiduHtm[3],
+    ]);
     showEl($(".rule-wrap"))
   });
 
@@ -681,69 +897,6 @@ $(function () {
   $(".prize-close").on("click", function () {
     hideEl($(".my-prize-wrap"))
     $(".my-prize-wrap .c-wrap").empty()
-  });
-
-  // 去抽奖
-  $(".checkin-sussess-btn").on("click", function () {
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "popup_button3",
-      "弹窗-登记成功-去抽奖",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    getPrizing();
-    makePrizes();
-    toggleDisplay($(".prize-page"))
-  });
-
-  // 核销
-  $(".has-prize").on("click", ".prize-checkin-btn", function (ev) {
-    prizeId = $(this).attr("id");
-    // 获取元素id(选择的值)
-    console.log("answer", prizeId);
-    const baiduHtm = [
-      "a20211118_zslt",
-      "click",
-      "popup_button17",
-      "弹窗-我的奖品-去核销按钮",
-    ];
-    _hmt.push([
-      "_trackEvent",
-      baiduHtm[0],
-      baiduHtm[1],
-      baiduHtm[2],
-      baiduHtm[3],
-    ]);
-    showEl($(".verify-wrap"))
-    hideEl($(".my-prize-wrap"))
-  });
-
-  //  确认核销
-  $(".verify-btn").on("click", function () {
-    const verifycode = $("#averify").val()
-    if (verifycode && prizeId) {
-      const baiduHtm = [
-        "a20211118_zslt",
-        "click",
-        "popup_button9",
-        "弹窗-核销-确认核销",
-      ];
-      _hmt.push([
-        "_trackEvent",
-        baiduHtm[0],
-        baiduHtm[1],
-        baiduHtm[2],
-        baiduHtm[3],
-      ]);
-      verifyPrize(prizeId, verifycode)
-    }
   });
 
 
